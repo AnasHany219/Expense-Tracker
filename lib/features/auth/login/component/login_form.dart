@@ -31,6 +31,7 @@ class _LogInFormState extends State<LogInForm> {
         obscureText: pass ? _isObscure : false,
         decoration: InputDecoration(
           labelText: label,
+          prefixIcon: pass ? Icon(Icons.password_outlined) : Icon(Icons.email),
           labelStyle: const TextStyle(
             color: textFieldColor,
           ),
