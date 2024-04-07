@@ -1,3 +1,10 @@
+import 'package:expense_tracker/features/auth/login/page/login.dart';
+import 'package:flutter/material.dart';
+
 void main() {
-  // runApp();
+  MaterialApp materialApp = const MaterialApp(
+    home: LoginScrean(),
+  );
+
+  runApp(materialApp);
 }
