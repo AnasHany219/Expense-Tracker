@@ -1,4 +1,5 @@
 import 'package:expense_tracker/core/text_style.dart';
+import 'package:expense_tracker/features/auth/forget_password/page/reset_password.dart';
 import 'package:expense_tracker/features/auth/login/component/login_form.dart';
 import 'package:expense_tracker/features/auth/login/component/primary_button.dart';
 import 'package:expense_tracker/features/auth/signup/page/signup.dart';
@@ -33,13 +34,23 @@ class LoginScrean extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Text(
-              'Forget Password ? ',
-              style: TextStyle(
-                color: shadowGray,
-                fontSize: 14,
-                decoration: TextDecoration.underline,
-                decorationThickness: 1,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ResetPassword(),
+                  ),
+                );
+              },
+              child: const Text(
+                'Forget Password ? ',
+                style: TextStyle(
+                  color: shadowGray,
+                  fontSize: 14,
+                  decoration: TextDecoration.underline,
+                  decorationThickness: 1,
+                ),
               ),
             ),
             const SizedBox(
