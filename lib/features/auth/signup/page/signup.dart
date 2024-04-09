@@ -2,6 +2,7 @@ import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/primary_button.dart';
 import 'package:expense_tracker/features/auth/login/page/login.dart';
 import 'package:expense_tracker/features/auth/signup/component/signup_form.dart';
+import 'package:expense_tracker/features/auth/verification/page/verification.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -31,10 +32,18 @@ class SignUpScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: PrimaryButton(
-                buttonText: 'Confirm',
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const VerificationScrean(),
+                    ),
+                  );
+                },
+                child: const PrimaryButton(buttonText: 'Verification'),
               ),
             ),
             const SizedBox(
