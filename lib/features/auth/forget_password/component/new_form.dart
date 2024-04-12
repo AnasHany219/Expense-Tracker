@@ -31,7 +31,7 @@ class _NewPasswordFormState extends State<NewPasswordForm> {
         obscureText: _isObscure,
         decoration: InputDecoration(
           labelText: label,
-          prefixIcon: Icon(Icons.password_outlined),
+          prefixIcon: const Icon(Icons.password_outlined),
           labelStyle: const TextStyle(
             color: textFieldColor,
           ),
