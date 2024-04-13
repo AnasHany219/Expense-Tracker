@@ -78,17 +78,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     }
   }
 
-  Future<void> _skipOnboarding(BuildContext context) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setBool('onboarding_completed', true);
+  void _skipOnboarding() {
+    sharedPreferences();
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const SignUpScreen()),
     );
-  }
-
-  void _skipOnboard() {
-    _skipOnboarding(context);
   }
 
   @override
@@ -105,8 +100,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           },
         ),
         bottomNavigationBar: OnBoardingNavigationBar(
-          onSkipPressed: _skipOnboard,
+          onSkipPressed: _skipOnboarding,
           onNextPressed: () {
+            sharedPreferences();
             _nextPage(
                 _currentPageIndex + 1); // Always try to move to the next page
           },
@@ -115,4 +111,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
     );
   }
+}
+
+Future<void> sharedPreferences() async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  await sharedPreferences.setBool('onboarding_completed', true);
 }
