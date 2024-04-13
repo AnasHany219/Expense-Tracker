@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.4.0
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -18,6 +19,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - 'assets\images\expense_tracker_image.png'
+    - 'assets\images\dashboard_screenshot.png'
+    - 'assets\images\wallet.png'
+    - 'assets\images\person_with_app.png'
 
 flutter_native_splash:
   color: "#1b383a"
