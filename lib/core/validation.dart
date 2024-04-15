@@ -31,4 +31,11 @@ class Validator {
     }
     return null;
   }
+
+  String? confirmPasswordValidator(String? value, String password) {
+    if (value != password) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
 }

@@ -10,7 +10,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -23,8 +23,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   }
 
   void newPasswordValidation(BuildContext context) {
-    if (formKey.currentState!.validate() &&
-        passwordController.text == newPasswordController.text) {
+    if (formKey.currentState!.validate()) {
       Navigator.pushNamed(context, 'verification_screen');
     } else {
       log('Invalid!');
