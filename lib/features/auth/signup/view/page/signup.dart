@@ -1,5 +1,5 @@
 import 'package:expense_tracker/core/text_style.dart';
-import 'package:expense_tracker/features/auth/login/page/login.dart';
+import 'package:expense_tracker/features/auth/login/view/page/login.dart';
 import 'package:expense_tracker/features/auth/signup/controller/cubit/registration_cubit.dart';
 import 'package:expense_tracker/features/auth/signup/view/component/signup_form.dart';
 import 'package:flutter/material.dart';

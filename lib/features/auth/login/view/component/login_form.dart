@@ -1,6 +1,9 @@
+import 'package:expense_tracker/core/primary_button.dart';
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/validation.dart';
+import 'package:expense_tracker/features/auth/login/controller/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LogInForm extends StatefulWidget {
   const LogInForm({super.key});
@@ -11,13 +14,37 @@ class LogInForm extends StatefulWidget {
 
 class _LogInFormState extends State<LogInForm> {
   bool _isObscure = true;
+
+  LoginCubit controller = LoginCubit();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        buildInputForm('Email', false),
-        buildInputForm('Password', true),
-      ],
+    return BlocProvider.value(
+      value: controller,
+      child: BlocBuilder<LoginCubit, LoginState>(
+        builder: (context, state) {
+          return Form(
+            key: controller.formKey,
+            child: Column(
+              children: [
+                buildInputForm('Email', false),
+                buildInputForm('Password', true),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      controller.logInValidate(context);
+                    },
+                    child: const PrimaryButton(buttonText: 'Login'),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -25,6 +52,11 @@ class _LogInFormState extends State<LogInForm> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
+        controller: pass
+            ? controller.emailController
+            : label == 'Password'
+                ? controller.passwordController
+                : null,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator:
             pass ? Validator().passwordValidator : Validator().emailValidator,
