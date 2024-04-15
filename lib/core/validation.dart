@@ -1,4 +1,16 @@
 class Validator {
+  String? nameValidator(String? value) {
+    // Regular expression for firstname and lastname validation
+    final nameRegex = RegExp(r'^[a-zA-Z]+$');
+
+    if (value == null || value.isEmpty) {
+      return 'Please enter your name';
+    } else if (!nameRegex.hasMatch(value)) {
+      return 'Please enter a valid name';
+    }
+    return null;
+  }
+
   String? emailValidator(String? value) {
     // Regular expression for email validation
     final emailRegex = RegExp(r'^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+');

@@ -3,7 +3,7 @@
 import 'package:expense_tracker/features/auth/onboarding/component/onboarding_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/features/auth/onboarding/component/onboarding_body.dart';
-import 'package:expense_tracker/features/auth/signup/page/signup.dart';
+import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingScreen extends StatefulWidget {

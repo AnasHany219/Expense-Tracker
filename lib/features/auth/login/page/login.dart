@@ -2,7 +2,7 @@ import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/auth/forget_password/page/reset_password.dart';
 import 'package:expense_tracker/features/auth/login/component/login_form.dart';
 import 'package:expense_tracker/core/primary_button.dart';
-import 'package:expense_tracker/features/auth/signup/page/signup.dart';
+import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
