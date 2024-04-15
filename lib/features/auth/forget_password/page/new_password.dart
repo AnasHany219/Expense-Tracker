@@ -33,7 +33,7 @@ class NewPassword extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const VerificationScrean(),
+                    builder: (context) => const VerificationScreen(),
                   ),
                 );
               },

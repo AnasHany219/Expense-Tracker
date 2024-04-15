@@ -4,8 +4,8 @@ import 'package:expense_tracker/features/auth/login/page/login.dart';
 import 'package:expense_tracker/features/auth/verification/component/verification_form.dart';
 import 'package:flutter/material.dart';
 
-class VerificationScrean extends StatelessWidget {
-  const VerificationScrean({super.key});
+class VerificationScreen extends StatelessWidget {
+  const VerificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class VerificationScrean extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const LoginScrean(),
+                    builder: (context) => const LoginScreen(),
                   ),
                 );
               },
@@ -60,7 +60,7 @@ class VerificationScrean extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LoginScrean(),
+                          builder: (context) => const LoginScreen(),
                         ),
                       );
                     },

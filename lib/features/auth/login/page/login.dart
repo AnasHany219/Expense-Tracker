@@ -6,8 +6,8 @@ import 'package:expense_tracker/features/auth/signup/page/signup.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class LoginScrean extends StatelessWidget {
-  const LoginScrean({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
