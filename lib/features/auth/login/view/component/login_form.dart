@@ -52,11 +52,8 @@ class _LogInFormState extends State<LogInForm> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
-        controller: pass
-            ? controller.emailController
-            : label == 'Password'
-                ? controller.passwordController
-                : null,
+        controller:
+            pass ? controller.passwordController : controller.emailController,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator:
             pass ? Validator().passwordValidator : Validator().emailValidator,

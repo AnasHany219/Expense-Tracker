@@ -1,5 +1,5 @@
-import 'package:expense_tracker/features/auth/forget_password/page/new_password.dart';
-import 'package:expense_tracker/features/auth/forget_password/page/reset_password.dart';
+import 'package:expense_tracker/features/auth/forget_password/view/page/new_password.dart';
+import 'package:expense_tracker/features/auth/forget_password/view/page/reset_password.dart';
 import 'package:expense_tracker/features/auth/login/view/page/login.dart';
 import 'package:expense_tracker/features/auth/onboarding/page/onboarding.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';

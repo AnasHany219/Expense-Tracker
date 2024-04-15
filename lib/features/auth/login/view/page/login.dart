@@ -1,5 +1,5 @@
 import 'package:expense_tracker/core/text_style.dart';
-import 'package:expense_tracker/features/auth/forget_password/page/reset_password.dart';
+import 'package:expense_tracker/features/auth/forget_password/view/page/reset_password.dart';
 import 'package:expense_tracker/features/auth/login/controller/cubit/login_cubit.dart';
 import 'package:expense_tracker/features/auth/login/view/component/login_form.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';

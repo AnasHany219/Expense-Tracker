@@ -1,11 +1,11 @@
 import 'package:expense_tracker/core/primary_button.dart';
 import 'package:expense_tracker/core/text_style.dart';
-import 'package:expense_tracker/features/auth/forget_password/component/reset_form.dart';
-import 'package:expense_tracker/features/auth/forget_password/page/new_password.dart';
+import 'package:expense_tracker/features/auth/forget_password/view/component/new_form.dart';
+import 'package:expense_tracker/features/auth/verification/page/verification.dart';
 import 'package:flutter/material.dart';
 
-class ResetPassword extends StatelessWidget {
-  const ResetPassword({super.key});
+class NewPassword extends StatelessWidget {
+  const NewPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,27 +17,28 @@ class ResetPassword extends StatelessWidget {
           children: [
             const SizedBox(height: 200),
             Text(
-              'Reset Password',
+              'New Password',
               style: titleText,
             ),
             const SizedBox(height: 5),
             Text(
-              'Enter Your Email',
+              'Enter Your New Password',
               style: subTitle.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 10),
-            const ResetForm(),
+            const NewPasswordForm(),
             const SizedBox(height: 40),
             GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const NewPassword(),
-                    ),
-                  );
-                },
-                child: const PrimaryButton(buttonText: 'Reset Password')),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VerificationScreen(),
+                  ),
+                );
+              },
+              child: const PrimaryButton(buttonText: 'Verification'),
+            ),
           ],
         ),
       ),
