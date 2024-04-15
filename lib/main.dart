@@ -1,19 +1,12 @@
-// import 'package:expense_tracker/features/auth/onboarding/page/onboarding.dart';
-import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:expense_tracker/core/route_generator.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  MaterialApp materialApp = MaterialApp(
+    onGenerateRoute: InitialRouteGenerator.onGenerateRoute,
+    onGenerateInitialRoutes: (_) => InitialRouteGenerator.initialRoute,
+  );
 
-  // Check if onboarding has been completed
-  // bool onBoardingCompleted =
-  //     sharedPreferences.getBool('onboarding_completed') ?? false;
-
-  // If onboarding has not been completed, show OnBoardingScreen, otherwise show SignUpScreen
-  runApp(const MaterialApp(
-    // home: onBoardingCompleted ? const SignUpScreen() : const OnBoardingScreen(),
-    home: SignUpScreen(),
-  ));
+  runApp(materialApp);
 }

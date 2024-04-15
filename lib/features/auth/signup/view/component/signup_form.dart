@@ -38,13 +38,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: GestureDetector(
                     onTap: () {
-                      controller.signUpValidate();
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const VerificationScreen(),
-                      //   ),
-                      // );
+                      controller.signUpValidate(context);
                     },
                     child: const PrimaryButton(buttonText: 'Verification'),
                   ),

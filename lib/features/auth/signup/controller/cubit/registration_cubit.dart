@@ -18,12 +18,9 @@ class RegistrationCubit extends Cubit<RegistrationState> {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  void signUpValidate() {
+  void signUpValidate(BuildContext context) {
     if (formKey.currentState!.validate()) {
-      log(firstNameController.text);
-      log(lastNameController.text);
-      log(emailController.text);
-      log(passwordController.text);
+      Navigator.pushNamed(context, 'verification_screen');
     } else {
       log('Invalid!');
     }
