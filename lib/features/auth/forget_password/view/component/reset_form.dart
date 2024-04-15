@@ -2,7 +2,6 @@ import 'package:expense_tracker/core/primary_button.dart';
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/validation.dart';
 import 'package:expense_tracker/features/auth/forget_password/controller/cubit/forget_password_cubit.dart';
-import 'package:expense_tracker/features/auth/forget_password/view/page/new_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -48,12 +47,7 @@ class _ResetFormState extends State<ResetForm> {
                   const SizedBox(height: 40),
                   GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const NewPassword(),
-                          ),
-                        );
+                        controller.resetPasswordValidation(context);
                       },
                       child: const PrimaryButton(buttonText: 'Reset Password')),
                 ],

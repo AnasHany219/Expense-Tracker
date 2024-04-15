@@ -1,8 +1,6 @@
-import 'package:expense_tracker/core/primary_button.dart';
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/auth/forget_password/controller/cubit/forget_password_cubit.dart';
 import 'package:expense_tracker/features/auth/forget_password/view/component/reset_form.dart';
-import 'package:expense_tracker/features/auth/forget_password/view/page/new_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
