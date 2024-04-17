@@ -3,7 +3,7 @@ import 'package:expense_tracker/features/auth/forget_password/view/page/reset_pa
 import 'package:expense_tracker/features/auth/login/view/page/login.dart';
 import 'package:expense_tracker/features/auth/onboarding/page/onboarding.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
-import 'package:expense_tracker/features/auth/verification/page/verification.dart';
+import 'package:expense_tracker/features/auth/verification/view/page/verification.dart';
 import 'package:flutter/material.dart';
 
 class InitialRouteGenerator {

@@ -38,4 +38,20 @@ class Validator {
     }
     return null;
   }
+
+  String? otpValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter the OTP';
+    } else if (value.length != 4 || !isNumeric(value)) {
+      return 'OTP must be a 4-digit number';
+    }
+    return null;
+  }
+
+  bool isNumeric(String? s) {
+    if (s == null) {
+      return false;
+    }
+    return double.tryParse(s) != null;
+  }
 }
