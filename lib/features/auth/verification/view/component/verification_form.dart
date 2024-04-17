@@ -27,6 +27,7 @@ class _VerificationFormState extends State<VerificationForm> {
                 TextFormField(
                   controller: controller.verificationControllers,
                   validator: Validator().otpValidator,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   textAlign: TextAlign.center,
                   maxLength: 4, // Set the maximum length to 4
                   keyboardType: TextInputType.number,
