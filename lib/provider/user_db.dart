@@ -138,25 +138,6 @@ class UserDB {
     }
   }
 
-  Future<String?> getOTPByEmail(String email) async {
-    await init(); // Assuming init() initializes your database connection
-    try {
-      List<Map<String, dynamic>> result = await db.query(
-        'users',
-        columns: ['otpCode'],
-        where: 'email = ?',
-        whereArgs: [email],
-      );
-      if (result.isNotEmpty) {
-        return result.first['otpCode'];
-      } else {
-        return null; // No user found with the given email
-      }
-    } catch (e) {
-      throw Exception('Failed to get user OTP: $e');
-    }
-  }
-
   /// Updates the OTP code for a specific user in the database.
   ///
   /// This method updates the `otpCode` field for the user with the specified [email] in the 'users' table of the database.

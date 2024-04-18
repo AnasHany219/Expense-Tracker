@@ -36,7 +36,7 @@ class User {
       'last_name': lastName,
       'email': email,
       'password': password,
-      'verified': verified,
+      'verified': 0,
       'otpCode': otpCode,
     };
   }

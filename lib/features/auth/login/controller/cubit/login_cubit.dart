@@ -3,6 +3,8 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:expense_tracker/core/email_sender.dart';
+import 'package:expense_tracker/model/user.dart';
 import 'package:expense_tracker/provider/user_db.dart';
 import 'package:flutter/material.dart';
 
@@ -33,17 +35,25 @@ class LoginCubit extends Cubit<LoginState> {
     final userDB = UserDB();
 
     try {
+      final user = await userDB.getUserByEmail(email);
+      print(
+          "email: ${user?.email}, pass: ${user?.password} verify: ${user?.verified}");
       // Check if email exists in the database
-      final emailExists = await userDB.checkEmailExists(email);
-      if (!emailExists) {
+      if (user == null) {
         showSnackBar(context, 'Email not found');
         return;
       }
 
       // Retrieve user from database
-      final user = await userDB.getUserByEmail(email);
-      if (user == null || user.password != password) {
+      if (user.password != password) {
         showSnackBar(context, 'Incorrect password');
+        return;
+      }
+
+      // Check if the user's account is verified
+      if (user.verified == 0 || user.verified == null) {
+        showSnackBar(context, 'Account not verified');
+        await updateUserAndSendOTP(context, user);
         return;
       }
 
@@ -58,8 +68,31 @@ class LoginCubit extends Cubit<LoginState> {
   void showSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message),
+        content: Row(
+          children: [
+            const Icon(Icons.error, color: Colors.red), // Error icon
+            const SizedBox(width: 8), // Space between icon and text
+            Text(message), // Error message
+          ],
+        ),
       ),
+    );
+  }
+
+  Future<void> updateUserAndSendOTP(BuildContext context, User user) async {
+    // Create an instance of EmailSender
+    EmailSender emailSender = EmailSender();
+    String otp = emailSender.generateOTP();
+    // Send OTP to the user's email
+    await emailSender.sendOTP(user.email, otp);
+
+    // Update user OTP in the database
+    await UserDB().updateUserOTPByEmail(user.email, otp);
+    // Navigate to the verification screen
+    Navigator.pushNamed(
+      context,
+      'verification_screen',
+      arguments: user.email,
     );
   }
 }
