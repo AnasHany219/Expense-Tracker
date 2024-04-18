@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerificationScreen extends StatelessWidget {
-  const VerificationScreen({super.key, String? email});
+  final String? email;
+
+  const VerificationScreen({super.key, this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class VerificationScreen extends StatelessWidget {
                     style: subTitle.copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 30),
-                  const VerificationForm(),
+                  VerificationForm(email: email),
                 ],
               ),
             ),

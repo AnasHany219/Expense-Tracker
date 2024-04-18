@@ -59,18 +59,16 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     // Create an instance of EmailSender
     EmailSender emailSender = EmailSender();
     String otp = emailSender.generateOTP();
+    // Send OTP to the user's email
+    await emailSender.sendOTP(user.email, otp);
 
     // Update user OTP in the database
     await UserDB().updateUserOTPByEmail(user.email, otp);
-
-    // Send OTP to the user's email
-    await emailSender.sendOTP(user.email);
-
     // Navigate to the verification screen
     Navigator.pushNamed(
       context,
       'verification_screen',
-      arguments: {'email': user.email},
+      arguments: user.email,
     );
   }
 }

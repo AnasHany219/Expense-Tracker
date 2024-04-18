@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerificationForm extends StatefulWidget {
-  const VerificationForm({super.key});
+  final String? email;
+
+  const VerificationForm({super.key, required this.email});
 
   @override
   State<VerificationForm> createState() => _VerificationFormState();
@@ -39,9 +41,9 @@ class _VerificationFormState extends State<VerificationForm> {
                 const SizedBox(height: 40),
                 GestureDetector(
                   onTap: () {
-                    controller.verifyValidate(context);
+                    controller.verifyValidate(context, widget.email!);
                   },
-                  child: const PrimaryButton(buttonText: 'Ok'),
+                  child: const PrimaryButton(buttonText: 'Check!'),
                 ),
                 const SizedBox(
                   height: 5,

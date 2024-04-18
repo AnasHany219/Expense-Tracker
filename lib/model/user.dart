@@ -4,7 +4,7 @@ class User {
   final String lastName;
   final String email;
   final String password;
-  final bool verified;
+  final int? verified;
   final String? otpCode;
 
   User({
@@ -13,13 +13,10 @@ class User {
     required this.lastName,
     required this.email,
     required this.password,
-    this.verified = false,
+    this.verified,
     this.otpCode,
   });
 
-  /// Constructs a new instance of [User] from a map representation.
-  ///
-  /// This factory constructor is commonly used when retrieving user data from a database or from serialized data formats like JSON.
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       id: map['id'],
@@ -27,13 +24,11 @@ class User {
       lastName: map['last_name'],
       email: map['email'],
       password: map['password'],
-      verified: map['verified'] == 1,
+      verified: map['verified'],
+      otpCode: map['otpCode'],
     );
   }
 
-  /// Converts the user object into a map representation.
-  ///
-  /// This method is useful for database operations or serialization, where the user data needs to be represented as a map before being stored or transmitted.
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -41,7 +36,8 @@ class User {
       'last_name': lastName,
       'email': email,
       'password': password,
-      'verified': verified ? 1 : 0,
+      'verified': verified,
+      'otpCode': otpCode,
     };
   }
 }

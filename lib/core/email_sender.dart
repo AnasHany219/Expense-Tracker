@@ -14,12 +14,8 @@ class EmailSender {
     return otp.toString();
   }
 
-  Future<void> sendOTP(String userEmail) async {
+  Future<void> sendOTP(String userEmail, String otp) async {
     final smtpServer = gmail(username, password);
-
-    // Generate OTP
-    final otp = generateOTP();
-
     // Create the email message
     final message = Message()
       ..from = Address(username)

@@ -41,8 +41,8 @@ class UserDB {
           last_name TEXT,
           email TEXT,
           password TEXT,
-          otp_code TEXT,
-          verified INTEGER DEFAULT 1
+          verified INTEGER DEFAULT 0,
+          otpCode TEXT
         )
       ''');
     } catch (e) {
@@ -120,11 +120,8 @@ class UserDB {
   /// Retrieves a user from the database by their email.
   ///
   /// This method queries the database to retrieve a user with the specified [email].
-  /// If a user with the given email exists in the 'users' table of the database,
-  /// it returns a [User] object representing the user's data.
-  /// If no user is found with the specified email, the method returns `null`.
   Future<User?> getUserByEmail(String email) async {
-    await init(); // Ensure database initialization before query
+    await init();
     try {
       List<Map<String, dynamic>> userData = await db.query(
         'users',
@@ -141,20 +138,61 @@ class UserDB {
     }
   }
 
+  Future<String?> getOTPByEmail(String email) async {
+    await init(); // Assuming init() initializes your database connection
+    try {
+      List<Map<String, dynamic>> result = await db.query(
+        'users',
+        columns: ['otpCode'],
+        where: 'email = ?',
+        whereArgs: [email],
+      );
+      if (result.isNotEmpty) {
+        return result.first['otpCode'];
+      } else {
+        return null; // No user found with the given email
+      }
+    } catch (e) {
+      throw Exception('Failed to get user OTP: $e');
+    }
+  }
+
   /// Updates the OTP code for a specific user in the database.
   ///
-  /// This method updates the `otp_code` field for the user with the specified [email] in the 'users' table of the database.
+  /// This method updates the `otpCode` field for the user with the specified [email] in the 'users' table of the database.
   Future<void> updateUserOTPByEmail(String email, String otpCode) async {
+    await init(); // Assuming init() initializes your database connection
+    try {
+      await db.transaction((txn) async {
+        int count = await txn.rawUpdate(
+          'UPDATE users SET otpCode = ? WHERE email = ?',
+          [otpCode, email],
+        );
+        if (count != 1) {
+          throw Exception(
+              'Failed to update user OTP: Unexpected number of rows updated');
+        }
+      });
+    } catch (e) {
+      throw Exception('Failed to update user OTP: $e');
+    }
+  }
+
+  /// Updates the verification status for a specific user in the database.
+  ///
+  /// This method updates the `verified` field for the user with the specified [email] in the 'users' table of the database.
+  Future<void> updateUserVerificationStatus(
+      String email, int verifiedStatus) async {
     await init();
     try {
       await db.update(
         'users',
-        {'otp_code': otpCode},
+        {'verified': verifiedStatus},
         where: 'email = ?',
         whereArgs: [email],
       );
     } catch (e) {
-      throw Exception('Failed to update user OTP: $e');
+      throw Exception('Failed to update user verification status: $e');
     }
   }
 }
