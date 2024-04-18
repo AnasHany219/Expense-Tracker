@@ -1,3 +1,4 @@
+import 'package:expense_tracker/features/auth/dashboard/dashboard_page.dart';
 import 'package:expense_tracker/features/auth/forget_password/view/page/new_password.dart';
 import 'package:expense_tracker/features/auth/forget_password/view/page/reset_password.dart';
 import 'package:expense_tracker/features/auth/login/view/page/login.dart';
@@ -31,12 +32,17 @@ class InitialRouteGenerator {
           builder: (BuildContext context) => const ResetPassword(),
         );
       case 'verification_screen':
+        final String? email = settings.arguments as String?;
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => const VerificationScreen(),
+          builder: (BuildContext context) => VerificationScreen(email: email),
         );
       case 'new_password':
         return MaterialPageRoute<dynamic>(
           builder: (BuildContext context) => const NewPassword(),
+        );
+      case 'dash_board':
+        return MaterialPageRoute<dynamic>(
+          builder: (BuildContext context) => const DashboardPage(),
         );
       default:
         return MaterialPageRoute<dynamic>(

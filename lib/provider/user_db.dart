@@ -41,7 +41,8 @@ class UserDB {
           last_name TEXT,
           email TEXT,
           password TEXT,
-          verified INTEGER DEFAULT 0
+          otp_code TEXT,
+          verified INTEGER DEFAULT 1
         )
       ''');
     } catch (e) {
@@ -92,6 +93,68 @@ class UserDB {
           .isNotEmpty; // Return true if email exists, false otherwise
     } catch (e) {
       throw Exception('Failed to check if email exists: $e');
+    }
+  }
+
+  /// Retrieves user data from the database by the specified ID.
+  ///
+  /// This method queries the database for a user with the given [id].
+  Future<User?> getUserById(int id) async {
+    await init(); // Ensure database initialization before query
+    try {
+      List<Map<String, dynamic>> userData = await db.query(
+        'users',
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      if (userData.isNotEmpty) {
+        return User.fromMap(userData.first);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      throw Exception('Failed to get user by ID: $e');
+    }
+  }
+
+  /// Retrieves a user from the database by their email.
+  ///
+  /// This method queries the database to retrieve a user with the specified [email].
+  /// If a user with the given email exists in the 'users' table of the database,
+  /// it returns a [User] object representing the user's data.
+  /// If no user is found with the specified email, the method returns `null`.
+  Future<User?> getUserByEmail(String email) async {
+    await init(); // Ensure database initialization before query
+    try {
+      List<Map<String, dynamic>> userData = await db.query(
+        'users',
+        where: 'email = ?',
+        whereArgs: [email],
+      );
+      if (userData.isNotEmpty) {
+        return User.fromMap(userData.first);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      throw Exception('Failed to get user by email: $e');
+    }
+  }
+
+  /// Updates the OTP code for a specific user in the database.
+  ///
+  /// This method updates the `otp_code` field for the user with the specified [email] in the 'users' table of the database.
+  Future<void> updateUserOTPByEmail(String email, String otpCode) async {
+    await init();
+    try {
+      await db.update(
+        'users',
+        {'otp_code': otpCode},
+        where: 'email = ?',
+        whereArgs: [email],
+      );
+    } catch (e) {
+      throw Exception('Failed to update user OTP: $e');
     }
   }
 }

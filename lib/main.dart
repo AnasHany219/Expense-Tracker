@@ -1,8 +1,10 @@
 import 'package:expense_tracker/core/route_generator.dart';
 // import 'package:expense_tracker/provider/user_db.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
+  await dotenv.load();
   // WidgetsFlutterBinding
   //     .ensureInitialized(); // Ensure Flutter binding is initialized
   // // Initialize the user database

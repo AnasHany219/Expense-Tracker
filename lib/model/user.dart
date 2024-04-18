@@ -5,6 +5,7 @@ class User {
   final String email;
   final String password;
   final bool verified;
+  final String? otpCode;
 
   User({
     this.id,
@@ -13,6 +14,7 @@ class User {
     required this.email,
     required this.password,
     this.verified = false,
+    this.otpCode,
   });
 
   /// Constructs a new instance of [User] from a map representation.

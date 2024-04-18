@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerificationScreen extends StatelessWidget {
-  const VerificationScreen({super.key});
+  const VerificationScreen({super.key, String? email});
 
   @override
   Widget build(BuildContext context) {

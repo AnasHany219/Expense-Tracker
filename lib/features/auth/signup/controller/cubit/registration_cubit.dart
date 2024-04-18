@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously
 
 import 'package:bloc/bloc.dart';
+import 'package:expense_tracker/core/email_sender.dart';
 import 'package:expense_tracker/model/user.dart';
 import 'package:expense_tracker/provider/user_db.dart';
 import 'package:flutter/material.dart';
@@ -38,17 +39,38 @@ class RegistrationCubit extends Cubit<RegistrationState> {
           ),
         );
       } else {
-        // Insert the user data into the database
         try {
+          // Insert the user data into the database
           await UserDB().insertUser(user);
-          Navigator.pushNamed(context, 'verification_screen');
+
+          // Update user OTP in the database and send OTP to user's email
+          await updateUserAndSendOTP(context, user);
         } catch (error) {
-          debugPrint('Error inserting user: $error');
-          // Handle other errors related to database insertion if needed
+          debugPrint('Error during signup: $error');
+          // Handle other errors related to signup process if needed
         }
       }
     } else {
       debugPrint('Invalid!');
     }
+  }
+
+  Future<void> updateUserAndSendOTP(BuildContext context, User user) async {
+    // Create an instance of EmailSender
+    EmailSender emailSender = EmailSender();
+    String otp = emailSender.generateOTP();
+
+    // Update user OTP in the database
+    await UserDB().updateUserOTPByEmail(user.email, otp);
+
+    // Send OTP to the user's email
+    await emailSender.sendOTP(user.email);
+
+    // Navigate to the verification screen
+    Navigator.pushNamed(
+      context,
+      'verification_screen',
+      arguments: {'email': user.email},
+    );
   }
 }
