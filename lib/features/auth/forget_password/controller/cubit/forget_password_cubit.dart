@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -28,7 +30,6 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
           ),
         );
       } else {
-        print("emailExists : $email");
         Navigator.pushNamed(
           context,
           'new_password',
@@ -43,7 +44,6 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   Future<void> newPasswordValidation(BuildContext context, String email) async {
     if (formKey.currentState!.validate()) {
       String password = passwordController.text;
-      print("ForgetPassword Validation: $email, $password");
 
       await updateUserAndSendOTP(context, email, password);
     } else {

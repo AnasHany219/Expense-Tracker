@@ -34,7 +34,6 @@ class _NewPasswordFormState extends State<NewPasswordForm> {
                 const SizedBox(height: 40),
                 GestureDetector(
                   onTap: () {
-                    print("NewPassword onTap: ${widget.email}");
                     controller.newPasswordValidation(context, widget.email!);
                   },
                   child: const PrimaryButton(buttonText: 'Verification'),

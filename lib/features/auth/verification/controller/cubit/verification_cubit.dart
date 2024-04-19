@@ -24,7 +24,6 @@ class VerificationCubit extends Cubit<VerificationState> {
       try {
         // Retrieve user from database by email
         final user = await userDB.getUserByEmail(userEmail);
-        print("VerificationCubit ${user?.otpCode} \t ${password}");
         if (user != null && user.otpCode == otp) {
           // If OTP matches, set user's verified status to 1
           await userDB.updateUserVerificationStatus(userEmail, 1);
