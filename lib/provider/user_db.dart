@@ -65,18 +65,6 @@ class UserDB {
     }
   }
 
-  /// Clears all users from the database.
-  ///
-  /// This method deletes all rows from the 'users' table, effectively clearing the table.
-  Future<void> clearUsers() async {
-    await init();
-    try {
-      await db.delete('users');
-    } catch (e) {
-      throw Exception('Failed to clear users: $e');
-    }
-  }
-
   /// Checks if the specified email already exists in the database.
   ///
   /// Returns `true` if the email exists, `false` otherwise.
@@ -152,6 +140,24 @@ class UserDB {
         if (count != 1) {
           throw Exception(
               'Failed to update user OTP: Unexpected number of rows updated');
+        }
+      });
+    } catch (e) {
+      throw Exception('Failed to update user OTP: $e');
+    }
+  }
+
+  Future<void> updateUserPasswordByEmail(String email, String password) async {
+    await init(); // Assuming init() initializes your database connection
+    try {
+      await db.transaction((txn) async {
+        int count = await txn.rawUpdate(
+          'UPDATE users SET password = ? WHERE email = ?',
+          [password, email],
+        );
+        if (count != 1) {
+          throw Exception(
+              'Failed to update user password: Unexpected number of rows updated');
         }
       });
     } catch (e) {

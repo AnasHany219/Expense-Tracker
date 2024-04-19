@@ -6,8 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerificationScreen extends StatelessWidget {
   final String? email;
+  final String? password; // Make password nullable
 
-  const VerificationScreen({super.key, this.email});
+  const VerificationScreen({super.key, required this.email, this.password});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,8 @@ class VerificationScreen extends StatelessWidget {
                     style: subTitle.copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 30),
-                  VerificationForm(email: email),
+                  VerificationForm(
+                      email: email, password: password), // Pass password here
                 ],
               ),
             ),

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewPassword extends StatelessWidget {
-  const NewPassword({super.key});
+  final String? email;
+  const NewPassword({super.key, this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class NewPassword extends StatelessWidget {
                     style: subTitle.copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 10),
-                  const NewPasswordForm(),
+                  NewPasswordForm(email: email),
                 ],
               ),
             ),

@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewPasswordForm extends StatefulWidget {
-  const NewPasswordForm({super.key});
+  final String? email;
+
+  const NewPasswordForm({super.key, required this.email});
 
   @override
   State<NewPasswordForm> createState() => _NewPasswordFormState();
@@ -32,7 +34,8 @@ class _NewPasswordFormState extends State<NewPasswordForm> {
                 const SizedBox(height: 40),
                 GestureDetector(
                   onTap: () {
-                    controller.newPasswordValidation(context);
+                    print("NewPassword onTap: ${widget.email}");
+                    controller.newPasswordValidation(context, widget.email!);
                   },
                   child: const PrimaryButton(buttonText: 'Verification'),
                 ),

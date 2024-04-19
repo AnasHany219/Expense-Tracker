@@ -8,7 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class VerificationForm extends StatefulWidget {
   final String? email;
 
-  const VerificationForm({super.key, required this.email});
+  final String? password; // Add password parameter
+
+  const VerificationForm({super.key, required this.email, this.password});
 
   @override
   State<VerificationForm> createState() => _VerificationFormState();
@@ -41,7 +43,8 @@ class _VerificationFormState extends State<VerificationForm> {
                 const SizedBox(height: 40),
                 GestureDetector(
                   onTap: () {
-                    controller.verifyValidate(context, widget.email!);
+                    controller.verifyValidate(context, widget.email!,
+                        password: widget.password);
                   },
                   child: const PrimaryButton(buttonText: 'Check!'),
                 ),
@@ -62,6 +65,7 @@ class _VerificationFormState extends State<VerificationForm> {
                       GestureDetector(
                         onTap: () {
                           controller.clear();
+                          controller.resendOTP(context, widget.email!);
                         },
                         child: Text(
                           'Resent',

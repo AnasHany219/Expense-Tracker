@@ -32,13 +32,27 @@ class InitialRouteGenerator {
           builder: (BuildContext context) => const ResetPassword(),
         );
       case 'verification_screen':
+        final dynamic arguments = settings.arguments;
+        if (arguments is String) {
+          // Only email is provided
+          return MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) =>
+                VerificationScreen(email: arguments),
+          );
+        } else if (arguments is Map<String, String>) {
+          // Both email and password are provided
+          return MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) => VerificationScreen(
+                email: arguments['email'], password: arguments['password']),
+          );
+        } else {
+          throw ArgumentError(
+              'Invalid arguments for verification_screen: $arguments');
+        }
+      case 'new_password':
         final String? email = settings.arguments as String?;
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => VerificationScreen(email: email),
-        );
-      case 'new_password':
-        return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => const NewPassword(),
+          builder: (BuildContext context) => NewPassword(email: email),
         );
       case 'dash_board':
         return MaterialPageRoute<dynamic>(

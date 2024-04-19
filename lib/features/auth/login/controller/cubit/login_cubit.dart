@@ -36,8 +36,6 @@ class LoginCubit extends Cubit<LoginState> {
 
     try {
       final user = await userDB.getUserByEmail(email);
-      print(
-          "email: ${user?.email}, pass: ${user?.password} verify: ${user?.verified}");
       // Check if email exists in the database
       if (user == null) {
         showSnackBar(context, 'Email not found');
