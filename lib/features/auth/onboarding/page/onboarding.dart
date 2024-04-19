@@ -52,11 +52,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     _pageController = PageController();
   }
 
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _pageController.dispose();
+  //   super.dispose();
+  // }
 
   void _nextPage(int index) {
     if (_currentPageIndex >= 0 &&
