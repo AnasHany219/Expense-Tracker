@@ -1,10 +1,12 @@
-import 'package:expense_tracker/features/auth/dashboard/dashboard_page.dart';
+import 'package:expense_tracker/features/expense/add_expense/view/page/add_expense_page.dart';
 import 'package:expense_tracker/features/auth/forget_password/view/page/new_password.dart';
 import 'package:expense_tracker/features/auth/forget_password/view/page/reset_password.dart';
 import 'package:expense_tracker/features/auth/login/view/page/login.dart';
 import 'package:expense_tracker/features/auth/onboarding/page/onboarding.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
 import 'package:expense_tracker/features/auth/verification/view/page/verification.dart';
+import 'package:expense_tracker/features/dashboard/view/page/dashboard_page.dart';
+import 'package:expense_tracker/features/expense/view_expense/view/page/view_expense_page.dart';
 import 'package:flutter/material.dart';
 
 class InitialRouteGenerator {
@@ -55,8 +57,17 @@ class InitialRouteGenerator {
           builder: (BuildContext context) => NewPassword(email: email),
         );
       case 'dash_board':
+        final String? email = settings.arguments as String?;
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => const DashboardPage(),
+          builder: (BuildContext context) => DashboardPage(email: email),
+        );
+      case 'add_expense':
+        return MaterialPageRoute<dynamic>(
+          builder: (BuildContext context) => AddExpensePage(),
+        );
+      case 'view_expense':
+        return MaterialPageRoute<dynamic>(
+          builder: (BuildContext context) => ViewExpensePage(),
         );
       default:
         return MaterialPageRoute<dynamic>(

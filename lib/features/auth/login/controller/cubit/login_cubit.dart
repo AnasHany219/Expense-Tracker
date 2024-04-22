@@ -56,7 +56,11 @@ class LoginCubit extends Cubit<LoginState> {
       }
 
       // If email and password are valid, navigate to the next screen
-      Navigator.pushNamed(context, 'dash_board');
+      Navigator.pushNamed(
+        context,
+        'dash_board',
+        arguments: user.email,
+      );
     } catch (e) {
       log('Error checking credentials: $e');
       // Handle any errors
