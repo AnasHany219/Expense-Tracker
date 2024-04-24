@@ -63,11 +63,11 @@ class InitialRouteGenerator {
         );
       case 'add_expense':
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => AddExpensePage(),
+          builder: (BuildContext context) => const AddExpensePage(),
         );
       case 'view_expense':
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => ViewExpensePage(),
+          builder: (BuildContext context) => const ViewExpensePage(),
         );
       default:
         return MaterialPageRoute<dynamic>(

@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/features/auth/onboarding/view/component/onboarding_body.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
