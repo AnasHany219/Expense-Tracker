@@ -1,22 +1,19 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'package:expense_tracker/features/auth/onboarding/component/onboarding_buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/features/auth/onboarding/component/onboarding_body.dart';
+import 'package:expense_tracker/features/auth/onboarding/view/component/onboarding_body.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:expense_tracker/features/auth/onboarding/view/component/onboarding_buttons.dart';
 
-class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({super.key});
+class OnBoardingController extends StatefulWidget {
+  const OnBoardingController({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _OnBoardingScreenState createState() => _OnBoardingScreenState();
+  _OnBoardingControllerState createState() => _OnBoardingControllerState();
 }
 
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  late PageController _pageController;
-  int _currentPageIndex = 0;
+class _OnBoardingControllerState extends State<OnBoardingController> {
+  late PageController pageCntrl;
+  int currentPageIndex = 0;
 
   final List<Map<String, String>> onboardingData = [
     {
@@ -49,41 +46,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
-  }
-
-  // @override
-  // void dispose() {
-  //   _pageController.dispose();
-  //   super.dispose();
-  // }
-
-  void _nextPage(int index) {
-    if (_currentPageIndex >= 0 &&
-        _currentPageIndex < onboardingData.length - 1) {
-      // Check if _currentPageIndex is valid and not the last page
-      setState(() {
-        _currentPageIndex = index; // Update _currentPageIndex
-      });
-      _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
-    } else if (_currentPageIndex == onboardingData.length - 1) {
-      // If it's the last page, perform the finish action
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const SignUpScreen()),
-      );
-    }
-  }
-
-  void _skipOnboarding() {
-    sharedPreferences();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const SignUpScreen()),
-    );
+    pageCntrl = PageController();
   }
 
   @override
@@ -92,23 +55,47 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       child: Scaffold(
         body: OnBoardingBody(
           onboardingData: onboardingData,
-          pageController: _pageController,
+          pageCntrl: pageCntrl,
           onPageChanged: (int index) {
             setState(() {
-              _currentPageIndex = index;
+              currentPageIndex = index;
             });
           },
         ),
         bottomNavigationBar: OnBoardingNavigationBar(
-          onSkipPressed: _skipOnboarding,
+          onSkipPressed: skipOnboarding,
           onNextPressed: () {
             sharedPreferences();
-            _nextPage(
-                _currentPageIndex + 1); // Always try to move to the next page
+            nextPage(currentPageIndex + 1);
           },
-          isLastPage: _currentPageIndex == onboardingData.length - 1,
+          isLastPage: currentPageIndex == onboardingData.length - 1,
         ),
       ),
+    );
+  }
+
+  void nextPage(int index) {
+    if (currentPageIndex >= 0 && currentPageIndex < onboardingData.length - 1) {
+      setState(() {
+        currentPageIndex = index;
+      });
+      pageCntrl.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
+    } else if (currentPageIndex == onboardingData.length - 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SignUpScreen()),
+      );
+    }
+  }
+
+  void skipOnboarding() {
+    sharedPreferences();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const SignUpScreen()),
     );
   }
 }

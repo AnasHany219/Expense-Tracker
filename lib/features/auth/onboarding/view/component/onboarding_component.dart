@@ -15,12 +15,12 @@ class OnBoardingComponents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
           title,
           style: titleText,
+          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 10),
         Image.asset(

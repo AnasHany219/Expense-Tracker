@@ -2,7 +2,7 @@ import 'package:expense_tracker/features/expense/add_expense/view/page/add_expen
 import 'package:expense_tracker/features/auth/forget_password/view/page/new_password.dart';
 import 'package:expense_tracker/features/auth/forget_password/view/page/reset_password.dart';
 import 'package:expense_tracker/features/auth/login/view/page/login.dart';
-import 'package:expense_tracker/features/auth/onboarding/page/onboarding.dart';
+import 'package:expense_tracker/features/auth/onboarding/view/page/onboarding.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
 import 'package:expense_tracker/features/auth/verification/view/page/verification.dart';
 import 'package:expense_tracker/features/dashboard/view/page/dashboard_page.dart';

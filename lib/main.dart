@@ -1,4 +1,4 @@
-import 'package:expense_tracker/features/auth/onboarding/page/onboarding.dart';
+import 'package:expense_tracker/features/auth/onboarding/view/page/onboarding.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:expense_tracker/core/route_generator.dart';
