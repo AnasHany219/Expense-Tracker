@@ -1,14 +1,13 @@
-import 'package:expense_tracker/core/primary_button.dart';
-import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/validation.dart';
-import 'package:expense_tracker/features/auth/verification/controller/cubit/verification_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:expense_tracker/core/text_style.dart';
+import 'package:expense_tracker/features/auth/verification/controller/cubit/verification_cubit.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class VerificationForm extends StatefulWidget {
   final String? email;
-
-  final String? password; // Add password parameter
+  final String? password;
 
   const VerificationForm({super.key, required this.email, this.password});
 
@@ -18,6 +17,7 @@ class VerificationForm extends StatefulWidget {
 
 class _VerificationFormState extends State<VerificationForm> {
   VerificationCubit controller = VerificationCubit();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -28,25 +28,32 @@ class _VerificationFormState extends State<VerificationForm> {
             key: controller.formKey,
             child: Column(
               children: [
-                TextFormField(
+                PinCodeTextField(
                   controller: controller.verificationControllers,
-                  validator: Validator().otpValidator,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  textAlign: TextAlign.center,
-                  maxLength: 4, // Set the maximum length to 4
+                  appContext: context,
+                  length: 4,
+                  obscureText: false,
+                  animationType: AnimationType.fade,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    counterText: "", // Hide the character counter
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 40),
-                GestureDetector(
-                  onTap: () {
+                  validator: Validator().otpValidator,
+                  onChanged: (value) {},
+                  onCompleted: (value) {
                     controller.verifyValidate(context, widget.email!,
                         password: widget.password);
                   },
-                  child: const PrimaryButton(buttonText: 'Check!'),
+                  pinTheme: PinTheme(
+                    shape: PinCodeFieldShape.box,
+                    borderRadius: BorderRadius.circular(5),
+                    fieldHeight: 50,
+                    fieldWidth: 40,
+                    inactiveFillColor: primaryColor,
+                    inactiveColor: primaryColor,
+                    activeFillColor: Colors.white,
+                  ),
+                  cursorColor: Colors.black,
+                  animationDuration: const Duration(milliseconds: 300),
+                  backgroundColor: Colors.transparent,
+                  enableActiveFill: true,
                 ),
                 const SizedBox(
                   height: 5,
@@ -68,7 +75,7 @@ class _VerificationFormState extends State<VerificationForm> {
                           controller.resendOTP(context, widget.email!);
                         },
                         child: Text(
-                          'Resent',
+                          'Resend',
                           style: textButton.copyWith(
                             decoration: TextDecoration.underline,
                             decorationThickness: 1,
