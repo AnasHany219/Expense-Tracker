@@ -1,3 +1,6 @@
+// ignore_for_file: deprecated_member_use
+
+import 'package:device_preview/device_preview.dart';
 import 'package:expense_tracker/features/auth/onboarding/view/page/onboarding.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,9 +21,14 @@ Future<void> main() async {
       onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
 
   MaterialApp materialApp = MaterialApp(
+    builder: DevicePreview.appBuilder,
+    useInheritedMediaQuery: true,
     home: initialRoute,
     onGenerateRoute: InitialRouteGenerator.onGenerateRoute,
   );
 
-  runApp(materialApp);
+  runApp(DevicePreview(
+    enabled: true,
+    builder: (context) => materialApp,
+  ));
 }

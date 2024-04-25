@@ -18,9 +18,9 @@ class NewPassword extends StatelessWidget {
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 150),
                   Text(
                     'New Password',
                     style: titleText,
