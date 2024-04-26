@@ -44,8 +44,8 @@ class _VerificationFormState extends State<VerificationForm> {
                   pinTheme: PinTheme(
                     shape: PinCodeFieldShape.box,
                     borderRadius: BorderRadius.circular(5),
-                    fieldHeight: 50,
-                    fieldWidth: 40,
+                    fieldHeight: MediaQuery.of(context).size.width * 0.13,
+                    fieldWidth: MediaQuery.of(context).size.width * 0.13,
                     inactiveFillColor: primaryColor,
                     inactiveColor: primaryColor,
                     activeFillColor: Colors.white,
