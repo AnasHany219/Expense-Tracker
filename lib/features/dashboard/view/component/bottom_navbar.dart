@@ -14,16 +14,16 @@ class BottomNavBar extends StatelessWidget {
       onTap: onTap,
       items: const [
         BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.track_changes_sharp),
+          label: 'Expenses',
+        ),
+        BottomNavigationBarItem(
           icon: Icon(Icons.add),
-          label: 'Add Expense',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.dashboard),
-          label: 'Dashboard',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.list),
-          label: 'View Expense',
+          label: 'Add Expenses',
         ),
       ],
     );
