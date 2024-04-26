@@ -20,10 +20,9 @@ class LoginScreen extends StatelessWidget {
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 120,
-                  ),
                   Text(
                     'Welcome Back',
                     style: titleText,

@@ -58,32 +58,30 @@ class _VerificationFormState extends State<VerificationForm> {
                 const SizedBox(
                   height: 5,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Don\'t receive any code ? ',
-                        style: subTitle,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          controller.clear();
-                          controller.resendOTP(context, widget.email!);
-                        },
-                        child: Text(
-                          'Resend',
-                          style: textButton.copyWith(
-                            decoration: TextDecoration.underline,
-                            decorationThickness: 1,
-                          ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Don\'t receive any code ? ',
+                      style: subTitle,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        controller.clear();
+                        controller.resendOTP(context, widget.email!);
+                      },
+                      child: Text(
+                        'Resend',
+                        style: textButton.copyWith(
+                          decoration: TextDecoration.underline,
+                          decorationThickness: 1,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),

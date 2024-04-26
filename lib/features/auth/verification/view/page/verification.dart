@@ -20,11 +20,9 @@ class VerificationScreen extends StatelessWidget {
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 200,
-                  ),
                   Text(
                     'Verification Code',
                     style: titleText,
