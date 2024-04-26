@@ -1,5 +1,11 @@
+import 'package:expense_tracker/features/dashboard/controller/cubit/dashboard_cubit.dart';
+import 'package:expense_tracker/features/dashboard/controller/dashboard_controller.dart';
 import 'package:expense_tracker/features/dashboard/view/component/bottom_navbar.dart';
+import 'package:expense_tracker/features/expense/add_expense/view/page/add_expense_page.dart';
+import 'package:expense_tracker/features/expense/view_expense/view/page/view_expense_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardPage extends StatelessWidget {
   final String? email; // Declare email variable
@@ -8,37 +14,29 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Expense Tracker Dashboard'),
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Welcome to Expense Tracker!',
-              style: TextStyle(fontSize: 24),
+    return BlocProvider(
+      create: (context) => DashboardController(),
+      child: BlocBuilder<DashboardController, DashboardState>(
+        builder: (context, state) {
+          DashboardController controller = context.read<DashboardController>();
+          return Scaffold(
+            appBar: AppBar(
+              // title: const Text('Expense Tracker Dashboard'),
             ),
-            SizedBox(height: 20),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: 1,
-        onTap: (index) {
-          // Handle navigation to different screens based on index
-          switch (index) {
-            case 0:
-              Navigator.pushNamed(context, 'add_expense');
-              break;
-            case 1:
-              Navigator.pushNamed(context, 'dash_board');
-              break;
-            case 2:
-              Navigator.pushNamed(context, 'view_expense');
-              break;
-          }
+            body: PageView(
+              controller: controller.pageController,
+              onPageChanged: controller.onChangeTapIndex,
+              children: [
+                AddExpensePage(),
+                Text("DAshboard Page"),
+                ViewExpensePage(),
+              ],
+            ),
+            bottomNavigationBar: BottomNavBar(
+              currentIndex: controller.selectedTapIndex,
+              onTap: controller.onChangeTapIndex,
+            ),
+          );
         },
       ),
     );
