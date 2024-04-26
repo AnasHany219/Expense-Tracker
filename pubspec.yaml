@@ -27,12 +27,12 @@ dev_dependencies:
   flutter_lints: ^3.0.0
 
 flutter:
-  uses-material-design: true
+    uses-material-design: true
   assets:
-    - 'assets\images\expense_tracker_image.png'
-    - 'assets\images\dashboard_screenshot.png'
-    - 'assets\images\wallet.png'
-    - 'assets\images\person_with_app.png'
+    - 'assets/images/expense_tracker_image.png'
+    - 'assets/images/dashboard_screenshot.png'
+    - 'assets/images/wallet.png'
+    - 'assets/images/person_with_app.png'
     - .env
 
 flutter_native_splash:
