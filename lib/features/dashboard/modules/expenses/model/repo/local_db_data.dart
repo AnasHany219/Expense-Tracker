@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:expense_tracker/features/dashboard/modules/expenses/model/expense_model.dart';
 import 'package:expense_tracker/features/dashboard/modules/expenses/model/repo/parent_data.dart';
 import 'package:path/path.dart';
@@ -48,9 +50,23 @@ class DatabaseRepo extends ParentData {
 
   @override
   Future<void> insert({required String name, required String cost}) async {
+
     await _database.insert(
       'expense',
-      {'name': name, 'cost': int.parse(cost)},
+      {
+        'name': name,
+        'cost': isDigit(cost)?int.parse(cost):0
+      },
     );
+
+    print('insert name: $name, cost: $cost');
+    
   }
+}
+
+bool isDigit(String? s){
+if (s == null) {
+    return false;
+  }
+  return double.tryParse(s) != null;
 }
