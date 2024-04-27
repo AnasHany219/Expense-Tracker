@@ -28,11 +28,13 @@ Future<void> main() async {
   // Widget initialRoute= const VerificationScreen(email: "test", password: "2222");
   Widget initialRoute = const DashboardPage();
 
+
+  
   MaterialApp materialApp = MaterialApp(
     builder: DevicePreview.appBuilder,
     useInheritedMediaQuery: true,
     home: initialRoute,
-    onGenerateRoute: MyRoutes.onGenerateRoute,
+    onGenerateRoute: InitialRouteGenerator.onGenerateRoute,
   );
 
   runApp(DevicePreview(
@@ -41,25 +43,3 @@ Future<void> main() async {
   ));
 }
 
-class MyRoutes {
-  static List<Route> initialRoutes = [
-    MaterialPageRoute<dynamic>(
-      builder: (BuildContext context) => const DashboardPage(),
-    )
-  ];
-
-  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case 'login':
-        final List data = settings.arguments as List;
-        return MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) => DashboardPage());
-      case 'signup':
-        return MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) => SignUpScreen());
-      default:
-        return MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) => OnBoardingScreen());
-    }
-  }
-}
