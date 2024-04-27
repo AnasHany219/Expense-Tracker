@@ -21,10 +21,10 @@ class BottomNavBar extends StatelessWidget {
           icon: Icon(Icons.track_changes_sharp),
           label: 'Expenses',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.add),
-          label: 'Add Expenses',
-        ),
+        // BottomNavigationBarItem(
+        //   icon: Icon(Icons.add),
+        //   label: 'Add Expenses',
+        // ),
       ],
     );
   }

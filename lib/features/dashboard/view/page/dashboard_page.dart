@@ -1,14 +1,15 @@
+import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/dashboard/controller/cubit/dashboard_cubit.dart';
 import 'package:expense_tracker/features/dashboard/controller/dashboard_controller.dart';
 import 'package:expense_tracker/features/dashboard/view/component/bottom_navbar.dart';
-import 'package:expense_tracker/features/dashboard/modules/add_expense/page/add_expense_page.dart';
+
 import 'package:expense_tracker/features/dashboard/modules/expenses/view/expense_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardPage extends StatelessWidget {
   final String? email; // Declare email variable
+  final List<String> titles = const ['Home', 'Expenses'];
 
   const DashboardPage({super.key, this.email});
 
@@ -21,15 +22,27 @@ class DashboardPage extends StatelessWidget {
           DashboardController controller = context.read<DashboardController>();
           return Scaffold(
             appBar: AppBar(
-                // title: const Text('Expense Tracker Dashboard'),
-                ),
+              centerTitle: true,
+              backgroundColor: primaryColor,
+              title: Text(
+                titles[controller.selectedTapIndex],
+                style: const TextStyle(color: Colors.white),
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'add_expense');
+                  },
+                  icon: const Icon(Icons.add, color: Colors.white),
+                )
+              ],
+            ),
             body: PageView(
               controller: controller.pageController,
               onPageChanged: controller.onChangeTapIndex,
               children: [
-                const Text('Home'),
-                const ExpensePage(),
-                const AddExpensePage(),
+                Text('Home'),
+                ExpensePage(),
               ],
             ),
             bottomNavigationBar: BottomNavBar(
