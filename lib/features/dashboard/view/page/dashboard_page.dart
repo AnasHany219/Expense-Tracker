@@ -1,5 +1,7 @@
-import 'package:expense_tracker/features/dashboard/view/component/bottom_navbar.dart';
+import 'package:expense_tracker/core/text_style.dart';
+import 'package:expense_tracker/features/dashboard/controller/cubit/dashboard_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardPage extends StatelessWidget {
   final String? email; // Declare email variable
@@ -8,37 +10,42 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Expense Tracker Dashboard'),
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Welcome to Expense Tracker!',
-              style: TextStyle(fontSize: 24),
+    return BlocProvider(
+      create: (context) => DashboardCubit(),
+      child: BlocBuilder<DashboardCubit, DashboardState>(
+        builder: (context, state) {
+          DashboardCubit controller = context.read<DashboardCubit>();
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                'hello, $email',
+                style: const TextStyle(color: Colors.white),
+              ),
+              backgroundColor: primaryColor,
             ),
-            SizedBox(height: 20),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: 1,
-        onTap: (index) {
-          // Handle navigation to different screens based on index
-          switch (index) {
-            case 0:
-              Navigator.pushNamed(context, 'add_expense');
-              break;
-            case 1:
-              Navigator.pushNamed(context, 'dash_board');
-              break;
-            case 2:
-              Navigator.pushNamed(context, 'view_expense');
-              break;
-          }
+            body: PageView(
+              controller: controller.pageController,
+              onPageChanged: controller.onChangeTabIndex,
+              children: const [
+                Text('Expenses'),
+                Text('Home'),
+                Text('Profile'),
+              ],
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: controller.selectedTapIndex,
+              onTap: controller.onChangeTabIndex,
+              unselectedItemColor: Colors.black,
+              showUnselectedLabels: true,
+              items: const [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.list), label: 'Expenses'),
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.person), label: 'Profile'),
+              ],
+            ),
+          );
         },
       ),
     );

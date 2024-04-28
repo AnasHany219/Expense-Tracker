@@ -3,4 +3,4 @@ part of 'dashboard_cubit.dart';
 @immutable
 sealed class DashboardState {}
 
-final class DashboardInitial extends DashboardState {}
+class DashboardChangeState extends DashboardState {}
