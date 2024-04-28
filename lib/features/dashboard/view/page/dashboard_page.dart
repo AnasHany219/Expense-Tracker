@@ -37,6 +37,8 @@ class DashboardPage extends StatelessWidget {
               onTap: controller.onChangeTabIndex,
               unselectedItemColor: Colors.black,
               showUnselectedLabels: true,
+              unselectedLabelStyle:
+                  const TextStyle(fontSize: 15, color: Colors.black),
               items: const [
                 BottomNavigationBarItem(
                     icon: Icon(Icons.list), label: 'Expenses'),
