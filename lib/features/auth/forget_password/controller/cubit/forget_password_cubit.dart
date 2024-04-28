@@ -4,7 +4,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/core/email_sender.dart';
-import 'package:expense_tracker/provider/user_db.dart';
+import 'package:expense_tracker/features/auth/provider/user_db.dart';
 import 'package:flutter/material.dart';
 
 part 'forget_password_state.dart';

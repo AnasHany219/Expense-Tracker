@@ -4,8 +4,8 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/core/email_sender.dart';
-import 'package:expense_tracker/model/user.dart';
-import 'package:expense_tracker/provider/user_db.dart';
+import 'package:expense_tracker/features/auth/model/user.dart';
+import 'package:expense_tracker/features/auth/provider/user_db.dart';
 import 'package:flutter/material.dart';
 
 part 'login_state.dart';
