@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart';
