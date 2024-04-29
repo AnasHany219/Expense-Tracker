@@ -44,6 +44,7 @@ class FirebaseRepo extends ParentRepo {
 
   // Implementing insertExpense method for Firebase data source
   @override
+  @override
   Future<void> insertExpense(Expense expense) async {
     await FirebaseFirestore.instance
         .collection('expenses')

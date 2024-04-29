@@ -30,7 +30,7 @@ class Expense {
   // Method to convert Expense object to a map
   Map<String, dynamic> toMap() {
     return {
-      'id': int.tryParse(id!),
+      'id': id != null ? int.tryParse(id!) : null,
       'email': email,
       'amount': amount,
       'category': category,
