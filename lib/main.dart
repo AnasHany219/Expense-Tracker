@@ -21,7 +21,7 @@ Future<void> main() async {
   // Widget initialRoute =
   //     onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
 
-  Widget initialRoute = const DashboardPage(email: 'anashany');
+  Widget initialRoute = const DashboardPage(email: 'anashany@gmail.com');
 
   MaterialApp materialApp = MaterialApp(
     home: initialRoute,
