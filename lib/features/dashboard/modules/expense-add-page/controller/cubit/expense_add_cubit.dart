@@ -2,6 +2,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';
+import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/firebase_data.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart';
 import 'package:flutter/material.dart';
 
@@ -65,6 +66,7 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
     try {
       final DatabaseRepo dbInstance = await DatabaseRepo.instance;
       await dbInstance.insertExpense(expense);
+      // await FirebaseRepo.instance.insertExpense(expense);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Row(
