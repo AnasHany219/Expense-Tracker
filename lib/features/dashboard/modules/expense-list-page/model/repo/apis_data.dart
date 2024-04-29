@@ -4,7 +4,7 @@ import 'package:expense_tracker/features/dashboard/modules/expense-list-page/mod
 class APIsRepo extends ParentRepo {
   // Implementing deleteExpense method for API data source
   @override
-  Future<void> deleteExpense({required Comparable<num> id}) {
+  Future<void> deleteExpense({required String id}) {
     // TODO: implement deleteExpense
     // Implement logic to delete expense data using external API
     // Example: Send HTTP DELETE request to API endpoint with expense ID to delete

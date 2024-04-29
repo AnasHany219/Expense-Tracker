@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/parent_date.dart';
 
@@ -13,29 +14,39 @@ class FirebaseRepo extends ParentRepo {
 
   // Implementing deleteExpense method for Firebase data source
   @override
-  Future<void> deleteExpense({required Comparable<num> id}) {
-    // TODO: implement deleteExpense
-    // Implement logic to delete expense data using Firebase services
-    // Example: Delete expense document from Firestore collection
-    throw UnimplementedError();
+  Future<void> deleteExpense({required String id}) async {
+    await FirebaseFirestore.instance.collection('expenses').doc(id).delete();
   }
 
   // Implementing fetchExpenses method for Firebase data source
   @override
-  Future<List<Expense>> fetchExpenses({String? email = ''}) {
-    // TODO: implement fetchExpenses
-    // Implement logic to fetch expense data from Firebase services
-    // Example: Retrieve expense documents from Firestore collection
-    // Parse the documents and return a list of Expense objects
-    throw UnimplementedError();
+  Future<List<Expense>> fetchExpenses({String? email = ''}) async {
+    return await FirebaseFirestore.instance
+        .collection('expenses')
+        .where('email', isEqualTo: email)
+        .get()
+        .then(
+      (QuerySnapshot querySnapshot) {
+        final List<Expense> expenses = querySnapshot.docs
+            .map(
+              (doc) => Expense.fromMap(
+                {
+                  ...(doc.data() as Map<String, dynamic>?) ?? {},
+                  'id': doc.reference.id
+                },
+              ),
+            )
+            .toList();
+        return expenses;
+      },
+    );
   }
 
   // Implementing insertExpense method for Firebase data source
   @override
-  Future<void> insertExpense(Expense expense) {
-    // TODO: implement insertExpense
-    // Implement logic to insert expense data using Firebase services
-    // Example: Add expense document to Firestore collection
-    throw UnimplementedError();
+  Future<void> insertExpense(Expense expense) async {
+    await FirebaseFirestore.instance
+        .collection('expenses')
+        .add(expense.toMap());
   }
 }

@@ -6,12 +6,18 @@
 // import 'package:shared_preferences/shared_preferences.dart';
 import 'package:expense_tracker/features/dashboard/view/page/dashboard_page.dart';
 import 'package:expense_tracker/core/route_generator.dart';
+import 'package:expense_tracker/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
   // Load environment variables
   await dotenv.load();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   // Check if onboarding has been completed
   // SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -21,7 +27,7 @@ Future<void> main() async {
   // Widget initialRoute =
   //     onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
 
-  Widget initialRoute = const DashboardPage(email: 'anashany@gmail.com');
+  Widget initialRoute = const DashboardPage(email: 'anashany219@gmail.com');
 
   MaterialApp materialApp = MaterialApp(
     home: initialRoute,

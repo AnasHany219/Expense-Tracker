@@ -1,5 +1,5 @@
 class Expense {
-  int? id;
+  String? id;
   final String email;
   final double amount;
   final String category;
@@ -18,7 +18,7 @@ class Expense {
   // Factory constructor to create Expense object from a map
   factory Expense.fromMap(Map<String, dynamic> map) {
     return Expense(
-      id: map['id'],
+      id: map['id'].toString(),
       email: map['email'],
       amount: map['amount'],
       category: map['category'],
@@ -30,7 +30,7 @@ class Expense {
   // Method to convert Expense object to a map
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'id': int.tryParse(id!),
       'email': email,
       'amount': amount,
       'category': category,

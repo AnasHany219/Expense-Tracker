@@ -42,8 +42,9 @@ class DatabaseRepo extends ParentRepo {
 
   // Implementing deleteExpense method for local database
   @override
-  Future<void> deleteExpense({required Comparable<num> id}) async {
-    await _database.delete('expenses', where: 'id = ?', whereArgs: [id]);
+  Future<void> deleteExpense({required String id}) async {
+    await _database
+        .delete('expenses', where: 'id = ?', whereArgs: [int.tryParse(id)]);
   }
 
   // Implementing fetchExpenses method for local database

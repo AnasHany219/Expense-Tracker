@@ -18,10 +18,10 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Future<void> addExpenseValidate(BuildContext context, String email) async {
-    final amount = amountController.text.trim();
-    final category = categoryController.text.trim();
-    final date = dateController.text.trim();
-    final notes = notesController.text.trim();
+    final amount = amountController.text;
+    final category = categoryController.text;
+    final date = dateController.text;
+    final notes = notesController.text;
 
     // Validate amount field
     if (amount.isEmpty || !isNumeric(amount)) {
@@ -93,8 +93,8 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
   }
 
   void clearFields() {
-    amountController.text = '';
-    categoryController.text = '';
+    amountController.clear();
+    categoryController.clear();
     dateController.clear();
     notesController.clear();
   }
