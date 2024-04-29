@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:expense_tracker/core/primary_button.dart';
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-add-page/controller/cubit/expense_add_cubit.dart';

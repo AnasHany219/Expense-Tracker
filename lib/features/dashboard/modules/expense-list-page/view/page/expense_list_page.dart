@@ -1,6 +1,7 @@
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/controller/cubit/expense_list_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';
+import 'package:expense_tracker/features/dashboard/modules/expense-list-page/view/components/expense_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -51,23 +52,11 @@ class ExpenseList extends StatelessWidget {
                           ),
                         ],
                       ))
-                    : GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8.0,
-                          mainAxisSpacing: 8.0,
-                        ),
+                    : ListView.builder(
                         itemCount: controller.expenses.length,
                         itemBuilder: (context, index) {
                           final Expense expense = controller.expenses[index];
-                          return Card(
-                            child: ListTile(
-                              title: Text('Amount: ${expense.amount}'),
-                              subtitle: Text('Category: ${expense.category}'),
-                              // Add more fields as needed
-                            ),
-                          );
+                          return ExpenseListItem(expense: expense);
                         },
                       ),
           );

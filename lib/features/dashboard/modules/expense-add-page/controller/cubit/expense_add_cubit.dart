@@ -1,8 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 part 'expense_add_state.dart';
 
@@ -22,7 +23,23 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
     final date = dateController.text.trim();
     final notes = notesController.text.trim();
 
-    if (amount.isEmpty || category.isEmpty || date.isEmpty || notes.isEmpty) {
+    // Validate amount field
+    if (amount.isEmpty || !isNumeric(amount)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Row(
+            children: [
+              Icon(Icons.error, color: Colors.red), // Error icon
+              SizedBox(width: 8), // Space between icon and text
+              Text('Amount must be a valid number'), // Error message
+            ],
+          ),
+        ),
+      );
+      return;
+    }
+
+    if (category.isEmpty || date.isEmpty || notes.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Row(
@@ -76,9 +93,16 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
   }
 
   void clearFields() {
-    amountController.clear();
-    categoryController.clear();
+    amountController.text = '';
+    categoryController.text = '';
     dateController.clear();
     notesController.clear();
+  }
+
+  bool isNumeric(String? str) {
+    if (str == null) {
+      return false;
+    }
+    return double.tryParse(str) != null;
   }
 }
