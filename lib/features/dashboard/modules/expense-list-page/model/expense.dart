@@ -1,18 +1,18 @@
 class Expense {
-  final int id;
+  int? id;
+  final String email;
   final double amount;
   final String category;
   final String date;
   final String notes;
-  final String email;
 
   Expense({
-    required this.id,
+    this.id,
+    required this.email,
     required this.amount,
     required this.category,
     required this.date,
     required this.notes,
-    required this.email,
   });
 
   // Factory constructor to create Expense object from a map
