@@ -4,8 +4,12 @@ import 'package:expense_tracker/features/dashboard/modules/expense-add-page/view
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Widget for adding a new expense.
 class ExpenseAddPage extends StatelessWidget {
+  /// The email address of the user.
   final String? email;
+
+  /// Constructs a new [ExpenseAddPage] instance.
   const ExpenseAddPage({super.key, this.email});
 
   @override
