@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomePage extends StatelessWidget {
   final String? email;
 
-  const HomePage({Key? key, this.email}) : super(key: key);
+  const HomePage({super.key, this.email});
 
   @override
   Widget build(BuildContext context) {

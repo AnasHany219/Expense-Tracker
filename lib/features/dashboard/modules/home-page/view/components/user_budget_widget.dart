@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/core/text_style.dart';
 
@@ -7,11 +9,11 @@ class UserBudgetWidget extends StatelessWidget {
   final Function(double) onUpdate;
 
   const UserBudgetWidget({
-    Key? key,
+    super.key,
     required this.totalExpenses,
     required this.userBudget,
     required this.onUpdate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
