@@ -76,7 +76,7 @@ class UserBudgetWidget extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
             children: [
               TextFormField(
                 controller: _controller,
