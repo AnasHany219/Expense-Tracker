@@ -14,11 +14,11 @@ class UserBudgetWidget extends StatelessWidget {
 
   /// Constructs a new [UserBudgetWidget] instance.
   const UserBudgetWidget({
-    Key? key,
+    super.key,
     required this.totalExpenses,
     required this.userBudget,
     required this.onUpdate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
