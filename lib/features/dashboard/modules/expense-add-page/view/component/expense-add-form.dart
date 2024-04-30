@@ -6,8 +6,12 @@ import 'package:expense_tracker/features/dashboard/modules/expense-add-page/cont
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Form widget for adding a new expense.
 class ExpenseAddForm extends StatefulWidget {
+  /// The email address of the user.
   final String? email;
+
+  /// Constructs a new [ExpenseAddForm] instance.
   const ExpenseAddForm({super.key, required this.email});
 
   @override
@@ -15,12 +19,18 @@ class ExpenseAddForm extends StatefulWidget {
 }
 
 class _ExpenseAddFormState extends State<ExpenseAddForm> {
-  ExpenseAddCubit controller = ExpenseAddCubit();
+  late ExpenseAddCubit controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = ExpenseAddCubit();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ExpenseAddCubit(),
+      create: (context) => controller,
       child: BlocBuilder<ExpenseAddCubit, ExpenseAddState>(
         builder: (context, state) {
           return Form(
@@ -51,6 +61,7 @@ class _ExpenseAddFormState extends State<ExpenseAddForm> {
     );
   }
 
+  /// Builds a TextFormField for input.
   Padding buildInputForm(String label) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
         child: TextFormField(
