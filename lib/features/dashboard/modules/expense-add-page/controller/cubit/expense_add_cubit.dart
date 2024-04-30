@@ -67,6 +67,7 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
       // final DatabaseRepo dbInstance = await DatabaseRepo.instance;
       // await dbInstance.insertExpense(expense);
       await FirebaseRepo.instance.insertExpense(expense);
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Row(

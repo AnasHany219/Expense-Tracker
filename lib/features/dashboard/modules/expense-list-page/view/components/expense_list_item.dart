@@ -3,8 +3,10 @@ import 'package:expense_tracker/features/dashboard/modules/expense-list-page/mod
 
 class ExpenseListItem extends StatelessWidget {
   final Expense expense;
+  final VoidCallback onRemove;
 
-  const ExpenseListItem({super.key, required this.expense});
+  const ExpenseListItem(
+      {super.key, required this.expense, required this.onRemove});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,10 @@ class ExpenseListItem extends StatelessWidget {
             Text('Date: ${expense.date}'),
             Text('Notes: ${expense.notes}'),
           ],
+        ),
+        trailing: IconButton(
+          icon: const Icon(Icons.remove_circle),
+          onPressed: onRemove,
         ),
       ),
     );

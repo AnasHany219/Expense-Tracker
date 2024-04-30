@@ -56,12 +56,20 @@ class ExpenseList extends StatelessWidget {
                         itemCount: controller.expenses.length,
                         itemBuilder: (context, index) {
                           final Expense expense = controller.expenses[index];
-                          return ExpenseListItem(expense: expense);
+                          return ExpenseListItem(
+                            expense: expense,
+                            onRemove: () => _onRemove(context, expense),
+                          );
                         },
                       ),
           );
         },
       ),
     );
+  }
+
+  void _onRemove(BuildContext context, Expense expense) {
+    final cubit = context.read<ExpenseListCubit>();
+    cubit.removeExpense(context, expense.id!);
   }
 }
