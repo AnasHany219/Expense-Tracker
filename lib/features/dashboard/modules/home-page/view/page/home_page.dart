@@ -1,6 +1,7 @@
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/dashboard/modules/home-page/controller/cubit/home_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/home-page/controller/cubit/home_state.dart';
+import 'package:expense_tracker/features/dashboard/modules/home-page/view/components/expense_summary_charts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,6 +42,11 @@ class HomePage extends StatelessWidget {
                     Text(
                         'Total Expenses: \$${totalExpenses.toStringAsFixed(2)}',
                         style: subTitle),
+                    const SizedBox(height: 60),
+                    // Expense Summary PieChart
+                    ExpenseSummaryCharts(
+                      expenseData: controller.getExpenseSummary(),
+                    ),
                     const SizedBox(height: 10),
                   ],
                 ),

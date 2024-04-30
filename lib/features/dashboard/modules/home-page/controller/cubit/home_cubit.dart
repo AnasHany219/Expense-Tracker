@@ -9,6 +9,7 @@ class HomeCubit extends Cubit<HomeState> {
   final String? email;
   User? currentUser;
   List<Expense> expenses = [];
+  Map<String, double> expenseSummary = {};
 
   HomeCubit(this.email) : super(HomeLoading()) {
     init();
@@ -21,6 +22,7 @@ class HomeCubit extends Cubit<HomeState> {
     currentUser = await userDB.getUserByEmail(email!);
 
     expenses = await (await DatabaseRepo.instance).fetchExpenses(email: email);
+    calculateExpenseSummary();
 
     emit(currentUser == null ? HomeEmpty() : HomeLoaded(currentUser!));
   }
@@ -28,5 +30,17 @@ class HomeCubit extends Cubit<HomeState> {
   double calculateTotalExpenses() {
     return expenses.fold(
         0.0, (previousValue, expense) => previousValue + expense.amount);
+  }
+
+  void calculateExpenseSummary() {
+    expenseSummary.clear();
+    for (var expense in expenses) {
+      expenseSummary[expense.category] =
+          (expenseSummary[expense.category] ?? 0) + expense.amount;
+    }
+  }
+
+  Map<String, double> getExpenseSummary() {
+    return Map<String, double>.from(expenseSummary);
   }
 }
