@@ -3,12 +3,18 @@ import 'package:expense_tracker/features/dashboard/modules/expense-list-page/mod
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+/// Repository class for managing expenses in a local SQLite database.
 class DatabaseRepo extends ParentRepo {
+  /// Private constructor to prevent direct instantiation.
   DatabaseRepo._init();
 
+  /// Singleton instance of [DatabaseRepo].
   static DatabaseRepo? _singletonObject;
+
+  /// SQLite database instance.
   static late Database _database;
 
+  /// Gets the singleton instance of [DatabaseRepo].
   static Future<DatabaseRepo> get instance async {
     if (_singletonObject == null) {
       await _initDatabase();
@@ -17,6 +23,7 @@ class DatabaseRepo extends ParentRepo {
     return _singletonObject!;
   }
 
+  /// Initializes the SQLite database.
   static Future<void> _initDatabase() async {
     // Get the path to the database file
     final String databasePath = await getDatabasesPath();
@@ -26,6 +33,7 @@ class DatabaseRepo extends ParentRepo {
     _database = await openDatabase(path, version: 1, onCreate: _createTable);
   }
 
+  /// Creates the expenses table in the database.
   static Future<void> _createTable(Database db, int version) async {
     // Create the expenses table if it doesn't exist
     await db.execute('''
@@ -40,14 +48,12 @@ class DatabaseRepo extends ParentRepo {
     ''');
   }
 
-  // Implementing deleteExpense method for local database
   @override
   Future<void> deleteExpense({required String id}) async {
     await _database
         .delete('expenses', where: 'id = ?', whereArgs: [int.tryParse(id)]);
   }
 
-  // Implementing fetchExpenses method for local database
   @override
   Future<List<Expense>> fetchExpenses({String? email = ''}) async {
     // Query the expenses table
@@ -64,7 +70,6 @@ class DatabaseRepo extends ParentRepo {
     return expenses;
   }
 
-  // Implementing insertExpense method for local database
   @override
   Future<void> insertExpense(Expense expense) async {
     // Execute the INSERT query
