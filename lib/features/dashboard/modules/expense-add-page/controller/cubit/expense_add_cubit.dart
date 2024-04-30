@@ -81,7 +81,7 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
         content: Row(
           children: [
             Icon(Icons.error, color: color), // Error icon
-            SizedBox(width: 8), // Space between icon and text
+            const SizedBox(width: 8), // Space between icon and text
             Text(message), // Error message
           ],
         ),
