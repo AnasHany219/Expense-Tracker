@@ -2,22 +2,23 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';
-// import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/firebase_data.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart';
 import 'package:flutter/material.dart';
 
 part 'expense_add_state.dart';
 
+/// Cubit responsible for managing adding expenses.
 class ExpenseAddCubit extends Cubit<ExpenseAddState> {
   ExpenseAddCubit() : super(ExpenseAddInitial());
 
-  TextEditingController amountController = TextEditingController();
-  TextEditingController categoryController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
-  TextEditingController notesController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
+  final TextEditingController notesController = TextEditingController();
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  /// Adds the expense after validating the input fields.
   Future<void> addExpenseValidate(BuildContext context, String email) async {
     final amount = amountController.text;
     final category = categoryController.text;
@@ -26,32 +27,12 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
 
     // Validate amount field
     if (amount.isEmpty || !isNumeric(amount)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Row(
-            children: [
-              Icon(Icons.error, color: Colors.red), // Error icon
-              SizedBox(width: 8), // Space between icon and text
-              Text('Amount must be a valid number'), // Error message
-            ],
-          ),
-        ),
-      );
+      showSnackBar(context, 'Amount must be a valid number', Colors.red);
       return;
     }
 
     if (category.isEmpty || date.isEmpty || notes.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Row(
-            children: [
-              Icon(Icons.error, color: Colors.red), // Error icon
-              SizedBox(width: 8), // Space between icon and text
-              Text('All fields are required'), // Error message
-            ],
-          ),
-        ),
-      );
+      showSnackBar(context, 'All fields are required', Colors.red);
       return;
     }
 
@@ -64,40 +45,20 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
     );
 
     try {
-      // inserting data in local database
-      final DatabaseRepo dbInstance = await DatabaseRepo.instance;
+      final dbInstance = await DatabaseRepo.instance;
       await dbInstance.insertExpense(expense);
 
       // inserting data in firebase
       // await FirebaseRepo.instance.insertExpense(expense);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Row(
-            children: [
-              Icon(Icons.check_circle, color: Colors.green),
-              SizedBox(width: 8),
-              Text('Expense added successfully'),
-            ],
-          ),
-        ),
-      );
+      showSnackBar(context, 'Expense added successfully', Colors.green);
       clearFields();
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Row(
-            children: [
-              Icon(Icons.error, color: Colors.red), // Error icon
-              SizedBox(width: 8), // Space between icon and text
-              Text('Failed to add expense'), // Error message
-            ],
-          ),
-        ),
-      );
+      showSnackBar(context, 'Failed to add expense', Colors.red);
     }
   }
 
+  /// Clears all input fields.
   void clearFields() {
     amountController.clear();
     categoryController.clear();
@@ -105,10 +66,26 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
     notesController.clear();
   }
 
+  /// Checks if a string is numeric.
   bool isNumeric(String? str) {
     if (str == null) {
       return false;
     }
     return double.tryParse(str) != null;
+  }
+
+  /// Displays a SnackBar with the provided message and color.
+  void showSnackBar(BuildContext context, String message, Color color) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.error, color: color), // Error icon
+            SizedBox(width: 8), // Space between icon and text
+            Text(message), // Error message
+          ],
+        ),
+      ),
+    );
   }
 }
