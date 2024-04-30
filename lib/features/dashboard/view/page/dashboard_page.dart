@@ -2,6 +2,7 @@ import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/dashboard/controller/cubit/dashboard_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-add-page/view/page/expense_add_page.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/view/page/expense_list_page.dart';
+import 'package:expense_tracker/features/dashboard/modules/home-page/view/page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -48,7 +49,7 @@ class DashboardPage extends StatelessWidget {
               controller: controller.pageController,
               onPageChanged: controller.onChangeTabIndex,
               children: [
-                const Text('Home'),
+                HomePage(email: email),
                 ExpenseList(email: email),
                 const Text('Profile'),
               ],

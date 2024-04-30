@@ -2,8 +2,8 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';
-import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/firebase_data.dart';
-// import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart';
+// import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/firebase_data.dart';
+import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart';
 import 'package:flutter/material.dart';
 
 part 'expense_list_state.dart';
@@ -18,8 +18,8 @@ class ExpenseListCubit extends Cubit<ExpenseListState> {
 
   Future<void> init() async {
     emit(ExpenseListLoading());
-    // expenses = await (await DatabaseRepo.instance).fetchExpenses(email: email);
-    expenses = await FirebaseRepo.instance.fetchExpenses(email: email);
+    expenses = await (await DatabaseRepo.instance).fetchExpenses(email: email);
+    // expenses = await FirebaseRepo.instance.fetchExpenses(email: email);
 
     emit(expenses.isEmpty ? ExpenseListEmpty() : ExpenseListLoaded());
   }
@@ -27,15 +27,13 @@ class ExpenseListCubit extends Cubit<ExpenseListState> {
   Future<void> removeExpense(BuildContext context, String id) async {
     try {
       // Call the deleteExpense method from local database
-      // final DatabaseRepo dbInstance = await DatabaseRepo.instance;
-      // await dbInstance.deleteExpense(id: id);
-      // expenses = await dbInstance.fetchExpenses(email: email);
+      final DatabaseRepo dbInstance = await DatabaseRepo.instance;
+      await dbInstance.deleteExpense(id: id);
 
       // Call the deleteExpense method from firebase
-      await FirebaseRepo.instance.deleteExpense(id: id);
-      expenses = await FirebaseRepo.instance.fetchExpenses(email: email);
+      // await FirebaseRepo.instance.deleteExpense(id: id);
 
-      emit(expenses.isEmpty ? ExpenseListEmpty() : ExpenseListLoaded());
+      init();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Row(
