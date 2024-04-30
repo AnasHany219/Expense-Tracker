@@ -1,19 +1,24 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/core/text_style.dart';
 
+/// A widget representing the user budget information.
 class UserBudgetWidget extends StatelessWidget {
+  /// The total expenses of the user.
   final double totalExpenses;
+
+  /// The user's budget.
   final double userBudget;
+
+  /// A callback function to update the user's budget.
   final Function(double) onUpdate;
 
+  /// Constructs a new [UserBudgetWidget] instance.
   const UserBudgetWidget({
-    super.key,
+    Key? key,
     required this.totalExpenses,
     required this.userBudget,
     required this.onUpdate,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +71,7 @@ class UserBudgetWidget extends StatelessWidget {
     );
   }
 
+  /// Displays a modal bottom sheet to edit the user's budget.
   void _showEditBudgetModal(BuildContext context) {
     final TextEditingController _controller =
         TextEditingController(text: userBudget.toStringAsFixed(2));
