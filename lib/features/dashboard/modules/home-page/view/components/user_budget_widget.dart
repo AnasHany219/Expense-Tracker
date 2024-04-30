@@ -73,7 +73,7 @@ class UserBudgetWidget extends StatelessWidget {
 
   /// Displays a modal bottom sheet to edit the user's budget.
   void _showEditBudgetModal(BuildContext context) {
-    final TextEditingController _controller =
+    final TextEditingController controller =
         TextEditingController(text: userBudget.toStringAsFixed(2));
 
     showModalBottomSheet(
@@ -85,7 +85,7 @@ class UserBudgetWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               TextFormField(
-                controller: _controller,
+                controller: controller,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                   labelText: 'Enter new budget',
@@ -101,7 +101,7 @@ class UserBudgetWidget extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   final double newBudget =
-                      double.tryParse(_controller.text) ?? 0.0;
+                      double.tryParse(controller.text) ?? 0.0;
                   onUpdate(newBudget);
                   Navigator.pop(context);
                 },

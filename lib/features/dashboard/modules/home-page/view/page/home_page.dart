@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
   final String? email;
 
   /// Constructs a new [HomePage] widget.
-  const HomePage({Key? key, this.email}) : super(key: key);
+  const HomePage({super.key, this.email});
 
   @override
   Widget build(BuildContext context) {
