@@ -30,7 +30,7 @@ class DashboardPage extends StatelessWidget {
                           builder: (context) => ExpenseAddPage(email: email)),
                     );
                   },
-                  icon: const Icon(Icons.add),
+                  icon: const Icon(Icons.add_box_rounded),
                   color: Colors.white,
                 )
               ],
@@ -62,11 +62,12 @@ class DashboardPage extends StatelessWidget {
               unselectedLabelStyle:
                   const TextStyle(fontSize: 15, color: primaryColor),
               items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.home_filled), label: 'Home'),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.list), label: 'Expenses'),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.person), label: 'Profile'),
+                    icon: Icon(Icons.person_2), label: 'Profile'),
               ],
             ),
           );

@@ -8,6 +8,6 @@ const shadowGray = Color(0xff5b5b5b);
 TextStyle titleText = const TextStyle(
     color: primaryColor, fontSize: 32, fontWeight: FontWeight.bold);
 TextStyle subTitle = const TextStyle(
-    color: secondaryColor, fontSize: 18, fontWeight: FontWeight.w500);
+    color: secondaryColor, fontSize: 16, fontWeight: FontWeight.w500);
 TextStyle textButton = const TextStyle(
     color: primaryColor, fontSize: 18, fontWeight: FontWeight.bold);

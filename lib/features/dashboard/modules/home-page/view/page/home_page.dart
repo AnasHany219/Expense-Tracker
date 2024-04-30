@@ -2,12 +2,14 @@ import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/dashboard/modules/home-page/controller/cubit/home_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/home-page/controller/cubit/home_state.dart';
 import 'package:expense_tracker/features/dashboard/modules/home-page/view/components/expense_summary_charts.dart';
+import 'package:expense_tracker/features/dashboard/modules/home-page/view/components/user_budget_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   final String? email;
-  const HomePage({super.key, this.email});
+
+  const HomePage({Key? key, this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +18,9 @@ class HomePage extends StatelessWidget {
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           final HomeCubit controller = context.read<HomeCubit>();
-          double totalExpenses =
+          final double totalExpenses =
               state is HomeLoaded ? controller.calculateTotalExpenses() : 0.0;
-          String displayName = state is HomeLoading
+          final String displayName = state is HomeLoading
               ? 'Loading...'
               : state is HomeEmpty
                   ? 'No-Name'
@@ -27,27 +29,24 @@ class HomePage extends StatelessWidget {
                       : 'Unknown';
           return SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Header Section
+                const SizedBox(height: 10),
+                Text('Welcome, $displayName!', style: titleText),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 10,
+                    UserBudgetWidget(
+                      totalExpenses: totalExpenses,
+                      userBudget: controller.userBudget,
+                      onUpdate: (newBudget) {
+                        controller.updateUserBudget(newBudget);
+                      },
                     ),
-                    Text('Welcome, $displayName!', style: titleText),
-                    const SizedBox(height: 10),
-                    // Total Expenses Display
-                    Text(
-                        'Total Expenses: \$${totalExpenses.toStringAsFixed(2)}',
-                        style: subTitle),
                     const SizedBox(height: 60),
-                    // Expense Summary PieChart
                     ExpenseSummaryCharts(
                       expenseData: controller.getExpenseSummary(),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 60),
                   ],
                 ),
               ],
