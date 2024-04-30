@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
+/// A custom bottom navigation bar widget.
 class BottomNavBar extends StatelessWidget {
+  /// The index of the currently selected item.
   final int currentIndex;
+
+  /// A callback function called when an item is tapped.
   final Function(int) onTap;
 
-  const BottomNavBar(
-      {super.key, required this.currentIndex, required this.onTap});
+  /// Constructs a new [BottomNavBar] widget.
+  const BottomNavBar({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
