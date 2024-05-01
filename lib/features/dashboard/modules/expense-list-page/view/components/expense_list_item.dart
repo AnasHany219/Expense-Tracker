@@ -17,7 +17,7 @@ class ExpenseListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text('Amount: ${expense.amount}'),
+        title: Text('Amount: ${expense.amount.toStringAsFixed(2)} \$'),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

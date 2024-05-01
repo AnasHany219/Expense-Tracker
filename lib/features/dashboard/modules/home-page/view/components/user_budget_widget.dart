@@ -34,7 +34,7 @@ class UserBudgetWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Spending Limit: ${userBudget.toStringAsFixed(2)}',
+                'Spending Limit: ${userBudget.toStringAsFixed(2)} \$ ',
                 style: const TextStyle(
                   color: primaryColor,
                   fontSize: 18,
@@ -50,7 +50,7 @@ class UserBudgetWidget extends StatelessWidget {
             ],
           ),
           Text(
-            'Total Spending: ${totalExpenses.toStringAsFixed(2)}',
+            'Total Spending: ${totalExpenses.toStringAsFixed(2)} \$ ',
             style: const TextStyle(
               fontSize: 18,
               color: primaryColor,
@@ -59,7 +59,7 @@ class UserBudgetWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Balance: ${difference.toStringAsFixed(2)}',
+            'Balance: ${difference.toStringAsFixed(2)} \$ ',
             style: TextStyle(
               fontSize: 18,
               color: isBudgetExceeded ? Colors.red : Colors.green,
