@@ -202,4 +202,22 @@ class UserDB {
       throw Exception('Failed to update user verification status: $e');
     }
   }
+
+  Future<void> deleteUserByEmail(String email) async {
+    await init();
+    try {
+      await db.transaction((txn) async {
+        int count = await txn.rawDelete(
+          'DELETE FROM users WHERE email = ?',
+          [email],
+        );
+        if (count != 1) {
+          throw Exception(
+              'Failed to delete user: Unexpected number of rows deleted');
+        }
+      });
+    } catch (e) {
+      throw Exception('Failed to delete user: $e');
+    }
+  }
 }

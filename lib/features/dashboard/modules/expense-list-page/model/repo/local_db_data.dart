@@ -75,4 +75,9 @@ class DatabaseRepo extends ParentRepo {
     // Execute the INSERT query
     await _database.insert('expenses', expense.toMap());
   }
+
+  Future<void> deleteExpensesByEmail(String email) async {
+    // Delete all expenses associated with the specified email
+    await _database.delete('expenses', where: 'email = ?', whereArgs: [email]);
+  }
 }

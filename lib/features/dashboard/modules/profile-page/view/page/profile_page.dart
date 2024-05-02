@@ -1,6 +1,7 @@
 import 'package:expense_tracker/features/dashboard/modules/profile-page/controller/cubit/profile_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/view/components/change_name.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/view/components/change_password.dart';
+import 'package:expense_tracker/features/dashboard/modules/profile-page/view/components/delete_account_button.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/view/components/logout_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,15 +30,12 @@ class ProfilePage extends StatelessWidget {
                   const SizedBox(height: 20),
                   LogoutButton(
                     onPressed: () {
-                      // Implement your logout logic here
-                      // For example:
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                        'login', // Navigate to the login screen
-                        (Route<dynamic> route) =>
-                            false, // Close all other routes
-                      );
+                          'login', (Route<dynamic> route) => false);
                     },
                   ),
+                  const SizedBox(height: 20),
+                  DeleteAccountButton(email: email),
                 ],
               ),
             ),
