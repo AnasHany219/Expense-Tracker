@@ -38,6 +38,7 @@ class HomeCubit extends Cubit<HomeState> {
 
     await fetchCurrentUser();
     await fetchExpenses();
+
     calculateExpenseSummary();
     await loadUserBudgetFromSharedPreferences();
 

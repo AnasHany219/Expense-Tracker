@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/features/auth/provider/user_db.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'profile_state.dart';
 
@@ -67,6 +68,16 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       // Delete user data associated with the provided email
       await userDB.deleteUserByEmail(email);
+
+      // Reset user budget to 0
+      String budgetKey = 'userBudget_$email';
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setDouble(budgetKey, 0);
+
+      // Reset onboarding_completed to false
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      await sharedPreferences.setBool('onboarding_completed', false);
 
       // Navigate to the signup page after successful deletion
       Navigator.of(context).pushNamedAndRemoveUntil(
