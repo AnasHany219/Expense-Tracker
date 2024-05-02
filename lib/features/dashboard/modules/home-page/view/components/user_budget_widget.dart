@@ -90,7 +90,6 @@ class UserBudgetWidget extends StatelessWidget {
                 decoration: const InputDecoration(
                   labelText: 'Enter new budget',
                 ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
                   return double.tryParse(value!) == null
                       ? 'Please enter a valid number'

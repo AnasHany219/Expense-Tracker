@@ -54,7 +54,6 @@ class _LogInFormState extends State<LogInForm> {
       child: TextFormField(
         controller:
             pass ? controller.passwordController : controller.emailController,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
         validator:
             pass ? Validator().passwordValidator : Validator().emailValidator,
         obscureText: pass ? _isObscure : false,

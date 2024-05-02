@@ -88,7 +88,6 @@ class _ExpenseAddFormState extends State<ExpenseAddForm> {
                         ? const Icon(Icons.calendar_today)
                         : const Icon(Icons.notes),
           ),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
             if (label == 'Amount') {
               if (value == null || value.isEmpty) {

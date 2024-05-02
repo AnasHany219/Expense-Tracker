@@ -53,7 +53,6 @@ class _NewPasswordFormState extends State<NewPasswordForm> {
         controller: label == 'New Password'
             ? controller.passwordController
             : controller.confirmPasswordController,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: label == 'New Password'
             ? Validator().passwordValidator
             : (value) => Validator().confirmPasswordValidator(

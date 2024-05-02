@@ -29,7 +29,6 @@ class _ResetFormState extends State<ResetForm> {
                 children: [
                   TextFormField(
                     controller: controller.emailController,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: Validator().emailValidator,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email),

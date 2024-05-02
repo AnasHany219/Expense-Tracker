@@ -68,7 +68,6 @@ class _SignUpFormState extends State<SignUpForm> {
                         ? controller.passwordController
                         : null,
         obscureText: label == 'Password' ? _isObscure : false,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: label == 'First Name'
             ? Validator().nameValidator
             : label == 'Last Name'
