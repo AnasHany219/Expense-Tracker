@@ -1,3 +1,4 @@
+import 'package:expense_tracker/features/dashboard/modules/profile-page/view/page/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expense_tracker/core/text_style.dart';
@@ -78,7 +79,7 @@ class DashboardPage extends StatelessWidget {
       children: [
         HomePage(email: email),
         ExpenseList(email: email),
-        const Text('Profile'),
+        ProfilePage(email: email),
       ],
     );
   }

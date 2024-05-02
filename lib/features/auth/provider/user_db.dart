@@ -147,6 +147,26 @@ class UserDB {
     }
   }
 
+  Future<void> updateUserNameByEmail(
+      String email, String firstName, String lastName) async {
+    await init();
+    try {
+      await db.transaction((txn) async {
+        int count = await txn.rawUpdate(
+          'UPDATE users SET first_name = ?, last_name = ? WHERE email = ?',
+          [firstName, lastName, email],
+        );
+        if (count != 1) {
+          throw Exception(
+            'Failed to update user name: Unexpected number of rows updated',
+          );
+        }
+      });
+    } catch (e) {
+      throw Exception('Failed to update user name: $e');
+    }
+  }
+
   Future<void> updateUserPasswordByEmail(String email, String password) async {
     await init(); // Assuming init() initializes your database connection
     try {
