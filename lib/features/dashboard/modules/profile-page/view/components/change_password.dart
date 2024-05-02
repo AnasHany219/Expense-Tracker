@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/validation.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/controller/cubit/profile_cubit.dart';
@@ -7,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ChangePassword extends StatefulWidget {
   final String? email;
 
-  const ChangePassword({Key? key, this.email}) : super(key: key);
+  const ChangePassword({super.key, this.email});
 
   @override
   _ChangePasswordState createState() => _ChangePasswordState();

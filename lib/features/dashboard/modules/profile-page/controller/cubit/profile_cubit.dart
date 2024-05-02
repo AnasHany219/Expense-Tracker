@@ -3,7 +3,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/features/auth/provider/user_db.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 part 'profile_state.dart';
 
