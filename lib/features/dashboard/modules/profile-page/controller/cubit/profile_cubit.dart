@@ -27,11 +27,16 @@ class ProfileCubit extends Cubit<ProfileState> {
       String newLastName = lastName.text;
 
       await userDB.updateUserNameByEmail(email, newFirstName, newLastName);
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Name has been Changed!'),
         ),
       );
+
+      // Clear the text fields
+      firstName.clear();
+      lastName.clear();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -51,6 +56,10 @@ class ProfileCubit extends Cubit<ProfileState> {
           content: Text('Password has been changed!'),
         ),
       );
+
+      // Clear the text fields
+      newPassword.clear();
+      confirmPassword.clear();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
