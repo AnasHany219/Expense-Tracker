@@ -13,7 +13,7 @@ class ChangeName extends StatefulWidget {
 }
 
 class _ChangeNameState extends State<ChangeName> {
-  ProfileCubit controller = ProfileCubit('');
+  ProfileCubit controller = ProfileCubit();
 
   @override
   Widget build(BuildContext context) {

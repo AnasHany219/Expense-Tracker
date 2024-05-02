@@ -8,13 +8,15 @@ import 'package:meta/meta.dart';
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  final String? email;
   final UserDB userDB = UserDB();
 
-  ProfileCubit(this.email) : super(ProfileInitial());
+  ProfileCubit() : super(ProfileInitial());
 
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
+
+  TextEditingController newPassword = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -33,6 +35,25 @@ class ProfileCubit extends Cubit<ProfileState> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Name has not been Changed!'),
+        ),
+      );
+    }
+  }
+
+  Future<void> updatePassword(BuildContext context, String email) async {
+    if (formKey.currentState!.validate()) {
+      String newPasswordText = newPassword.text;
+
+      await userDB.updateUserPasswordByEmail(email, newPasswordText);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Password has been changed!'),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Password change failed! Please check your inputs.'),
         ),
       );
     }
