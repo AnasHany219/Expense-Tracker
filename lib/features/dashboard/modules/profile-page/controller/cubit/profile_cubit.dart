@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:bloc/bloc.dart';
-import 'package:expense_tracker/features/auth/provider/user_db.dart';
+import 'package:expense_tracker/features/auth/signup/model/database_repo/user_db.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

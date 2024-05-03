@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:expense_tracker/features/auth/model/user.dart';
-import 'package:expense_tracker/features/auth/provider/user_db.dart';
+import 'package:expense_tracker/features/auth/signup/model/user.dart';
+import 'package:expense_tracker/features/auth/signup/model/database_repo/user_db.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart';
 import 'package:expense_tracker/features/dashboard/modules/home-page/controller/cubit/home_state.dart';

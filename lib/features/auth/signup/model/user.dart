@@ -1,4 +1,5 @@
 class User {
+  // Properties
   int? id;
   final String firstName;
   final String lastName;
@@ -7,6 +8,7 @@ class User {
   final int? verified;
   final String? otpCode;
 
+  // Constructor
   User({
     this.id,
     required this.firstName,
@@ -17,6 +19,7 @@ class User {
     this.otpCode,
   });
 
+  /// Factory method to create a User object from a map.
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       id: map['id'],
@@ -29,6 +32,10 @@ class User {
     );
   }
 
+  /// Converts the User object to a map.
+  ///
+  /// Returns:
+  /// A map representation of the User object.
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -36,7 +43,7 @@ class User {
       'last_name': lastName,
       'email': email,
       'password': password,
-      'verified': 0,
+      'verified': 0, // Default to 0 if not provided
       'otpCode': otpCode,
     };
   }

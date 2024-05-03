@@ -1,6 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:expense_tracker/features/auth/model/user.dart';
+import 'package:expense_tracker/features/auth/signup/model/user.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
