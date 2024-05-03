@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expense_tracker/core/text_style.dart';
-import 'package:expense_tracker/features/auth/login/view/page/login.dart';
 import 'package:expense_tracker/features/auth/signup/controller/cubit/registration_cubit.dart';
 import 'package:expense_tracker/features/auth/signup/view/component/signup_form.dart';
 
@@ -59,11 +58,9 @@ class SignUpScreen extends StatelessWidget {
           const SizedBox(width: 5),
           GestureDetector(
             onTap: () {
-              Navigator.push(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ),
+                'login',
               );
             },
             child: Text(
