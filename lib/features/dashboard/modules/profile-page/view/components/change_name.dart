@@ -67,7 +67,6 @@ class _ChangeNameState extends State<ChangeName> {
       child: TextFormField(
         controller:
             label == 'First Name' ? controller.firstName : controller.lastName,
-        // autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: Validator().nameValidator,
         decoration: InputDecoration(
           labelText: label,

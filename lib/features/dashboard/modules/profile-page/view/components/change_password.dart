@@ -72,7 +72,6 @@ class _ChangePasswordState extends State<ChangePassword> {
         controller: label == 'New Password'
             ? controller.newPassword
             : controller.confirmPassword,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: label == 'New Password'
             ? Validator().passwordValidator
             : (val) => val != controller.newPassword.text
