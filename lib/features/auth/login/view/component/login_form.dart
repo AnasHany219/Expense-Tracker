@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expense_tracker/core/primary_button.dart';
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/validation.dart';
 import 'package:expense_tracker/features/auth/login/controller/cubit/login_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LogInForm extends StatefulWidget {
-  const LogInForm({super.key});
+  const LogInForm({Key? key}) : super(key: key);
 
   @override
   State<LogInForm> createState() => _LogInFormState();
@@ -14,28 +14,32 @@ class LogInForm extends StatefulWidget {
 
 class _LogInFormState extends State<LogInForm> {
   bool _isObscure = true;
+  late final LoginCubit _loginCubit;
 
-  LoginCubit controller = LoginCubit();
+  @override
+  void initState() {
+    super.initState();
+    _loginCubit = LoginCubit();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: controller,
+      value: _loginCubit,
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
           return Form(
-            key: controller.formKey,
+            key: _loginCubit.formKey,
             child: Column(
               children: [
                 buildInputForm('Email', false),
                 buildInputForm('Password', true),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: GestureDetector(
                     onTap: () {
-                      controller.logInValidate(context);
+                      _loginCubit.logInValidate(context);
                     },
                     child: const PrimaryButton(buttonText: 'Login'),
                   ),
@@ -48,27 +52,27 @@ class _LogInFormState extends State<LogInForm> {
     );
   }
 
-  Padding buildInputForm(String label, bool pass) {
+  Padding buildInputForm(String label, bool isPassword) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
-        controller:
-            pass ? controller.passwordController : controller.emailController,
-        validator:
-            pass ? Validator().passwordValidator : Validator().emailValidator,
-        obscureText: pass ? _isObscure : false,
+        controller: isPassword
+            ? _loginCubit.passwordController
+            : _loginCubit.emailController,
+        validator: isPassword
+            ? Validator().passwordValidator
+            : Validator().emailValidator,
+        obscureText: isPassword ? _isObscure : false,
         decoration: InputDecoration(
           labelText: label,
-          prefixIcon: pass
+          prefixIcon: isPassword
               ? const Icon(Icons.password_outlined)
               : const Icon(Icons.email),
-          labelStyle: const TextStyle(
-            color: textFieldColor,
-          ),
+          labelStyle: const TextStyle(color: textFieldColor),
           focusedBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: primaryColor),
           ),
-          suffixIcon: pass
+          suffixIcon: isPassword
               ? IconButton(
                   onPressed: () {
                     setState(() {
