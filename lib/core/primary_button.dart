@@ -14,6 +14,13 @@ class PrimaryButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: primaryColor,
+        boxShadow: [
+          BoxShadow(
+            color: primaryColor.withOpacity(0.4),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Text(
         buttonText,
