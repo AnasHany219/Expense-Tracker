@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expense_tracker/core/primary_button.dart';
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/validation.dart';
 import 'package:expense_tracker/features/auth/forget_password/controller/cubit/forget_password_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewPasswordForm extends StatefulWidget {
   final String? email;
@@ -17,24 +17,33 @@ class NewPasswordForm extends StatefulWidget {
 class _NewPasswordFormState extends State<NewPasswordForm> {
   bool _isObscure = true;
 
-  ForgetPasswordCubit controller = ForgetPasswordCubit();
+  late ForgetPasswordCubit _forgetPasswordCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _forgetPasswordCubit = ForgetPasswordCubit();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: controller,
+      value: _forgetPasswordCubit,
       child: BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
         builder: (context, state) {
           return Form(
-            key: controller.formKey,
+            key: _forgetPasswordCubit.formKey,
             child: Column(
               children: [
-                buildInputForm('New Password'),
-                buildInputForm('Confirm New Password'),
+                _buildInputForm(
+                    'New Password', _forgetPasswordCubit.passwordController),
+                _buildInputForm('Confirm New Password',
+                    _forgetPasswordCubit.confirmPasswordController),
                 const SizedBox(height: 40),
                 GestureDetector(
                   onTap: () {
-                    controller.newPasswordValidation(context, widget.email!);
+                    _forgetPasswordCubit.newPasswordValidation(
+                        context, widget.email!);
                   },
                   child: const PrimaryButton(buttonText: 'Verification'),
                 ),
@@ -46,18 +55,16 @@ class _NewPasswordFormState extends State<NewPasswordForm> {
     );
   }
 
-  Padding buildInputForm(String label) {
+  Padding _buildInputForm(String label, TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
-        controller: label == 'New Password'
-            ? controller.passwordController
-            : controller.confirmPasswordController,
+        controller: controller,
         validator: label == 'New Password'
             ? Validator().passwordValidator
             : (value) => Validator().confirmPasswordValidator(
                   value,
-                  controller.passwordController.text,
+                  _forgetPasswordCubit.passwordController.text,
                 ),
         obscureText: _isObscure,
         decoration: InputDecoration(
