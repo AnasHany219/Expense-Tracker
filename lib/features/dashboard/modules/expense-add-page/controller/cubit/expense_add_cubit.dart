@@ -27,12 +27,13 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
 
     // Validate amount field
     if (amount.isEmpty || !isNumeric(amount)) {
-      showSnackBar(context, 'Amount must be a valid number', Colors.red);
+      showSnackBar(
+          context, 'Amount must be a valid number', Colors.red, Icons.error);
       return;
     }
 
     if (category.isEmpty || date.isEmpty || notes.isEmpty) {
-      showSnackBar(context, 'All fields are required', Colors.red);
+      showSnackBar(context, 'All fields are required', Colors.red, Icons.error);
       return;
     }
 
@@ -51,10 +52,11 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
       // inserting data in firebase
       // await FirebaseRepo.instance.insertExpense(expense);
 
-      showSnackBar(context, 'Expense added successfully', Colors.green);
+      showSnackBar(context, 'Expense added successfully', Colors.green,
+          Icons.check_circle);
       clearFields();
     } catch (e) {
-      showSnackBar(context, 'Failed to add expense', Colors.red);
+      showSnackBar(context, 'Failed to add expense', Colors.red, Icons.error);
     }
   }
 
@@ -74,13 +76,14 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
     return double.tryParse(str) != null;
   }
 
-  /// Displays a SnackBar with the provided message and color.
-  void showSnackBar(BuildContext context, String message, Color color) {
+  /// Displays a SnackBar with the provided message, color and icon.
+  void showSnackBar(
+      BuildContext context, String message, Color color, IconData iconData) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
           children: [
-            Icon(Icons.error, color: color), // Error icon
+            Icon(iconData, color: color), // Provided icon
             const SizedBox(width: 8), // Space between icon and text
             Text(message), // Error message
           ],
