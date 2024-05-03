@@ -6,7 +6,7 @@ import 'package:expense_tracker/core/validation.dart';
 import 'package:expense_tracker/features/auth/login/controller/cubit/login_cubit.dart';
 
 class LogInForm extends StatefulWidget {
-  const LogInForm({Key? key}) : super(key: key);
+  const LogInForm({super.key});
 
   @override
   State<LogInForm> createState() => _LogInFormState();
