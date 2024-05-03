@@ -19,7 +19,7 @@ class User {
     this.otpCode,
   });
 
-  /// Factory method to create a User object from a map.
+  /// Factory method to create a [User] object from a map.
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       id: map['id'],
@@ -32,10 +32,10 @@ class User {
     );
   }
 
-  /// Converts the User object to a map.
+  /// Converts the [User] object to a map.
   ///
   /// Returns:
-  /// A map representation of the User object.
+  /// A map representation of the [User] object.
   Map<String, dynamic> toMap() {
     return {
       'id': id,

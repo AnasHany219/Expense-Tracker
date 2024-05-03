@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expense_tracker/core/primary_button.dart';
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/validation.dart';
 import 'package:expense_tracker/features/auth/signup/controller/cubit/registration_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -27,13 +27,15 @@ class _SignUpFormState extends State<SignUpForm> {
             key: controller.formKey,
             child: Column(
               children: [
-                buildInputForm('First Name'),
-                buildInputForm('Last Name'),
-                buildInputForm('Email'),
-                buildInputForm('Password'),
-                const SizedBox(
-                  height: 20,
-                ),
+                _buildInputFormField('First Name',
+                    controller.firstNameController, Validator().nameValidator),
+                _buildInputFormField('Last Name', controller.lastNameController,
+                    Validator().nameValidator),
+                _buildInputFormField('Email', controller.emailController,
+                    Validator().emailValidator),
+                _buildInputFormField('Password', controller.passwordController,
+                    Validator().passwordValidator),
+                const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: GestureDetector(
@@ -43,9 +45,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     child: const PrimaryButton(buttonText: 'Verification'),
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5),
               ],
             ),
           );
@@ -54,29 +54,14 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  Padding buildInputForm(String label) {
+  Padding _buildInputFormField(
+      String label, TextEditingController controller, var validator) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
-        controller: label == 'First Name'
-            ? controller.firstNameController
-            : label == 'Last Name'
-                ? controller.lastNameController
-                : label == 'Email'
-                    ? controller.emailController
-                    : label == 'Password'
-                        ? controller.passwordController
-                        : null,
+        controller: controller,
         obscureText: label == 'Password' ? _isObscure : false,
-        validator: label == 'First Name'
-            ? Validator().nameValidator
-            : label == 'Last Name'
-                ? Validator().nameValidator
-                : label == 'Password'
-                    ? Validator().passwordValidator
-                    : label == 'Email'
-                        ? Validator().emailValidator
-                        : null,
+        validator: validator,
         decoration: InputDecoration(
           hintText: label,
           prefixIcon: label == 'Password'
@@ -84,12 +69,9 @@ class _SignUpFormState extends State<SignUpForm> {
               : label == 'Email'
                   ? const Icon(Icons.email)
                   : null,
-          hintStyle: const TextStyle(
-            color: textFieldColor,
-          ),
+          hintStyle: const TextStyle(color: textFieldColor),
           focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: primaryColor),
-          ),
+              borderSide: BorderSide(color: primaryColor)),
           suffixIcon: label == 'Password'
               ? IconButton(
                   onPressed: () {
