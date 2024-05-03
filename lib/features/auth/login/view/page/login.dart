@@ -1,19 +1,16 @@
-import 'package:expense_tracker/core/text_style.dart';
-import 'package:expense_tracker/features/auth/forget_password/view/page/reset_password.dart';
-import 'package:expense_tracker/features/auth/login/controller/cubit/login_cubit.dart';
-import 'package:expense_tracker/features/auth/login/view/component/login_form.dart';
-import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:expense_tracker/core/text_style.dart';
+import 'package:expense_tracker/features/auth/login/controller/cubit/login_cubit.dart';
+import 'package:expense_tracker/features/auth/login/view/component/login_form.dart';
 
-// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LoginCubit>(
-      create: (context) => LoginCubit(),
+      create: (context) => LoginCubit(), // Creating LoginCubit instance
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
           return Scaffold(
@@ -27,27 +24,19 @@ class LoginScreen extends StatelessWidget {
                     'Welcome Back',
                     style: titleText,
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 5),
                   const LogInForm(),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      // Navigate to ResetPassword page when tapped
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => const ResetPassword(),
-                        ),
+                        'reset_password',
                       );
                     },
                     child: const Text(
-                      'Forget Password ? ',
+                      'Forget Password ? ', // Display forget password text
                       style: TextStyle(
                         color: textShadow,
                         fontSize: 14,
@@ -56,25 +45,20 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       Text(
-                        'Create New Account ? ',
-                        style: subTitle,
+                        'Create New Account ? ', // Display create account text
+                        style: subTitle, // Apply subTitle style
                       ),
-                      const SizedBox(
-                        width: 5,
-                      ),
+                      const SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
+                          // Navigate to SignUpScreen page when tapped
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignUpScreen(),
-                            ),
+                            'signup',
                           );
                         },
                         child: Text(
