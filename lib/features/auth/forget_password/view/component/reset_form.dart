@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expense_tracker/core/primary_button.dart';
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/validation.dart';
 import 'package:expense_tracker/features/auth/forget_password/controller/cubit/forget_password_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResetForm extends StatefulWidget {
   const ResetForm({super.key});
@@ -13,22 +13,28 @@ class ResetForm extends StatefulWidget {
 }
 
 class _ResetFormState extends State<ResetForm> {
-  ForgetPasswordCubit controller = ForgetPasswordCubit();
+  late ForgetPasswordCubit _forgetPasswordCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _forgetPasswordCubit = ForgetPasswordCubit();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: controller,
+      value: _forgetPasswordCubit,
       child: BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Form(
-              key: controller.formKey,
+              key: _forgetPasswordCubit.formKey,
               child: Column(
                 children: [
                   TextFormField(
-                    controller: controller.emailController,
+                    controller: _forgetPasswordCubit.emailController,
                     validator: Validator().emailValidator,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email),
@@ -45,10 +51,11 @@ class _ResetFormState extends State<ResetForm> {
                   ),
                   const SizedBox(height: 40),
                   GestureDetector(
-                      onTap: () {
-                        controller.resetPasswordValidation(context);
-                      },
-                      child: const PrimaryButton(buttonText: 'Reset Password')),
+                    onTap: () {
+                      _forgetPasswordCubit.resetPasswordValidation(context);
+                    },
+                    child: const PrimaryButton(buttonText: 'Reset Password'),
+                  ),
                 ],
               ),
             ),
