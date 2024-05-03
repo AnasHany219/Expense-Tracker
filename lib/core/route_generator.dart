@@ -8,41 +8,31 @@ import 'package:expense_tracker/features/dashboard/view/page/dashboard_page.dart
 import 'package:flutter/material.dart';
 
 class InitialRouteGenerator {
-  static List<Route> initialRoute = [
-    MaterialPageRoute<dynamic>(
-      builder: (BuildContext context) => const OnBoardingScreen(),
-    ),
-    MaterialPageRoute<dynamic>(
-      builder: (BuildContext context) => const SignUpScreen(),
-    ),
-  ];
-
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case 'singup':
+      case 'signup':
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => const SignUpScreen(),
+          builder: (_) => const SignUpScreen(),
         );
       case 'login':
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => const LoginScreen(),
+          builder: (_) => const LoginScreen(),
         );
       case 'reset_password':
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => const ResetPassword(),
+          builder: (_) => const ResetPassword(),
         );
       case 'verification_screen':
         final dynamic arguments = settings.arguments;
         if (arguments is String) {
           // Only email is provided
           return MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) =>
-                VerificationScreen(email: arguments),
+            builder: (_) => VerificationScreen(email: arguments),
           );
         } else if (arguments is Map<String, String>) {
           // Both email and password are provided
           return MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) => VerificationScreen(
+            builder: (_) => VerificationScreen(
                 email: arguments['email'], password: arguments['password']),
           );
         } else {
@@ -52,17 +42,16 @@ class InitialRouteGenerator {
       case 'new_password':
         final String? email = settings.arguments as String?;
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => NewPassword(email: email),
+          builder: (_) => NewPassword(email: email),
         );
-      case 'dash_board':
+      case 'dashboard':
         final String? email = settings.arguments as String?;
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => DashboardPage(email: email),
+          builder: (_) => DashboardPage(email: email),
         );
-
       default:
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => const OnBoardingScreen(),
+          builder: (_) => const OnBoardingScreen(),
         );
     }
   }

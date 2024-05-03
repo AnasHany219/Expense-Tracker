@@ -90,7 +90,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       // Navigate to the signup page after successful deletion
       Navigator.of(context).pushNamedAndRemoveUntil(
-        'singup',
+        'signup',
         (Route<dynamic> route) => false,
       );
 

@@ -58,7 +58,7 @@ class LoginCubit extends Cubit<LoginState> {
       // If email and password are valid, navigate to the next screen
       Navigator.pushNamed(
         context,
-        'dash_board',
+        'dashboard',
         arguments: user.email,
       );
     } catch (e) {
