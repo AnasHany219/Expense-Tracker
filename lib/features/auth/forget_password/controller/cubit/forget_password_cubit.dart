@@ -3,25 +3,28 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+
 import 'package:expense_tracker/core/email_sender.dart';
 import 'package:expense_tracker/features/auth/provider/user_db.dart';
-import 'package:flutter/material.dart';
 
 part 'forget_password_state.dart';
 
 class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   ForgetPasswordCubit() : super(ForgetPasswordInitial());
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  /// Validates the email for password reset and navigates to the appropriate screen.
   Future<void> resetPasswordValidation(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      String email = emailController.text;
-      bool emailExists = await UserDB().checkEmailExists(email);
+      final String email = emailController.text;
+      final bool emailExists = await UserDB().checkEmailExists(email);
 
       if (!emailExists) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -41,16 +44,17 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     }
   }
 
+  /// Validates the new password and sends OTP for verification.
   Future<void> newPasswordValidation(BuildContext context, String email) async {
     if (formKey.currentState!.validate()) {
-      String password = passwordController.text;
-
+      final String password = passwordController.text;
       await updateUserAndSendOTP(context, email, password);
     } else {
       log('Invalid!');
     }
   }
 
+  /// Updates user's OTP and sends OTP to the user's email.
   Future<void> updateUserAndSendOTP(
       BuildContext context, String email, String password) async {
     try {
@@ -58,18 +62,12 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       final user = await userDB.getUserByEmail(email);
 
       if (user != null) {
-        // Create an instance of EmailSender
-        EmailSender emailSender = EmailSender();
-
-        String otp = emailSender.generateOTP();
-        // Send OTP to the user's email
+        final EmailSender emailSender = EmailSender();
+        final String otp = emailSender.generateOTP();
 
         await emailSender.sendOTP(user.email, otp);
-
-        // Update user OTP in the database
         await userDB.updateUserOTPByEmail(user.email, otp);
 
-        // Navigate to the verification screen
         Navigator.pushNamed(
           context,
           'verification_screen',
