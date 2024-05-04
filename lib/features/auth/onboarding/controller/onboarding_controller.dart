@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/features/auth/onboarding/view/component/onboarding_body.dart';
-import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:expense_tracker/features/auth/onboarding/view/component/onboarding_buttons.dart';
 
+/// Controller for the onboarding process.
 class OnBoardingController extends StatefulWidget {
   const OnBoardingController({super.key});
 
@@ -13,8 +13,9 @@ class OnBoardingController extends StatefulWidget {
   _OnBoardingControllerState createState() => _OnBoardingControllerState();
 }
 
+/// State class for OnBoardingController.
 class _OnBoardingControllerState extends State<OnBoardingController> {
-  late PageController pageCntrl;
+  late PageController pageController;
   int currentPageIndex = 0;
 
   final List<Map<String, String>> onboardingData = [
@@ -48,7 +49,7 @@ class _OnBoardingControllerState extends State<OnBoardingController> {
   @override
   void initState() {
     super.initState();
-    pageCntrl = PageController();
+    pageController = PageController();
   }
 
   @override
@@ -57,7 +58,7 @@ class _OnBoardingControllerState extends State<OnBoardingController> {
       child: Scaffold(
         body: OnBoardingBody(
           onboardingData: onboardingData,
-          pageCntrl: pageCntrl,
+          pageController: pageController,
           onPageChanged: (int index) {
             setState(() {
               currentPageIndex = index;
@@ -65,9 +66,12 @@ class _OnBoardingControllerState extends State<OnBoardingController> {
           },
         ),
         bottomNavigationBar: OnBoardingNavigationBar(
-          onSkipPressed: skipOnboarding,
+          onSkipPressed: () {
+            saveOnboardingCompletion();
+            skipOnboarding();
+          },
           onNextPressed: () {
-            sharedPreferences();
+            saveOnboardingCompletion();
             nextPage(currentPageIndex + 1);
           },
           isLastPage: currentPageIndex == onboardingData.length - 1,
@@ -76,33 +80,35 @@ class _OnBoardingControllerState extends State<OnBoardingController> {
     );
   }
 
+  /// Navigates to the next onboarding page.
   void nextPage(int index) {
     if (currentPageIndex >= 0 && currentPageIndex < onboardingData.length - 1) {
       setState(() {
         currentPageIndex = index;
       });
-      pageCntrl.nextPage(
+      pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.ease,
       );
     } else if (currentPageIndex == onboardingData.length - 1) {
-      Navigator.push(
+      Navigator.pushNamed(
         context,
-        MaterialPageRoute(builder: (context) => const SignUpScreen()),
+        'signup',
       );
     }
   }
 
+  /// Skips the onboarding process.
   void skipOnboarding() {
-    sharedPreferences();
-    Navigator.pushReplacement(
+    Navigator.pushReplacementNamed(
       context,
-      MaterialPageRoute(builder: (context) => const SignUpScreen()),
+      'signup',
     );
   }
-}
 
-Future<void> sharedPreferences() async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  await sharedPreferences.setBool('onboarding_completed', true);
+  /// Saves the completion state of onboarding to shared preferences.
+  Future<void> saveOnboardingCompletion() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setBool('onboarding_completed', true);
+  }
 }
