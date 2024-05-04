@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:bloc/bloc.dart';
+import 'package:expense_tracker/core/snackbar.dart';
 import 'package:expense_tracker/features/auth/signup/model/database_repo/user_db.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart';
 import 'package:flutter/material.dart';
@@ -28,21 +29,15 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       await userDB.updateUserNameByEmail(email, newFirstName, newLastName);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Name has been Changed!'),
-        ),
-      );
+      ShowSnackbar.showSnackBar(
+          context, 'Name has been Changed!', Colors.green, Icons.check_circle);
 
       // Clear the text fields
       firstName.clear();
       lastName.clear();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Name has not been Changed!'),
-        ),
-      );
+      ShowSnackbar.showSnackBar(
+          context, 'Name hasn\'t Changed!', Colors.red, Icons.error);
     }
   }
 
@@ -51,21 +46,15 @@ class ProfileCubit extends Cubit<ProfileState> {
       String newPasswordText = newPassword.text;
 
       await userDB.updateUserPasswordByEmail(email, newPasswordText);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Password has been changed!'),
-        ),
-      );
+      ShowSnackbar.showSnackBar(context, 'Password has been changed!',
+          Colors.green, Icons.check_circle);
 
       // Clear the text fields
       newPassword.clear();
       confirmPassword.clear();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Password change failed! Please check your inputs.'),
-        ),
-      );
+      ShowSnackbar.showSnackBar(
+          context, 'Password hasn\'t Changed!', Colors.red, Icons.error);
     }
   }
 
@@ -95,18 +84,12 @@ class ProfileCubit extends Cubit<ProfileState> {
       );
 
       // Show a snackbar to inform the user
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Your account has been Deleted!'),
-        ),
-      );
+      ShowSnackbar.showSnackBar(context, 'Your account has been Deleted!',
+          Colors.green, Icons.check_circle);
     } catch (e) {
       // Show a snackbar for error handling
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Error!'),
-        ),
-      );
+      ShowSnackbar.showSnackBar(
+          context, 'Your account hasn\'t Deleted!', Colors.red, Icons.error);
     }
   }
 }

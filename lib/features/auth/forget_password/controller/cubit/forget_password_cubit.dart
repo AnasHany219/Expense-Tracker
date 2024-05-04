@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:expense_tracker/core/snackbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expense_tracker/core/email_sender.dart';
@@ -27,11 +28,8 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       final bool emailExists = await UserDB().checkEmailExists(email);
 
       if (!emailExists) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Email does not exist'),
-          ),
-        );
+        ShowSnackbar.showSnackBar(
+            context, 'Email does not exist', Colors.red, Icons.error);
       } else {
         Navigator.pushNamed(
           context,

@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:bloc/bloc.dart';
+import 'package:expense_tracker/core/snackbar.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart'; // import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/firebase_data.dart';
 import 'package:flutter/material.dart';
@@ -41,29 +42,11 @@ class ExpenseListCubit extends Cubit<ExpenseListState> {
       // await FirebaseRepo.instance.deleteExpense(id: id);
 
       init();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Row(
-            children: [
-              Icon(Icons.check_circle, color: Colors.green),
-              SizedBox(width: 8),
-              Text('Expense removed successfully'),
-            ],
-          ),
-        ),
-      );
+      ShowSnackbar.showSnackBar(context, 'Expense removed successfully',
+          Colors.green, Icons.check_circle);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Row(
-            children: [
-              Icon(Icons.error, color: Colors.red), // Error icon
-              SizedBox(width: 8), // Space between icon and text
-              Text('Failed to remove expense'), // Error message
-            ],
-          ),
-        ),
-      );
+      ShowSnackbar.showSnackBar(
+          context, 'Failed to remove expense', Colors.red, Icons.error);
     }
   }
 }

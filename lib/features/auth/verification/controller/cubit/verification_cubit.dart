@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/core/email_sender.dart';
+import 'package:expense_tracker/core/snackbar.dart';
 import 'package:expense_tracker/features/auth/signup/model/database_repo/user_db.dart';
 import 'package:expense_tracker/features/auth/signup/model/user.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,8 @@ class VerificationCubit extends Cubit<VerificationState> {
         if (user != null && user.otpCode == otp) {
           await _processVerificationSuccess(context, user, password);
         } else {
-          _showInvalidOTP(context);
+          ShowSnackbar.showSnackBar(
+              context, 'Wrong OTP code', Colors.red, Icons.error);
         }
       } catch (e) {
         log('Error verifying OTP: $e');
@@ -84,31 +86,7 @@ class VerificationCubit extends Cubit<VerificationState> {
     await emailSender.sendOTP(user.email, otp);
     await UserDB().updateUserOTPByEmail(user.email, otp);
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Row(
-          children: [
-            Icon(Icons.check_circle, color: Colors.green),
-            SizedBox(width: 8),
-            Text('OTP resent successfully'),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// Shows a snackbar for invalid OTP.
-  void _showInvalidOTP(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Row(
-          children: [
-            Icon(Icons.error, color: Colors.red), // Error icon
-            SizedBox(width: 8), // Space between icon and text
-            Text('Wrong OTP code'), // Error message
-          ],
-        ),
-      ),
-    );
+    ShowSnackbar.showSnackBar(
+        context, 'OTP resent successfully', Colors.green, Icons.check_circle);
   }
 }

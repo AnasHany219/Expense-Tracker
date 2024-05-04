@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:expense_tracker/core/snackbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expense_tracker/core/email_sender.dart';
@@ -35,17 +36,20 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       final user = await userDB.getUserByEmail(email);
       if (user == null) {
-        showSnackBar(context, 'Email not found');
+        ShowSnackbar.showSnackBar(
+            context, 'Email not found', Colors.red, Icons.error);
         return;
       }
 
       if (user.password != password) {
-        showSnackBar(context, 'Incorrect password');
+        ShowSnackbar.showSnackBar(
+            context, 'Incorrect password', Colors.red, Icons.error);
         return;
       }
 
       if (user.verified == 0 || user.verified == null) {
-        showSnackBar(context, 'Account not verified');
+        ShowSnackbar.showSnackBar(
+            context, 'Account not verified', Colors.red, Icons.error);
         await updateUserAndSendOTP(context, user);
         return;
       }
@@ -58,20 +62,6 @@ class LoginCubit extends Cubit<LoginState> {
     } catch (e) {
       log('Error checking credentials: $e');
     }
-  }
-
-  void showSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Row(
-          children: [
-            const Icon(Icons.error, color: Colors.red),
-            const SizedBox(width: 8),
-            Text(message),
-          ],
-        ),
-      ),
-    );
   }
 
   Future<void> updateUserAndSendOTP(BuildContext context, User user) async {

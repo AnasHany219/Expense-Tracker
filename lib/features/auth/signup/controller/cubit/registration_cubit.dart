@@ -2,6 +2,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/core/email_sender.dart';
+import 'package:expense_tracker/core/snackbar.dart';
 import 'package:expense_tracker/features/auth/signup/model/user.dart';
 import 'package:expense_tracker/features/auth/signup/model/database_repo/user_db.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +28,15 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       final emailExists = await _checkEmailExists(user.email);
 
       if (emailExists) {
-        _showEmailExistsSnackBar(context);
+        ShowSnackbar.showSnackBar(
+            context, 'Email already exists', Colors.red, Icons.error);
       } else {
         try {
           await _insertUserIntoDatabase(user);
           await _updateUserAndSendOTP(context, user);
         } catch (error) {
+          ShowSnackbar.showSnackBar(
+              context, 'Error during signup', Colors.red, Icons.error);
           debugPrint('Error during signup: $error');
           // Handle other errors related to signup process if needed
         }
@@ -72,15 +76,6 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       context,
       'verification_screen',
       arguments: user.email,
-    );
-  }
-
-  /// Shows a snackbar to inform the user that the email already exists.
-  void _showEmailExistsSnackBar(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Email already exists'),
-      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:bloc/bloc.dart';
+import 'package:expense_tracker/core/snackbar.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/repo/local_db_data.dart';
 import 'package:flutter/material.dart';
@@ -27,13 +28,14 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
 
     // Validate amount field
     if (amount.isEmpty || !isNumeric(amount)) {
-      showSnackBar(
+      ShowSnackbar.showSnackBar(
           context, 'Amount must be a valid number', Colors.red, Icons.error);
       return;
     }
 
     if (category.isEmpty || date.isEmpty || notes.isEmpty) {
-      showSnackBar(context, 'All fields are required', Colors.red, Icons.error);
+      ShowSnackbar.showSnackBar(
+          context, 'All fields are required', Colors.red, Icons.error);
       return;
     }
 
@@ -52,11 +54,12 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
       // inserting data in firebase
       // await FirebaseRepo.instance.insertExpense(expense);
 
-      showSnackBar(context, 'Expense added successfully', Colors.green,
-          Icons.check_circle);
+      ShowSnackbar.showSnackBar(context, 'Expense added successfully',
+          Colors.green, Icons.check_circle);
       clearFields();
     } catch (e) {
-      showSnackBar(context, 'Failed to add expense', Colors.red, Icons.error);
+      ShowSnackbar.showSnackBar(
+          context, 'Failed to add expense', Colors.red, Icons.error);
     }
   }
 
@@ -74,21 +77,5 @@ class ExpenseAddCubit extends Cubit<ExpenseAddState> {
       return false;
     }
     return double.tryParse(str) != null;
-  }
-
-  /// Displays a SnackBar with the provided message, color and icon.
-  void showSnackBar(
-      BuildContext context, String message, Color color, IconData iconData) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Row(
-          children: [
-            Icon(iconData, color: color), // Provided icon
-            const SizedBox(width: 8), // Space between icon and text
-            Text(message), // Error message
-          ],
-        ),
-      ),
-    );
   }
 }
