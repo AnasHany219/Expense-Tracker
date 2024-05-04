@@ -91,15 +91,17 @@ class _OnBoardingControllerState extends State<OnBoardingController> {
         curve: Curves.ease,
       );
     } else if (currentPageIndex == onboardingData.length - 1) {
-      Navigator.pushNamed(
-        context,
-        'signup',
-      );
+      navigateToSignUp(context);
     }
   }
 
   /// Skips the onboarding process.
   void skipOnboarding() {
+    navigateToSignUp(context);
+  }
+
+  /// Navigates to the sign-up screen, replacing the current screen.
+  void navigateToSignUp(BuildContext context) {
     Navigator.pushReplacementNamed(
       context,
       'signup',

@@ -54,7 +54,7 @@ class LoginCubit extends Cubit<LoginState> {
         return;
       }
 
-      Navigator.pushNamed(
+      Navigator.pushReplacementNamed(
         context,
         'dashboard',
         arguments: user.email,
