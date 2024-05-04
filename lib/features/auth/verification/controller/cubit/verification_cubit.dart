@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/core/email_sender.dart';
 import 'package:expense_tracker/features/auth/signup/model/database_repo/user_db.dart';
+import 'package:expense_tracker/features/auth/signup/model/user.dart';
 import 'package:flutter/material.dart';
 
 part 'verification_state.dart';
@@ -12,42 +13,24 @@ part 'verification_state.dart';
 class VerificationCubit extends Cubit<VerificationState> {
   VerificationCubit() : super(VerificationInitial());
 
+  // Text controller for verification code input field
   TextEditingController verificationControllers = TextEditingController();
 
+  // Form key for form validation
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  /// Validates verification code and initiates verification process.
   void verifyValidate(BuildContext context, String userEmail,
       {String? password}) async {
     if (formKey.currentState!.validate()) {
       final otp = verificationControllers.text;
       final userDB = UserDB();
       try {
-        // Retrieve user from database by email
         final user = await userDB.getUserByEmail(userEmail);
         if (user != null && user.otpCode == otp) {
-          // If OTP matches, set user's verified status to 1
-          await userDB.updateUserVerificationStatus(userEmail, 1);
-
-          if (password != null) {
-            // If password is provided, update the password in the database
-            await userDB.updateUserPasswordByEmail(userEmail, password);
-          }
-
-          // Navigate to the login screen
-          Navigator.pushNamed(context, 'login');
+          await _processVerificationSuccess(context, user, password);
         } else {
-          // Show snackbar for wrong OTP code
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Row(
-                children: [
-                  Icon(Icons.error, color: Colors.red), // Error icon
-                  SizedBox(width: 8), // Space between icon and text
-                  Text('Wrong OTP code'), // Error message
-                ],
-              ),
-            ),
-          );
+          _showInvalidOTP(context);
         }
       } catch (e) {
         log('Error verifying OTP: $e');
@@ -58,28 +41,14 @@ class VerificationCubit extends Cubit<VerificationState> {
     }
   }
 
+  /// Resends OTP to the user's email.
   void resendOTP(BuildContext context, String email) async {
     try {
       final userDB = UserDB();
       final user = await userDB.getUserByEmail(email);
 
       if (user != null) {
-        // Create an instance of EmailSender
-        EmailSender emailSender = EmailSender();
-        String otp = emailSender.generateOTP();
-
-        // Send OTP to the user's email
-        await emailSender.sendOTP(user.email, otp);
-
-        // Update user OTP in the database
-        await userDB.updateUserOTPByEmail(user.email, otp);
-
-        // Show success message
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('OTP resent successfully'),
-          ),
-        );
+        await _sendOTPAndUpdateDB(context, user);
       } else {
         log('User not found with email: $email');
       }
@@ -89,7 +58,57 @@ class VerificationCubit extends Cubit<VerificationState> {
     }
   }
 
+  /// Clears verification code input field.
   void clear() {
     verificationControllers.clear();
+  }
+
+  /// Processes successful verification.
+  Future<void> _processVerificationSuccess(
+      BuildContext context, User user, String? password) async {
+    final userDB = UserDB();
+    await userDB.updateUserVerificationStatus(user.email, 1);
+
+    if (password != null) {
+      await userDB.updateUserPasswordByEmail(user.email, password);
+    }
+
+    Navigator.pushNamed(context, 'login');
+  }
+
+  /// Sends OTP to user's email and updates it in the database.
+  Future<void> _sendOTPAndUpdateDB(BuildContext context, User user) async {
+    final emailSender = EmailSender();
+    String otp = emailSender.generateOTP();
+
+    await emailSender.sendOTP(user.email, otp);
+    await UserDB().updateUserOTPByEmail(user.email, otp);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.check_circle, color: Colors.green),
+            SizedBox(width: 8),
+            Text('OTP resent successfully'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Shows a snackbar for invalid OTP.
+  void _showInvalidOTP(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.error, color: Colors.red), // Error icon
+            SizedBox(width: 8), // Space between icon and text
+            Text('Wrong OTP code'), // Error message
+          ],
+        ),
+      ),
+    );
   }
 }

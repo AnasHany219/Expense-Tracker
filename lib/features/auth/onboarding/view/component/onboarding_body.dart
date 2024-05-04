@@ -8,11 +8,11 @@ class OnBoardingBody extends StatelessWidget {
   final Function(int) onPageChanged; // Callback function
 
   const OnBoardingBody({
-    Key? key,
+    super.key,
     required this.onboardingData,
     required this.pageController,
     required this.onPageChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
