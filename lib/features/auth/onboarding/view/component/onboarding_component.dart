@@ -1,12 +1,12 @@
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:flutter/material.dart';
 
-class OnBoardingComponents extends StatelessWidget {
+class OnBoardingComponent extends StatelessWidget {
   final String title;
   final String description;
   final String imagePath;
 
-  const OnBoardingComponents(
+  const OnBoardingComponent(
       {super.key,
       required this.title,
       required this.description,
