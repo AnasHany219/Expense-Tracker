@@ -24,6 +24,7 @@ dependencies:
   device_preview: ^1.1.0
   cloud_firestore: ^4.17.2
   fl_chart: ^0.67.0
+  dio: ^5.4.3+1
 
 dev_dependencies:
   flutter_test:
@@ -33,10 +34,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - 'assets\images\expense_tracker_image.png'
-    - 'assets\images\dashboard_screenshot.png'
-    - 'assets\images\wallet.png'
-    - 'assets\images\person_with_app.png'
+    - 'assets/images/expense_tracker_image.png'
+    - 'assets/images/dashboard_screenshot.png'
+    - 'assets/images/wallet.png'
+    - 'assets/images/person_with_app.png'
     - .env
 
 flutter_native_splash:
