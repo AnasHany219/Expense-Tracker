@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Welcome Back',
-                    style: titleText,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 5),
                   const LogInForm(),
@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Create New Account ? ', // Display create account text
-                        style: subTitle, // Apply subTitle style
+                        style: Theme.of(context).textTheme.titleMedium, // Apply subTitle style
                       ),
                       const SizedBox(width: 5),
                       GestureDetector(
@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                         },
                         child: Text(
                           'Sign Up',
-                          style: textButton.copyWith(
+                          style: Theme.of(context).textTheme.labelLarge!.copyWith(
                             decoration: TextDecoration.underline,
                             decorationThickness: 1,
                           ),

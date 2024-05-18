@@ -22,13 +22,13 @@ class OnBoardingNavigationBar extends StatelessWidget {
         children: [
           TextButton(
             onPressed: onSkipPressed,
-            child: Text('Skip', style: textButton),
+            child: Text('Skip', style: Theme.of(context).textTheme.labelLarge),
           ),
           TextButton(
             onPressed: onNextPressed,
             child: Text(
               isLastPage ? 'Finish' : 'Next',
-              style: textButton,
+              style: Theme.of(context).textTheme.labelLarge,
             ),
           ),
         ],

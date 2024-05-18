@@ -19,7 +19,7 @@ class OnBoardingComponent extends StatelessWidget {
       children: [
         Text(
           title,
-          style: titleText,
+          style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 10),
@@ -32,7 +32,7 @@ class OnBoardingComponent extends StatelessWidget {
         Text(
           description,
           textAlign: TextAlign.center,
-          style: subTitle,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ],
     );

@@ -22,12 +22,15 @@ class ResetPassword extends StatelessWidget {
                 children: [
                   Text(
                     'Reset Password',
-                    style: titleText,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 5),
                   Text(
                     'Enter Your Email',
-                    style: subTitle.copyWith(fontWeight: FontWeight.w600),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 10),
                   const ResetForm(),

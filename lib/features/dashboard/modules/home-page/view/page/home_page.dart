@@ -29,7 +29,8 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 10),
-                Text('Welcome, $displayName!', style: titleText),
+                Text('Welcome, $displayName!',
+                    style: Theme.of(context).textTheme.titleLarge),
                 _buildUserBudgetWidget(controller, totalExpenses),
                 const SizedBox(height: 60),
                 ExpenseSummaryCharts(

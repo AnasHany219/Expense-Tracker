@@ -24,12 +24,12 @@ class NewPassword extends StatelessWidget {
                 children: [
                   Text(
                     'New Password',
-                    style: titleText,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 5),
                   Text(
                     'Enter Your New Password',
-                    style: subTitle.copyWith(fontWeight: FontWeight.w600),
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 10),
                   NewPasswordForm(email: email),

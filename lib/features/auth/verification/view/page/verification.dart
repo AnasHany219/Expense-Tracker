@@ -19,7 +19,7 @@ class VerificationScreen extends StatelessWidget {
       child: BlocBuilder<VerificationCubit, VerificationState>(
         builder: (context, state) {
           return Scaffold(
-            body: _buildBody(),
+            body: _buildBody(context),
           );
         },
       ),
@@ -27,17 +27,21 @@ class VerificationScreen extends StatelessWidget {
   }
 
   /// Builds the body of the verification screen.
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('Verification Code', style: titleText),
+          Text('Verification Code',
+              style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 5),
           Text('Enter The OTP Code',
-              style: subTitle.copyWith(fontWeight: FontWeight.w600)),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(fontWeight: FontWeight.w600)),
           const SizedBox(height: 30),
           VerificationForm(email: email, password: password),
         ],

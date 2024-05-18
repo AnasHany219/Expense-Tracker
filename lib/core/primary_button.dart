@@ -13,7 +13,8 @@ class PrimaryButton extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: primaryColor,
+        // color: primaryColor,
+        color: Theme.of(context).buttonTheme.colorScheme!.background,
         boxShadow: [
           BoxShadow(
             color: primaryColor.withOpacity(0.4),
@@ -24,7 +25,7 @@ class PrimaryButton extends StatelessWidget {
       ),
       child: Text(
         buttonText,
-        style: textButton.copyWith(color: Colors.white),
+        style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white),
       ),
     );
   }

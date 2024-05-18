@@ -19,7 +19,7 @@ class SignUpScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildTitle(),
+                _buildTitle(context),
                 const SizedBox(height: 10),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30),
@@ -35,12 +35,12 @@ class SignUpScreen extends StatelessWidget {
   }
 
   /// Builds the title widget.
-  Widget _buildTitle() {
+  Widget _buildTitle(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Text(
         'Create New Account',
-        style: titleText,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
     );
   }
@@ -53,7 +53,7 @@ class SignUpScreen extends StatelessWidget {
         children: [
           Text(
             'Have an account? ',
-            style: subTitle,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(width: 5),
           GestureDetector(
@@ -65,10 +65,10 @@ class SignUpScreen extends StatelessWidget {
             },
             child: Text(
               'Login',
-              style: textButton.copyWith(
-                decoration: TextDecoration.underline,
-                decorationThickness: 1,
-              ),
+              style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    decoration: TextDecoration.underline,
+                    decorationThickness: 1,
+                  ),
             ),
           )
         ],

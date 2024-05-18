@@ -89,7 +89,7 @@ class _VerificationFormState extends State<VerificationForm> {
       children: [
         Text(
           'Don\'t receive any code ? ',
-          style: subTitle,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(width: 5),
         GestureDetector(
@@ -99,10 +99,10 @@ class _VerificationFormState extends State<VerificationForm> {
           },
           child: Text(
             'Resend',
-            style: textButton.copyWith(
-              decoration: TextDecoration.underline,
-              decorationThickness: 1,
-            ),
+            style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  decoration: TextDecoration.underline,
+                  decorationThickness: 1,
+                ),
           ),
         ),
       ],
