@@ -64,7 +64,7 @@ class _VerificationFormState extends State<VerificationForm> {
         _controller.verifyValidate(context, widget.email!,
             password: widget.password);
       },
-      pinTheme: buildPinTheme(),
+      pinTheme: buildPinTheme(context),
       cursorColor: Colors.black,
       animationDuration: const Duration(milliseconds: 300),
       backgroundColor: Colors.transparent,
@@ -72,7 +72,7 @@ class _VerificationFormState extends State<VerificationForm> {
     );
   }
 
-  PinTheme buildPinTheme() {
+  PinTheme buildPinTheme(BuildContext context) {
     return PinTheme(
       shape: PinCodeFieldShape.box,
       borderRadius: BorderRadius.circular(5),
@@ -80,7 +80,7 @@ class _VerificationFormState extends State<VerificationForm> {
       fieldWidth: 40,
       inactiveFillColor: Theme.of(context).buttonTheme.colorScheme!.background,
       inactiveColor: Theme.of(context).buttonTheme.colorScheme!.background,
-      activeFillColor: Colors.white,
+      activeFillColor: Theme.of(context).buttonTheme.colorScheme!.background,
     );
   }
 
