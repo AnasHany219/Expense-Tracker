@@ -4,6 +4,7 @@ import 'package:expense_tracker/core/my_theme.dart';
 import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:expense_tracker/features/auth/onboarding/view/page/onboarding.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
+import 'package:expense_tracker/features/auth/verification/view/page/verification.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/view/page/profile_page.dart';
 import 'package:expense_tracker/features/dashboard/view/page/dashboard_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,11 +30,13 @@ Future<void> main() async {
   bool onboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
 
   // Determine initial route based on onboarding completion
-  // Widget initialRoute =
-  //     onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
-
   Widget initialRoute =
-      const DashboardPage(email: "kashkoushdevahmed@gmail.com");
+      onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
+
+  // Widget initialRoute =
+  //     const DashboardPage(email: "kashkoushdevahmed@gmail.com");
+
+  // Widget initialRoute = const VerificationScreen(email:"kashkoushdevahmed@gmail.com",password:"ah123532003");
 
   runApp(
     MainApp(

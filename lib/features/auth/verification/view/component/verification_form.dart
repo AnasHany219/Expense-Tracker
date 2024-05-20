@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -88,7 +89,8 @@ class _VerificationFormState extends State<VerificationForm> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Don\'t receive any code ? ',
+          ParentCubit.instance.local["dont_receive_code"] ??
+              'Don\'t receive any code ? ',
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(width: 5),
@@ -98,7 +100,7 @@ class _VerificationFormState extends State<VerificationForm> {
             _controller.resendOTP(context, widget.email!);
           },
           child: Text(
-            'Resend',
+            ParentCubit.instance.local["resend_code"] ?? 'Resend',
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
                   decoration: TextDecoration.underline,
                   decorationThickness: 1,

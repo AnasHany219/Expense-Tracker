@@ -38,5 +38,9 @@
   "Reset Password": "اعاده كلمه المرور",
   "password_not_match": "كلمه المرور غير متطابقه",
   "change_lang": "تغير اللغة",
-  "change_mode": "تغيير الوضع"
+  "change_mode": "تغيير الوضع",
+  "enter_otp": "ادخل الكود",
+  "verification_code": "كود التحقق",
+  "dont_receive_code": "لم تستلم الكود؟",
+  "resend_code": "ارسال الكود"
 }

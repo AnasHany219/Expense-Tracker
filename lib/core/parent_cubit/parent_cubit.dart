@@ -13,8 +13,8 @@ class ParentCubit extends Cubit<ParentState> {
     loadLanguage();
   }
   Map<String, dynamic> local = {};
-  ThemeMode themeMode = ThemeMode.dark;
-  String language = 'ar';
+  ThemeMode themeMode = ThemeMode.light;
+  String language = 'en';
   Future<void> loadLanguage() async {
     String s = await rootBundle.loadString('assets/lang/$language.json');
     local = await json.decode(s);
