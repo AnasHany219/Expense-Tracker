@@ -10,13 +10,13 @@ class ParentCubit extends Cubit<ParentState> {
   static final ParentCubit instance = ParentCubit();
 
   ParentCubit() : super(ParentInitial()) {
-    loadLanguage(); 
+    loadLanguage();
   }
   Map<String, dynamic> local = {};
 
   Future<void> loadLanguage() async {
     String s = await rootBundle.loadString('assets/lang/ar.json');
-    local = json.decode(s);
+    local = await json.decode(s);
     emit(ParentInitial());
   }
 }

@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/view/page/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,7 @@ import 'package:expense_tracker/features/dashboard/modules/home-page/view/page/h
 
 class DashboardPage extends StatelessWidget {
   final String? email; // Store email variable
-  final List<String> titles = const ['Home', 'Expense List', 'Profile'];
+  final List<String> titles = const ["home_title", "expenses", "profile"];
 
   const DashboardPage({super.key, this.email});
 
@@ -51,15 +52,19 @@ class DashboardPage extends StatelessWidget {
 
   /// Builds the title widget for the app bar.
   Widget buildAppBarTitle(DashboardCubit dashboardCubit) {
-    return Center(
-      child: Text(
-        titles[dashboardCubit.selectedTapIndex],
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-        ),
-      ),
-    );
+    return BlocProvider<ParentCubit>(
+        create: (context) => ParentCubit.instance,
+        child: BlocBuilder<ParentCubit, ParentState>(builder: (context, state) {
+          return Center(
+            child: Text(
+              ParentCubit.instance.local[titles[dashboardCubit.selectedTapIndex]]??'',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+          );
+        }));
   }
 
   /// Navigates to the expense add page.
@@ -88,29 +93,33 @@ class DashboardPage extends StatelessWidget {
   /// Builds the bottom navigation bar widget for the dashboard.
   Widget buildBottomNavigationBar(
       BuildContext context, DashboardCubit dashboardCubit) {
-    return BottomNavigationBar(
-      currentIndex: dashboardCubit.selectedTapIndex,
-      onTap: dashboardCubit.onChangeTabIndex,
-      unselectedItemColor:
-          Theme.of(context).buttonTheme.colorScheme!.background,
-      showUnselectedLabels: true,
-      unselectedLabelStyle: TextStyle(
-          fontSize: 15,
-          color: Theme.of(context).buttonTheme.colorScheme!.background),
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_filled),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.view_list),
-          label: 'Expenses',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person_pin),
-          label: 'Profile',
-        ),
-      ],
-    );
+    return BlocProvider<ParentCubit>(
+        create: (context) => ParentCubit.instance,
+        child: BlocBuilder<ParentCubit, ParentState>(builder: (context, state) {
+          return BottomNavigationBar(
+            currentIndex: dashboardCubit.selectedTapIndex,
+            onTap: dashboardCubit.onChangeTabIndex,
+            unselectedItemColor:
+                Theme.of(context).buttonTheme.colorScheme!.background,
+            showUnselectedLabels: true,
+            unselectedLabelStyle: TextStyle(
+                fontSize: 15,
+                color: Theme.of(context).buttonTheme.colorScheme!.background),
+            items: [
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.home_filled),
+                label: ParentCubit.instance.local['home'] ?? '',
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.view_list),
+                label: ParentCubit.instance.local['expenses'] ?? '',
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.person_pin),
+                label: ParentCubit.instance.local['profile'] ?? '',
+              ),
+            ],
+          );
+        }));
   }
 }

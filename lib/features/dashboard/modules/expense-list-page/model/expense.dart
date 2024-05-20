@@ -19,13 +19,13 @@ class Expense {
   final String notes;
 
   /// Constructs a new [Expense] instance.
-  Expense({
-    this.id,
-    required this.email,
-    required this.amount,
-    required this.category,
-    required this.date,
-    required this.notes,
+    Expense({
+      this.id,
+      required this.email,
+      required this.amount,
+      required this.category,
+      required this.date,
+      required this.notes,
   });
 
   /// Factory constructor to create an Expense object from a map.

@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/validation.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/controller/cubit/profile_cubit.dart';
@@ -23,37 +24,44 @@ class _ChangeNameState extends State<ChangeName> {
         builder: (context, state) {
           return Form(
             key: controller.formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text(
-                  'Enter your new name:',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 8.0),
-                buildInputForm('First Name'),
-                const SizedBox(height: 8.0),
-                buildInputForm('Last Name'),
-                const SizedBox(height: 8.0),
-                ElevatedButton(
-                  onPressed: () {
-                    controller.updateUserName(context, widget.email!);
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).buttonTheme.colorScheme!.background),
-                  ),
-                  child: const Text(
-                    'Change Name',
-                    style: TextStyle(
-                      color: Colors.white,
+            child: BlocProvider<ParentCubit>(
+              create: (context) => ParentCubit.instance,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    ParentCubit.instance.local["enter_new_name"] ?? "",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 8.0),
+                  buildInputForm(
+                      ParentCubit.instance.local["first_name"] ?? ""),
+                  const SizedBox(height: 8.0),
+                  buildInputForm(ParentCubit.instance.local["last_name"] ?? ""),
+                  const SizedBox(height: 8.0),
+                  ElevatedButton(
+                    onPressed: () {
+                      controller.updateUserName(context, widget.email!);
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context)
+                              .buttonTheme
+                              .colorScheme!
+                              .background),
+                    ),
+                    child: Text(
+                      ParentCubit.instance.local["change_name"] ?? "",
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
@@ -64,22 +72,25 @@ class _ChangeNameState extends State<ChangeName> {
   Padding buildInputForm(String label) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
-      child: TextFormField(
+      child: BlocProvider<ParentCubit>(
+        create: (context) => ParentCubit.instance,
+        child: TextFormField(
           style: Theme.of(context).textTheme.bodySmall,
-          controller: label == 'First Name'
+          controller: label == ParentCubit.instance.local["first_name"]
               ? controller.firstName
               : controller.lastName,
           validator: Validator().nameValidator,
           decoration: InputDecoration(
             labelText: label,
             prefixIcon: const Icon(Icons.edit),
-            labelStyle:Theme.of(context).textTheme.titleSmall,
+            labelStyle: Theme.of(context).textTheme.titleSmall,
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                   color: Theme.of(context).buttonTheme.colorScheme!.background),
             ),
           ),
-          ),
+        ),
+      ),
     );
   }
 }

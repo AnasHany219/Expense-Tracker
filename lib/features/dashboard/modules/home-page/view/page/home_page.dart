@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expense_tracker/features/dashboard/modules/home-page/controller/cubit/home_cubit.dart';
@@ -24,19 +25,22 @@ class HomePage extends StatelessWidget {
               _calculateTotalExpenses(state, controller);
           final String displayName = _getDisplayName(state);
           return SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 10),
-                Text('Welcome, $displayName!',
-                    style: Theme.of(context).textTheme.titleLarge),
-                _buildUserBudgetWidget(controller, totalExpenses),
-                const SizedBox(height: 60),
-                ExpenseSummaryCharts(
-                  expenseData: controller.getExpenseSummary(),
-                ),
-                const SizedBox(height: 60),
-              ],
+            child: BlocProvider<ParentCubit>(
+              create: (context) => ParentCubit.instance,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 10),
+                  Text('${ParentCubit.instance.local["welcome_home"]??""}, $displayName!',
+                      style: Theme.of(context).textTheme.titleLarge),
+                  _buildUserBudgetWidget(controller, totalExpenses),
+                  const SizedBox(height: 60),
+                  ExpenseSummaryCharts(
+                    expenseData: controller.getExpenseSummary(),
+                  ),
+                  const SizedBox(height: 60),
+                ],
+              ),
             ),
           );
         },
@@ -52,13 +56,13 @@ class HomePage extends StatelessWidget {
   /// Retrieves the display name based on the state.
   String _getDisplayName(HomeState state) {
     if (state is HomeLoading) {
-      return 'Loading...';
+      return ParentCubit.instance.local["loading"]??"Loading..";
     } else if (state is HomeEmpty) {
-      return 'No-Name';
+      return ParentCubit.instance.local["no_name"]??'No-Name';
     } else if (state is HomeLoaded) {
       return '${state.user.firstName} ${state.user.lastName}';
     } else {
-      return 'Unknown';
+      return ParentCubit.instance.local["unknown_name"]??'Unknown';
     }
   }
 

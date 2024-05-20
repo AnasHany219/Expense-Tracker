@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:expense_tracker/features/auth/forget_password/controller/cubit/forget_password_cubit.dart';
 import 'package:expense_tracker/features/auth/forget_password/view/component/reset_form.dart';
 import 'package:flutter/material.dart';
@@ -13,19 +14,23 @@ class ResetPassword extends StatelessWidget {
       child: BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
         builder: (context, state) {
           return Scaffold(
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: BlocProvider<ParentCubit>(
+              create: (context) => ParentCubit.instance,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Reset Password',
+                    ParentCubit.instance.local["welcome_reset_password"] ??
+                        'Reset Password',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    'Enter Your Email',
+                    ParentCubit.instance.local["enter_email"] ??
+                        'Enter Your Email',
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium!
@@ -36,7 +41,7 @@ class ResetPassword extends StatelessWidget {
                 ],
               ),
             ),
-          );
+          ));
         },
       ),
     );

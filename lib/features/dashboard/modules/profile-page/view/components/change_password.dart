@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/validation.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/controller/cubit/profile_cubit.dart';
@@ -26,38 +27,45 @@ class _ChangePasswordState extends State<ChangePassword> {
         builder: (context, state) {
           return Form(
             key: controller.formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text(
-                  'Enter your new password:',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 8.0),
-                buildPasswordFormField('New Password'),
-                const SizedBox(height: 8.0),
-                buildPasswordFormField('Confirm Password'),
-                const SizedBox(height: 8.0),
-                ElevatedButton(
-                  onPressed: () {
-                    controller.updatePassword(context, widget.email!);
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      Theme.of(context).buttonTheme.colorScheme!.background,
+            child: BlocProvider<ParentCubit>(
+              create: (context) => ParentCubit.instance,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    ParentCubit.instance.local["enter_new_password"],
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
-                  child: const Text(
-                    'Change Password',
-                    style: TextStyle(
-                      color: Colors.white,
+                  const SizedBox(height: 8.0),
+                  buildPasswordFormField(
+                      label: ParentCubit.instance.local["new_password"],
+                      isNewPassword: 1),
+                  const SizedBox(height: 8.0),
+                  buildPasswordFormField(
+                      label: ParentCubit.instance.local["confirm_password"],
+                      isNewPassword: 0),
+                  const SizedBox(height: 8.0),
+                  ElevatedButton(
+                    onPressed: () {
+                      controller.updatePassword(context, widget.email!);
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        Theme.of(context).buttonTheme.colorScheme!.background,
+                      ),
+                    ),
+                    child: Text(
+                      ParentCubit.instance.local["change_password"],
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
@@ -65,15 +73,15 @@ class _ChangePasswordState extends State<ChangePassword> {
     );
   }
 
-  Padding buildPasswordFormField(String label) {
+  Padding buildPasswordFormField({String label = "", int isNewPassword = 1}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
         style: Theme.of(context).textTheme.bodySmall,
-        controller: label == 'New Password'
+        controller: isNewPassword == 1
             ? controller.newPassword
             : controller.confirmPassword,
-        validator: label == 'New Password'
+        validator: isNewPassword == 1
             ? Validator().passwordValidator
             : (val) => val != controller.newPassword.text
                 ? 'Passwords do not match'
@@ -82,7 +90,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         decoration: InputDecoration(
           labelText: label,
           prefixIcon: const Icon(Icons.lock),
-          labelStyle:Theme.of(context).textTheme.titleSmall,
+          labelStyle: Theme.of(context).textTheme.titleSmall,
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
                 color: Theme.of(context).buttonTheme.colorScheme!.background),

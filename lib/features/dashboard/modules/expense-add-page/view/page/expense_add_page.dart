@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-add-page/controller/cubit/expense_add_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-add-page/view/component/expense-add-form.dart';
@@ -16,12 +17,15 @@ class ExpenseAddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            "Add Expense",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
+        title: Center(
+          child: BlocProvider<ParentCubit>(
+            create: (context) => ParentCubit.instance,
+            child: Text(
+              ParentCubit.instance.local["add_expense"],
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
             ),
           ),
         ),
