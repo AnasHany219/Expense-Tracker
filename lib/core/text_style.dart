@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-// const primaryColor = Color(0xff003f5c);
 const primaryColor = Color(0xff003f5c);
 const primaryColor2 = Color(0xff66b3ff); /* for dark colors */
 const secondaryColor = Color(0xff4d7298);
 const secondaryColor2 = Color(0xff99ccff); /* for dark colors */
-const textFieldColor = Color(0xffcccccc);
+const textFieldColor = Color(0xFF000000);
+const textFieldColor2 = Color(0xffcccccc);
 const textShadow = Color(0xff002535);
 
 TextStyle titleText = const TextStyle(

@@ -27,13 +27,13 @@ class _SignUpFormState extends State<SignUpForm> {
             key: controller.formKey,
             child: Column(
               children: [
-                _buildInputFormField('First Name',
+                _buildInputFormField(context, 'First Name',
                     controller.firstNameController, Validator().nameValidator),
-                _buildInputFormField('Last Name', controller.lastNameController,
+                _buildInputFormField(context, 'Last Name', controller.lastNameController,
                     Validator().nameValidator),
-                _buildInputFormField('Email', controller.emailController,
+                _buildInputFormField(context, 'Email', controller.emailController,
                     Validator().emailValidator),
-                _buildInputFormField('Password', controller.passwordController,
+                _buildInputFormField(context, 'Password', controller.passwordController,
                     Validator().passwordValidator),
                 const SizedBox(height: 20),
                 Padding(
@@ -54,11 +54,12 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  Padding _buildInputFormField(
+  Padding _buildInputFormField(BuildContext context,
       String label, TextEditingController controller, var validator) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
+        style: Theme.of(context).textTheme.bodySmall,
         controller: controller,
         obscureText: label == 'Password' ? _isObscure : false,
         validator: validator,
@@ -69,7 +70,7 @@ class _SignUpFormState extends State<SignUpForm> {
               : label == 'Email'
                   ? const Icon(Icons.email)
                   : null,
-          hintStyle: const TextStyle(color: textFieldColor),
+          hintStyle: Theme.of(context).textTheme.titleSmall,
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                   color:
@@ -89,6 +90,7 @@ class _SignUpFormState extends State<SignUpForm> {
               : null,
         ),
       ),
+     
     );
   }
 }

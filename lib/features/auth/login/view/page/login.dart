@@ -35,10 +35,10 @@ class LoginScreen extends StatelessWidget {
                         'reset_password',
                       );
                     },
-                    child: const Text(
+                    child:  Text(
                       'Forget Password ? ', // Display forget password text
                       style: TextStyle(
-                        color: textShadow,
+                        color: Theme.of(context).textTheme.titleMedium!.color,
                         fontSize: 14,
                         decoration: TextDecoration.underline,
                         decorationThickness: 1,

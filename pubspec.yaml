@@ -34,6 +34,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - "assets/lang/"
     - "assets/images/expense_tracker_image.png"
     - "assets/images/dashboard_screenshot.png"
     - "assets/images/wallet.png"

@@ -60,6 +60,7 @@ class _NewPasswordFormState extends State<NewPasswordForm> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
+        style: Theme.of(context).textTheme.bodySmall,
         controller: controller,
         validator: label == 'New Password'
             ? Validator().passwordValidator
@@ -71,9 +72,7 @@ class _NewPasswordFormState extends State<NewPasswordForm> {
         decoration: InputDecoration(
           labelText: label,
           prefixIcon: const Icon(Icons.password_outlined),
-          labelStyle: const TextStyle(
-            color: textFieldColor,
-          ),
+          labelStyle: Theme.of(context).textTheme.titleSmall,
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
                 color: Theme.of(context).buttonTheme.colorScheme!.background),

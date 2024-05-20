@@ -11,9 +11,11 @@ class MyTheme {
     ),
     textTheme: const TextTheme(
       titleLarge: TextStyle(fontSize: 24, color: primaryColor),
+      bodySmall: TextStyle(fontSize: 14, color: textFieldColor),
       titleMedium: TextStyle(
           fontSize: 18, color: secondaryColor, fontWeight: FontWeight.w500),
       labelLarge: TextStyle(fontSize: 18, color: primaryColor),
+      titleSmall: TextStyle(fontSize: 18, color: textFieldColor),
     ),
   );
 
@@ -27,6 +29,8 @@ class MyTheme {
       titleMedium: TextStyle(
           fontSize: 18, color: secondaryColor2, fontWeight: FontWeight.w500),
       labelLarge: TextStyle(fontSize: 18, color: primaryColor2),
+      bodySmall: TextStyle(fontSize: 14, color: textFieldColor2),
+      titleSmall: TextStyle(fontSize: 18, color: textFieldColor2),
     ),
   );
 }

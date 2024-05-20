@@ -85,6 +85,7 @@ class UserBudgetWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               TextFormField(
+                style: Theme.of(context).textTheme.bodySmall,
                 controller: controller,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(

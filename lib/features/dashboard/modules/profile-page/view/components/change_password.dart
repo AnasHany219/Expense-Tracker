@@ -69,6 +69,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
+        style: Theme.of(context).textTheme.bodySmall,
         controller: label == 'New Password'
             ? controller.newPassword
             : controller.confirmPassword,
@@ -81,9 +82,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         decoration: InputDecoration(
           labelText: label,
           prefixIcon: const Icon(Icons.lock),
-          labelStyle: const TextStyle(
-            color: textFieldColor,
-          ),
+          labelStyle:Theme.of(context).textTheme.titleSmall,
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
                 color: Theme.of(context).buttonTheme.colorScheme!.background),

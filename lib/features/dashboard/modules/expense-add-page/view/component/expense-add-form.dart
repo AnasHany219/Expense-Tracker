@@ -65,6 +65,7 @@ class _ExpenseAddFormState extends State<ExpenseAddForm> {
   Padding buildInputForm(String label) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
         child: TextFormField(
+          style: Theme.of(context).textTheme.bodySmall,
           controller: label == 'Amount'
               ? controller.amountController
               : label == 'Category'
@@ -74,9 +75,7 @@ class _ExpenseAddFormState extends State<ExpenseAddForm> {
                       : controller.notesController,
           decoration: InputDecoration(
             hintText: label == 'Date' ? 'dd-mm-yyyy' : label,
-            hintStyle: const TextStyle(
-              color: textFieldColor,
-            ),
+            hintStyle: Theme.of(context).textTheme.titleSmall,
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                   color: Theme.of(context).buttonTheme.colorScheme!.background),

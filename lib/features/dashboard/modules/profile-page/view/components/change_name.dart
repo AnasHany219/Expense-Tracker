@@ -65,21 +65,21 @@ class _ChangeNameState extends State<ChangeName> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
-        controller:
-            label == 'First Name' ? controller.firstName : controller.lastName,
-        validator: Validator().nameValidator,
-        decoration: InputDecoration(
-          labelText: label,
-          prefixIcon: const Icon(Icons.edit),
-          labelStyle: const TextStyle(
-            color: textFieldColor,
+          style: Theme.of(context).textTheme.bodySmall,
+          controller: label == 'First Name'
+              ? controller.firstName
+              : controller.lastName,
+          validator: Validator().nameValidator,
+          decoration: InputDecoration(
+            labelText: label,
+            prefixIcon: const Icon(Icons.edit),
+            labelStyle:Theme.of(context).textTheme.titleSmall,
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Theme.of(context).buttonTheme.colorScheme!.background),
+            ),
           ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-                color: Theme.of(context).buttonTheme.colorScheme!.background),
           ),
-        ),
-      ),
     );
   }
 }

@@ -56,6 +56,7 @@ class _LogInFormState extends State<LogInForm> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
+         style: Theme.of(context).textTheme.bodySmall,
         controller: isPassword
             ? _loginCubit.passwordController
             : _loginCubit.emailController,
@@ -68,7 +69,7 @@ class _LogInFormState extends State<LogInForm> {
           prefixIcon: isPassword
               ? const Icon(Icons.password_outlined)
               : const Icon(Icons.email),
-          labelStyle: const TextStyle(color: textFieldColor),
+          labelStyle:Theme.of(context).textTheme.titleSmall,
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
                 color: Theme.of(context).buttonTheme.colorScheme!.background),
@@ -82,7 +83,8 @@ class _LogInFormState extends State<LogInForm> {
                   },
                   icon: Icon(
                     _isObscure ? Icons.visibility_off : Icons.visibility,
-                    color: Theme.of(context).buttonTheme.colorScheme!.background,
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.background,
                   ),
                 )
               : null,
