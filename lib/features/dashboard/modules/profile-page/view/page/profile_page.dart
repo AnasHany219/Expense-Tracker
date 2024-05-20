@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/controller/cubit/profile_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/view/components/change_name.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/view/components/change_password.dart';
@@ -23,6 +24,44 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      ParentCubit.instance.changeMode();
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context)
+                              .buttonTheme
+                              .colorScheme!
+                              .background),
+                    ),
+                    child: Text(
+                      ParentCubit.instance.local["change_mode"] ??
+                          "Change Mode",
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      ParentCubit.instance.changeLang();
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context)
+                              .buttonTheme
+                              .colorScheme!
+                              .background),
+                    ),
+                    child: Text(
+                      ParentCubit.instance.local["change_lang"] ??
+                          "Change Language",
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 10),
                   ChangeName(email: email),
                   const SizedBox(height: 20),

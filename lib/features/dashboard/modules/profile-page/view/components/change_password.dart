@@ -76,24 +76,27 @@ class _ChangePasswordState extends State<ChangePassword> {
   Padding buildPasswordFormField({String label = "", int isNewPassword = 1}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
-      child: TextFormField(
-        style: Theme.of(context).textTheme.bodySmall,
-        controller: isNewPassword == 1
-            ? controller.newPassword
-            : controller.confirmPassword,
-        validator: isNewPassword == 1
-            ? Validator().passwordValidator
-            : (val) => val != controller.newPassword.text
-                ? 'Passwords do not match'
-                : null,
-        obscureText: true,
-        decoration: InputDecoration(
-          labelText: label,
-          prefixIcon: const Icon(Icons.lock),
-          labelStyle: Theme.of(context).textTheme.titleSmall,
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-                color: Theme.of(context).buttonTheme.colorScheme!.background),
+      child: BlocProvider<ParentCubit>(
+        create: (context) => ParentCubit.instance,
+        child: TextFormField(
+          style: Theme.of(context).textTheme.bodySmall,
+          controller: isNewPassword == 1
+              ? controller.newPassword
+              : controller.confirmPassword,
+          validator: isNewPassword == 1
+              ? Validator().passwordValidator
+              : (val) => val != controller.newPassword.text
+                  ? ParentCubit.instance.local["password_not_match"]??'Passwords do not match'
+                  : null,
+          obscureText: true,
+          decoration: InputDecoration(
+            labelText: label,
+            prefixIcon: const Icon(Icons.lock),
+            labelStyle: Theme.of(context).textTheme.titleSmall,
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Theme.of(context).buttonTheme.colorScheme!.background),
+            ),
           ),
         ),
       ),

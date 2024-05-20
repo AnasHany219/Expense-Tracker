@@ -1,10 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:expense_tracker/core/my_theme.dart';
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:expense_tracker/features/auth/onboarding/view/page/onboarding.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/view/page/profile_page.dart';
 import 'package:expense_tracker/features/dashboard/view/page/dashboard_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:expense_tracker/core/route_generator.dart';
 import 'package:expense_tracker/firebase_options.dart';
@@ -27,10 +29,11 @@ Future<void> main() async {
   bool onboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
 
   // Determine initial route based on onboarding completion
-  Widget initialRoute =
-      onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
+  // Widget initialRoute =
+  //     onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
 
-  // Widget initialRoute = const DashboardPage(email: "kashkoushdevahmed@gmail.com");
+  Widget initialRoute =
+      const DashboardPage(email: "kashkoushdevahmed@gmail.com");
 
   runApp(
     MainApp(
@@ -49,13 +52,19 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: MyTheme.instance.light,
-      darkTheme: MyTheme.instance.dark,
-      themeMode: ThemeMode.light,
-      home: initialRoute,
-      onGenerateRoute: InitialRouteGenerator.onGenerateRoute,
-    );
+    return BlocProvider<ParentCubit>(
+        create: (context) => ParentCubit.instance,
+        child: BlocBuilder<ParentCubit, ParentState>(
+          builder: (context, state) {
+            return MaterialApp(
+              theme: MyTheme.instance.light,
+              darkTheme: MyTheme.instance.dark,
+              themeMode: ParentCubit.instance.themeMode,
+              home: initialRoute,
+              onGenerateRoute: InitialRouteGenerator.onGenerateRoute,
+            );
+          },
+        ));
   }
 }
 /* 

@@ -1,3 +1,5 @@
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
+
 class Validator {
   /// Validates the provided name.
   String? nameValidator(String? value) {
@@ -32,7 +34,8 @@ class Validator {
   /// Validates the confirmation password.
   String? confirmPasswordValidator(String? value, String password) {
     if (value != password) {
-      return 'Passwords do not match';
+      return ParentCubit.instance.local["password_not_match"] ??
+          'Passwords do not match';
     }
     return null;
   }
