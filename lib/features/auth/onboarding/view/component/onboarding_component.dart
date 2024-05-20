@@ -1,4 +1,3 @@
-import 'package:expense_tracker/core/text_style.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingComponent extends StatelessWidget {

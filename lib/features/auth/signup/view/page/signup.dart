@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/auth/signup/controller/cubit/registration_cubit.dart';
 import 'package:expense_tracker/features/auth/signup/view/component/signup_form.dart';
 

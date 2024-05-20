@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expense_tracker/features/auth/verification/controller/cubit/verification_cubit.dart';
 import 'package:expense_tracker/features/auth/verification/view/component/verification_form.dart';
-import 'package:expense_tracker/core/text_style.dart';
 
 /// Screen for entering verification code.
 class VerificationScreen extends StatelessWidget {

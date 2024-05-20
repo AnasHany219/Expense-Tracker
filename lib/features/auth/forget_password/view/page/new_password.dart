@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expense_tracker/features/auth/forget_password/controller/cubit/forget_password_cubit.dart';
 import 'package:expense_tracker/features/auth/forget_password/view/component/new_form.dart';
-import 'package:expense_tracker/core/text_style.dart';
 
 class NewPassword extends StatelessWidget {
   final String? email;

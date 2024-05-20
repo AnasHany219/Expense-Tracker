@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/dashboard/modules/home-page/controller/cubit/home_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/home-page/controller/cubit/home_state.dart';
 import 'package:expense_tracker/features/dashboard/modules/home-page/view/components/expense_summary_charts.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/core/text_style.dart';
 
 class OnBoardingNavigationBar extends StatelessWidget {
   final VoidCallback onSkipPressed;
