@@ -35,9 +35,9 @@ class _NewPasswordFormState extends State<NewPasswordForm> {
             key: _forgetPasswordCubit.formKey,
             child: Column(
               children: [
-                _buildInputForm(
-                    'New Password', _forgetPasswordCubit.passwordController),
-                _buildInputForm('Confirm New Password',
+                _buildInputForm(context, 'New Password',
+                    _forgetPasswordCubit.passwordController),
+                _buildInputForm(context, 'Confirm New Password',
                     _forgetPasswordCubit.confirmPasswordController),
                 const SizedBox(height: 40),
                 GestureDetector(
@@ -55,7 +55,8 @@ class _NewPasswordFormState extends State<NewPasswordForm> {
     );
   }
 
-  Padding _buildInputForm(String label, TextEditingController controller) {
+  Padding _buildInputForm(
+      BuildContext context, String label, TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
@@ -73,8 +74,9 @@ class _NewPasswordFormState extends State<NewPasswordForm> {
           labelStyle: const TextStyle(
             color: textFieldColor,
           ),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: primaryColor),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: Theme.of(context).buttonTheme.colorScheme!.background),
           ),
           suffixIcon: IconButton(
             onPressed: () {
@@ -84,7 +86,7 @@ class _NewPasswordFormState extends State<NewPasswordForm> {
             },
             icon: Icon(
               _isObscure ? Icons.visibility_off : Icons.visibility,
-              color: primaryColor,
+              color: Theme.of(context).buttonTheme.colorScheme!.background,
             ),
           ),
         ),

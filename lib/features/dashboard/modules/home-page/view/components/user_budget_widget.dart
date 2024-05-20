@@ -35,8 +35,8 @@ class UserBudgetWidget extends StatelessWidget {
             children: [
               Text(
                 'Spending Limit: ${userBudget.toStringAsFixed(2)} \$ ',
-                style: const TextStyle(
-                  color: primaryColor,
+                style: TextStyle(
+                  color: Theme.of(context).buttonTheme.colorScheme!.background,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -51,9 +51,9 @@ class UserBudgetWidget extends StatelessWidget {
           ),
           Text(
             'Total Spending: ${totalExpenses.toStringAsFixed(2)} \$ ',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
-              color: primaryColor,
+              color: Theme.of(context).buttonTheme.colorScheme!.background,
               fontWeight: FontWeight.bold,
             ),
           ),

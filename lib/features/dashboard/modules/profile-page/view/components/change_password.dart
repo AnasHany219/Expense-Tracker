@@ -47,7 +47,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      primaryColor,
+                      Theme.of(context).buttonTheme.colorScheme!.background,
                     ),
                   ),
                   child: const Text(
@@ -84,8 +84,9 @@ class _ChangePasswordState extends State<ChangePassword> {
           labelStyle: const TextStyle(
             color: textFieldColor,
           ),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: primaryColor),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: Theme.of(context).buttonTheme.colorScheme!.background),
           ),
         ),
       ),

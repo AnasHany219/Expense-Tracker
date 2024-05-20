@@ -3,6 +3,8 @@
 import 'package:expense_tracker/core/my_theme.dart';
 import 'package:expense_tracker/features/auth/onboarding/view/page/onboarding.dart';
 import 'package:expense_tracker/features/auth/signup/view/page/signup.dart';
+import 'package:expense_tracker/features/dashboard/modules/profile-page/view/page/profile_page.dart';
+import 'package:expense_tracker/features/dashboard/view/page/dashboard_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:expense_tracker/core/route_generator.dart';
 import 'package:expense_tracker/firebase_options.dart';
@@ -28,6 +30,8 @@ Future<void> main() async {
   Widget initialRoute =
       onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
 
+  // Widget initialRoute = const DashboardPage(email: "kashkoushdevahmed@gmail.com");
+
   runApp(
     MainApp(
       initialRoute: initialRoute,
@@ -47,7 +51,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: MyTheme.instance.light,
-      darkTheme: MyTheme.instance.light,
+      darkTheme: MyTheme.instance.dark,
       themeMode: ThemeMode.light,
       home: initialRoute,
       onGenerateRoute: InitialRouteGenerator.onGenerateRoute,

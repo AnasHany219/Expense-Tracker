@@ -77,8 +77,8 @@ class _VerificationFormState extends State<VerificationForm> {
       borderRadius: BorderRadius.circular(5),
       fieldHeight: 50,
       fieldWidth: 40,
-      inactiveFillColor: primaryColor,
-      inactiveColor: primaryColor,
+      inactiveFillColor: Theme.of(context).buttonTheme.colorScheme!.background,
+      inactiveColor: Theme.of(context).buttonTheme.colorScheme!.background,
       activeFillColor: Colors.white,
     );
   }

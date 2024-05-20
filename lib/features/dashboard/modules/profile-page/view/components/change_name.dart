@@ -43,8 +43,8 @@ class _ChangeNameState extends State<ChangeName> {
                     controller.updateUserName(context, widget.email!);
                   },
                   style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(primaryColor),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Theme.of(context).buttonTheme.colorScheme!.background),
                   ),
                   child: const Text(
                     'Change Name',
@@ -74,8 +74,9 @@ class _ChangeNameState extends State<ChangeName> {
           labelStyle: const TextStyle(
             color: textFieldColor,
           ),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: primaryColor),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: Theme.of(context).buttonTheme.colorScheme!.background),
           ),
         ),
       ),

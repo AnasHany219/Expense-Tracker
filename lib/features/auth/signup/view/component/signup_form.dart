@@ -70,8 +70,10 @@ class _SignUpFormState extends State<SignUpForm> {
                   ? const Icon(Icons.email)
                   : null,
           hintStyle: const TextStyle(color: textFieldColor),
-          focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: primaryColor)),
+          focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color:
+                      Theme.of(context).buttonTheme.colorScheme!.background)),
           suffixIcon: label == 'Password'
               ? IconButton(
                   onPressed: () {
@@ -81,7 +83,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   },
                   icon: Icon(
                     _isObscure ? Icons.visibility_off : Icons.visibility,
-                    color: primaryColor,
+                    color: Theme.of(context).buttonTheme.colorScheme!.background,
                   ),
                 )
               : null,

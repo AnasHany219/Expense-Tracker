@@ -77,8 +77,9 @@ class _ExpenseAddFormState extends State<ExpenseAddForm> {
             hintStyle: const TextStyle(
               color: textFieldColor,
             ),
-            focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: primaryColor),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Theme.of(context).buttonTheme.colorScheme!.background),
             ),
             prefixIcon: label == 'Amount'
                 ? const Icon(Icons.attach_money)

@@ -24,7 +24,8 @@ class DashboardPage extends StatelessWidget {
           return Scaffold(
             appBar: buildAppBar(context, dashboardCubit),
             body: buildPageView(context, dashboardCubit),
-            bottomNavigationBar: buildBottomNavigationBar(dashboardCubit),
+            bottomNavigationBar:
+                buildBottomNavigationBar(context, dashboardCubit),
           );
         },
       ),
@@ -44,7 +45,7 @@ class DashboardPage extends StatelessWidget {
         )
       ],
       title: buildAppBarTitle(dashboardCubit),
-      backgroundColor: primaryColor,
+      backgroundColor: Theme.of(context).buttonTheme.colorScheme!.background,
     );
   }
 
@@ -85,13 +86,17 @@ class DashboardPage extends StatelessWidget {
   }
 
   /// Builds the bottom navigation bar widget for the dashboard.
-  Widget buildBottomNavigationBar(DashboardCubit dashboardCubit) {
+  Widget buildBottomNavigationBar(
+      BuildContext context, DashboardCubit dashboardCubit) {
     return BottomNavigationBar(
       currentIndex: dashboardCubit.selectedTapIndex,
       onTap: dashboardCubit.onChangeTabIndex,
-      unselectedItemColor: primaryColor,
+      unselectedItemColor:
+          Theme.of(context).buttonTheme.colorScheme!.background,
       showUnselectedLabels: true,
-      unselectedLabelStyle: const TextStyle(fontSize: 15, color: primaryColor),
+      unselectedLabelStyle: TextStyle(
+          fontSize: 15,
+          color: Theme.of(context).buttonTheme.colorScheme!.background),
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home_filled),

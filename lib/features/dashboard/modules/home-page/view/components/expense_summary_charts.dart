@@ -28,7 +28,7 @@ class ExpenseSummaryCharts extends StatelessWidget {
 
         /// Line Chart
         _title('Line Chart'),
-        _buildLineChart(),
+        _buildLineChart(context),
         const SizedBox(height: 30),
       ],
     );
@@ -59,7 +59,7 @@ class ExpenseSummaryCharts extends StatelessWidget {
   }
 
   /// Builds the line chart.
-  Widget _buildLineChart() {
+  Widget _buildLineChart(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 30),
       child: SizedBox(
@@ -68,9 +68,15 @@ class ExpenseSummaryCharts extends StatelessWidget {
           LineChartData(
             borderData: FlBorderData(
               show: true,
-              border: const Border(
-                left: BorderSide(color: primaryColor, width: 3),
-                bottom: BorderSide(color: primaryColor, width: 3),
+              border: Border(
+                left: BorderSide(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.background,
+                    width: 3),
+                bottom: BorderSide(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.background,
+                    width: 3),
               ),
             ),
             lineBarsData: [

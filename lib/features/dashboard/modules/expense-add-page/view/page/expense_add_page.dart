@@ -25,7 +25,7 @@ class ExpenseAddPage extends StatelessWidget {
             ),
           ),
         ),
-        backgroundColor: primaryColor,
+        backgroundColor: Theme.of(context).buttonTheme.colorScheme!.background,
       ),
       body: BlocProvider(
         create: (context) =>

@@ -36,15 +36,18 @@ class _ResetFormState extends State<ResetForm> {
                   TextFormField(
                     controller: _forgetPasswordCubit.emailController,
                     validator: Validator().emailValidator,
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.email),
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.email),
                       hintText: 'Email',
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         color: textFieldColor,
                       ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
-                          color: primaryColor,
+                          color: Theme.of(context)
+                              .buttonTheme
+                              .colorScheme!
+                              .background,
                         ),
                       ),
                     ),

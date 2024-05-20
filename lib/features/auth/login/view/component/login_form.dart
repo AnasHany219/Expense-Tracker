@@ -69,8 +69,9 @@ class _LogInFormState extends State<LogInForm> {
               ? const Icon(Icons.password_outlined)
               : const Icon(Icons.email),
           labelStyle: const TextStyle(color: textFieldColor),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: primaryColor),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: Theme.of(context).buttonTheme.colorScheme!.background),
           ),
           suffixIcon: isPassword
               ? IconButton(
@@ -81,7 +82,7 @@ class _LogInFormState extends State<LogInForm> {
                   },
                   icon: Icon(
                     _isObscure ? Icons.visibility_off : Icons.visibility,
-                    color: primaryColor,
+                    color: Theme.of(context).buttonTheme.colorScheme!.background,
                   ),
                 )
               : null,
