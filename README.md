@@ -1,39 +1,65 @@
-# Expense Tracker App 📊💰
+### Expense Tracker 💸
 
-Welcome to Expense Tracker, a Flutter-based mobile application to help you manage your finances easily!
+Expense Tracker is a Flutter application designed to help you manage your expenses efficiently. With Expense Tracker, you can easily track your spending, set budgets, and visualize your financial data.
 
-## Features ✨
+### Features 🚀
 
-🔒 **Authentication**: Securely sign up and log in to your account to access your financial data.
+✅ **Expense Management**: Add, edit, and delete your expenses effortlessly.
 
-💸 **Expense Tracking**: Easily track your expenses and income to gain insights into your spending habits.
+💰 **Budget Tracking**: Set budgets for different categories and track your spending against them.
 
-🔔 **Password Reset**: Forgot your password? No worries! Reset it effortlessly using our password reset feature.
+📊 **Visualize Data**: View detailed charts and graphs to visualize your expenses over time.
 
-📱 **Mobile Friendly**: Seamlessly access your financial data on the go with our mobile-friendly design.
+🔒 **Secure Authentication**: Securely log in to your account using Firebase authentication.
 
-## Getting Started 🚀
+### Technologies Used 🛠️
 
-To get started with Expense Tracker, follow these steps:
+- Flutter
+- Firebase
+- SharedPreferences
+- Bloc State Management
 
-1. Clone this repository to your local machine.
-2. Navigate to the project directory.
-3. Run `flutter pub get` to install dependencies.
-4. Connect your device or start an emulator.
-5. Run `flutter run` to launch the app on your device/emulator.
+### Installation 📦
 
-## Contributing 🤝
+1. Clone the repository:
 
-We welcome contributions from everyone! Whether you're a developer, designer, or enthusiast, your input is valuable to us. Feel free to open an issue or submit a pull request to help improve Expense Tracker.
+   ```bash
+   git clone https://github.com/AnasHany219/Expense-Tracker.git
+   ```
 
-## Support 💬
+2. Navigate to the project directory:
 
-If you have any questions, feedback, or need assistance, please don't hesitate to reach out to us. You can contact our support at anashany219@gmail.com.
+   ```bash
+   cd Expense-Tracker
+   ```
 
-## Acknowledgements 🙏
+3. Install dependencies:
 
-We would like to express our gratitude to the Flutter community for their amazing contributions and support.
+   ```bash
+   flutter pub get
+   ```
 
----
+4. Run the app:
 
-Thank you for choosing Expense Tracker! We hope this app helps you take control of your finances and achieve your financial goals. Happy tracking! 💳💼
+   ```bash
+   flutter run
+   ```
+
+### Contributors 🙌
+
+- [Anas Hany](https://github.com/AnasHany219) (Primary Account)
+- [Anas Hany](https://github.com/AnasHany2193) (Secondary Account)
+- [Ahmad Kashkoush](https://github.com/ahmad-kashkoush) (Contributor)
+
+### Feedback and Support 📧
+
+If you have any feedback, suggestions, or issues, feel free to [open an issue](https://github.com/AnasHany219/Expense-Tracker/issues) or [reach out](https://github.com/AnasHany219) to the project maintainers.
+
+### Connect with Us 🌐
+
+Follow us on GitHub to stay up-to-date with our latest projects and contributions!
+
+- [Anas Hany](https://github.com/AnasHany219)
+- [Ahmad Kashkoush](https://github.com/ahmad-kashkoush)
+
+Happy Expense Tracking! 📈💰
