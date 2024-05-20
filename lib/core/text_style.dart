@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 // const primaryColor = Color(0xff003f5c);
 const primaryColor = Color(0xff003f5c);
-const primaryColor2 = Color.fromARGB(255, 21, 145, 203);/* for dark colors */
+const primaryColor2 = Color(0xff66b3ff); /* for dark colors */
 const secondaryColor = Color(0xff4d7298);
-const secondaryColor2 = Color.fromARGB(255, 129, 178, 227); /* for dark colors */
+const secondaryColor2 = Color(0xff99ccff); /* for dark colors */
 const textFieldColor = Color(0xffcccccc);
 const textShadow = Color(0xff002535);
 

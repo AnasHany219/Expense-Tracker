@@ -16,7 +16,7 @@ class MyTheme {
           labelLarge: TextStyle(fontSize: 18, color: primaryColor)));
 
   ThemeData dark = ThemeData.dark(useMaterial3: true).copyWith(
-      scaffoldBackgroundColor: Colors.black,
+      scaffoldBackgroundColor: const Color(0xff121212),
       buttonTheme: const ButtonThemeData(
         colorScheme: ColorScheme.dark(background: primaryColor2),
       ),

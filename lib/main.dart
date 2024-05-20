@@ -29,10 +29,10 @@ Future<void> main() async {
   bool onboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
 
   // Determine initial route based on onboarding completion
-  // Widget initialRoute =
-  //     onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
+  Widget initialRoute =
+      onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
 
-  Widget initialRoute = const DashboardPage(email: 'anashany219@gmail.com');
+  // Widget initialRoute = const DashboardPage(email: 'anashany219@gmail.com');
 
   runApp(
     MainApp(
@@ -52,9 +52,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: MyTheme.instance.dark,
-        darkTheme: MyTheme.instance.dark,
-        themeMode: ThemeMode.dark,
+        theme: MyTheme.instance.light,
+        darkTheme: MyTheme.instance.light,
+        themeMode: ThemeMode.light,
         home: initialRoute,
         onGenerateRoute: InitialRouteGenerator.onGenerateRoute);
   }
