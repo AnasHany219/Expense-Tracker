@@ -24,44 +24,37 @@ class _ChangeNameState extends State<ChangeName> {
         builder: (context, state) {
           return Form(
             key: controller.formKey,
-            child: BlocProvider<ParentCubit>(
-              create: (context) => ParentCubit.instance,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    ParentCubit.instance.local["enter_new_name"] ?? "",
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  ParentCubit.instance.local["enter_new_name"] ?? "",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 8.0),
+                buildInputForm(ParentCubit.instance.local["first_name"] ?? ""),
+                const SizedBox(height: 8.0),
+                buildInputForm(ParentCubit.instance.local["last_name"] ?? ""),
+                const SizedBox(height: 8.0),
+                ElevatedButton(
+                  onPressed: () {
+                    controller.updateUserName(context, widget.email!);
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Theme.of(context).buttonTheme.colorScheme!.background),
+                  ),
+                  child: Text(
+                    ParentCubit.instance.local["change_name"] ?? "",
                     style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 8.0),
-                  buildInputForm(
-                      ParentCubit.instance.local["first_name"] ?? ""),
-                  const SizedBox(height: 8.0),
-                  buildInputForm(ParentCubit.instance.local["last_name"] ?? ""),
-                  const SizedBox(height: 8.0),
-                  ElevatedButton(
-                    onPressed: () {
-                      controller.updateUserName(context, widget.email!);
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Theme.of(context)
-                              .buttonTheme
-                              .colorScheme!
-                              .background),
-                    ),
-                    child: Text(
-                      ParentCubit.instance.local["change_name"] ?? "",
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         },
@@ -72,22 +65,19 @@ class _ChangeNameState extends State<ChangeName> {
   Padding buildInputForm(String label) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
-      child: BlocProvider<ParentCubit>(
-        create: (context) => ParentCubit.instance,
-        child: TextFormField(
-          style: Theme.of(context).textTheme.bodySmall,
-          controller: label == ParentCubit.instance.local["first_name"]
-              ? controller.firstName
-              : controller.lastName,
-          validator: Validator().nameValidator,
-          decoration: InputDecoration(
-            labelText: label,
-            prefixIcon: const Icon(Icons.edit),
-            labelStyle: Theme.of(context).textTheme.titleSmall,
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                  color: Theme.of(context).buttonTheme.colorScheme!.background),
-            ),
+      child: TextFormField(
+        style: Theme.of(context).textTheme.bodySmall,
+        controller: label == ParentCubit.instance.local["first_name"]
+            ? controller.firstName
+            : controller.lastName,
+        validator: Validator().nameValidator,
+        decoration: InputDecoration(
+          labelText: label,
+          prefixIcon: const Icon(Icons.edit),
+          labelStyle: Theme.of(context).textTheme.titleSmall,
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: Theme.of(context).buttonTheme.colorScheme!.background),
           ),
         ),
       ),

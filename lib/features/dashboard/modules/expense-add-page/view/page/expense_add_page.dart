@@ -18,18 +18,15 @@ class ExpenseAddPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: BlocProvider<ParentCubit>(
-            create: (context) => ParentCubit.instance,
-            child: Text(
-              ParentCubit.instance.local["add_expense"],
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-              ),
+          child: Text(
+            ParentCubit.instance.local["add_expense"],
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
             ),
           ),
         ),
-        backgroundColor: Theme.of(context).buttonTheme.colorScheme!.background,
+      backgroundColor: Theme.of(context).buttonTheme.colorScheme!.background,
       ),
       body: BlocProvider(
         create: (context) =>

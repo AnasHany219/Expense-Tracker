@@ -25,8 +25,8 @@ class ExpenseListCubit extends Cubit<ExpenseListState> {
   /// Initializes the cubit.
   Future<void> init() async {
     emit(ExpenseListLoading());
-    // expenses = await (await DatabaseRepo.instance).fetchExpenses(email: email);
-    expenses = await FirebaseRepo.instance.fetchExpenses(email: email);
+    expenses = await (await DatabaseRepo.instance).fetchExpenses(email: email);
+    // expenses = await FirebaseRepo.instance.fetchExpenses(email: email);
 
     emit(expenses.isEmpty ? ExpenseListEmpty() : ExpenseListLoaded());
   }

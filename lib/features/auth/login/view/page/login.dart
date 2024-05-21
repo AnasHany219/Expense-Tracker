@@ -17,74 +17,69 @@ class LoginScreen extends StatelessWidget {
           return Scaffold(
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: BlocProvider<ParentCubit>(
-                create: (context) => ParentCubit.instance,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      ParentCubit.instance.local["welcome_login"] ??
-                          'Welcome Back',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: 5),
-                    const LogInForm(),
-                    const SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: () {
-                        // Navigate to ResetPassword page when tapped
-                        Navigator.pushNamed(
-                          context,
-                          'reset_password',
-                        );
-                      },
-                      child: Text(
-                        ParentCubit.instance.local["forget_password"] ??
-                            'Forget Password ? ', // Display forget password text
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.titleMedium!.color,
-                          fontSize: 14,
-                          decoration: TextDecoration.underline,
-                          decorationThickness: 1,
-                        ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    ParentCubit.instance.local["welcome_login"] ??
+                        'Welcome Back',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 5),
+                  const LogInForm(),
+                  const SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to ResetPassword page when tapped
+                      Navigator.pushNamed(
+                        context,
+                        'reset_password',
+                      );
+                    },
+                    child: Text(
+                      ParentCubit.instance.local["forget_password"] ??
+                          'Forget Password ? ', // Display forget password text
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.titleMedium!.color,
+                        fontSize: 14,
+                        decoration: TextDecoration.underline,
+                        decorationThickness: 1,
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Text(
-                          ParentCubit.instance.local["create_account"] ??
-                              'Create New Account ? ', // Display create account text
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium, // Apply subTitle style
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Text(
+                        ParentCubit.instance.local["create_account"] ??
+                            'Create New Account ? ', // Display create account text
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium, // Apply subTitle style
+                      ),
+                      const SizedBox(width: 5),
+                      GestureDetector(
+                        onTap: () {
+                          // Navigate to SignUpScreen page when tapped
+                          Navigator.pushNamed(
+                            context,
+                            'signup',
+                          );
+                        },
+                        child: Text(
+                          ParentCubit.instance.local["welcome_signup"] ??
+                              'Sign Up',
+                          style:
+                              Theme.of(context).textTheme.labelLarge!.copyWith(
+                                    decoration: TextDecoration.underline,
+                                    decorationThickness: 1,
+                                  ),
                         ),
-                        const SizedBox(width: 5),
-                        GestureDetector(
-                          onTap: () {
-                            // Navigate to SignUpScreen page when tapped
-                            Navigator.pushNamed(
-                              context,
-                              'signup',
-                            );
-                          },
-                          child: Text(
-                            ParentCubit.instance.local["welcome_signup"] ??
-                                'Sign Up',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge!
-                                .copyWith(
-                                  decoration: TextDecoration.underline,
-                                  decorationThickness: 1,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           );

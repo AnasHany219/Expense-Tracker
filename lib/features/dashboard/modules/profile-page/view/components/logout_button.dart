@@ -9,26 +9,22 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ParentCubit>(
-        create: (context) => ParentCubit.instance,
-        child: BlocBuilder<ParentCubit, ParentState>(builder: (context, state) {
-          return SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: onPressed,
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  Colors.green, // You can customize the color here
-                ),
-              ),
-              child:  Text(
-                ParentCubit.instance.local["log_out"]??"",
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          );
-        }));
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+            Colors.green, // You can customize the color here
+          ),
+        ),
+        child: Text(
+          ParentCubit.instance.local["log_out"] ?? "",
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
   }
 }
