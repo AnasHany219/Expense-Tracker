@@ -24,6 +24,11 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 10),
+                  ChangeName(email: email),
+                  const SizedBox(height: 20),
+                  ChangePassword(email: email),
+                  const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
                       ParentCubit.instance.changeMode();
@@ -34,6 +39,8 @@ class ProfilePage extends StatelessWidget {
                               .buttonTheme
                               .colorScheme!
                               .background),
+                      minimumSize: MaterialStateProperty.all<Size>(
+                          const Size(double.infinity, 50)),
                     ),
                     child: Text(
                       ParentCubit.instance.local["change_mode"] ??
@@ -43,6 +50,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 15),
                   ElevatedButton(
                     onPressed: () {
                       ParentCubit.instance.changeLang();
@@ -53,6 +61,8 @@ class ProfilePage extends StatelessWidget {
                               .buttonTheme
                               .colorScheme!
                               .background),
+                      minimumSize: MaterialStateProperty.all<Size>(
+                          const Size(double.infinity, 50)),
                     ),
                     child: Text(
                       ParentCubit.instance.local["change_lang"] ??
@@ -63,17 +73,13 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  ChangeName(email: email),
-                  const SizedBox(height: 20),
-                  ChangePassword(email: email),
-                  const SizedBox(height: 20),
                   LogoutButton(
                     onPressed: () {
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           'login', (Route<dynamic> route) => false);
                     },
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   DeleteAccountButton(email: email),
                 ],
               ),

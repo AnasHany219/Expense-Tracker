@@ -11,7 +11,7 @@ class MyTheme {
     ),
     textTheme: const TextTheme(
       titleLarge: TextStyle(fontSize: 24, color: primaryColor),
-      bodySmall: TextStyle(fontSize: 14, color: textFieldColor),
+      bodySmall: TextStyle(fontSize: 18, color: textFieldColor),
       titleMedium: TextStyle(
           fontSize: 18, color: secondaryColor, fontWeight: FontWeight.w500),
       labelLarge: TextStyle(fontSize: 18, color: primaryColor),

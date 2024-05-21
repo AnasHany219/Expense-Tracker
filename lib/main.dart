@@ -33,10 +33,10 @@ Future<void> main() async {
   // Widget initialRoute =
   //     onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
 
-  // Widget initialRoute =
-  //     const DashboardPage(email: "kashkoushdevahmed@gmail.com");
+  Widget initialRoute =
+      const DashboardPage(email: "kashkoushdevahmed@gmail.com");
 
-  Widget initialRoute = const VerificationScreen(email:"kashkoushdevahmed@gmail.com",password:"ah123532003");
+  // Widget initialRoute = const VerificationScreen(email:"kashkoushdevahmed@gmail.com",password:"ah123532003");
 
   runApp(
     MainApp(
