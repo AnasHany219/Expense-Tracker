@@ -71,11 +71,11 @@ class ExpenseSummaryCharts extends StatelessWidget {
               border: Border(
                 left: BorderSide(
                     color:
-                        Theme.of(context).buttonTheme.colorScheme!.background,
+                        Theme.of(context).buttonTheme.colorScheme!.primary,
                     width: 3),
                 bottom: BorderSide(
                     color:
-                        Theme.of(context).buttonTheme.colorScheme!.background,
+                        Theme.of(context).buttonTheme.colorScheme!.primary,
                     width: 3),
               ),
             ),

@@ -7,7 +7,8 @@ class MyTheme {
   ThemeData light = ThemeData.light(useMaterial3: true).copyWith(
     scaffoldBackgroundColor: Colors.white,
     buttonTheme: const ButtonThemeData(
-      colorScheme: ColorScheme.light(background: primaryColor),
+      colorScheme:
+          ColorScheme.light(background: primaryColor, primary: primaryColor),
     ),
     textTheme: const TextTheme(
       titleLarge: TextStyle(fontSize: 24, color: primaryColor),
@@ -22,7 +23,8 @@ class MyTheme {
   ThemeData dark = ThemeData.dark(useMaterial3: true).copyWith(
     scaffoldBackgroundColor: const Color(0xff121212),
     buttonTheme: const ButtonThemeData(
-      colorScheme: ColorScheme.dark(background: primaryColor2),
+      colorScheme:
+          ColorScheme.dark(background: primaryColor2, primary: primaryColor2),
     ),
     textTheme: const TextTheme(
       titleLarge: TextStyle(fontSize: 24, color: primaryColor2),
