@@ -9,38 +9,31 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ParentCubit>(
-      create: (context) => ParentCubit.instance,
-      child: BlocBuilder<ParentCubit, ParentState>(
-        builder: (context, state) {
-          return Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Theme.of(context).buttonTheme.colorScheme!.background,
-              boxShadow: [
-                BoxShadow(
-                  color: Theme.of(context)
-                      .buttonTheme
-                      .colorScheme!
-                      .background
-                      .withOpacity(0.4),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Text(
-              ParentCubit.instance.local[buttonText] ?? buttonText,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelLarge!
-                  .copyWith(color: Colors.white),
-            ),
-          );
-        },
+    return Container(
+      alignment: Alignment.center,
+      height: 60,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Theme.of(context).buttonTheme.colorScheme!.background,
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context)
+                .buttonTheme
+                .colorScheme!
+                .background
+                .withOpacity(0.4),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Text(
+        ParentCubit.instance.local[buttonText] ?? buttonText,
+        style: Theme.of(context)
+            .textTheme
+            .labelLarge!
+            .copyWith(color: Colors.white),
       ),
     );
   }

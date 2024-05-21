@@ -14,10 +14,8 @@ class ResetPassword extends StatelessWidget {
       child: BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
         builder: (context, state) {
           return Scaffold(
-              body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: BlocProvider<ParentCubit>(
-              create: (context) => ParentCubit.instance,
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,7 +39,7 @@ class ResetPassword extends StatelessWidget {
                 ],
               ),
             ),
-          ));
+          );
         },
       ),
     );

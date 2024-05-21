@@ -29,19 +29,29 @@ Future<void> main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool onboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
 
+<<<<<<< HEAD
   // Determine initial route based on onboarding completion
+=======
+  // // Determine initial route based on onboarding completion
+>>>>>>> ahmad-kashkoush
   Widget initialRoute =
       onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
 
   // Widget initialRoute =
+<<<<<<< HEAD
   // const DashboardPage(email: "anashany219@gmail.com");
+=======
+  //     const DashboardPage(email: "anashany219@gmail.com");
+  // Widget initialRoute =
+  //     const VerificationScreen(email: "anashany219@gmail.com");
+>>>>>>> ahmad-kashkoush
 
   // Widget initialRoute = const VerificationScreen(email:"kashkoushdevahmed@gmail.com",password:"ah123532003");
 
   runApp(
     MainApp(
       initialRoute: initialRoute,
-    ),
+    )
   );
 }
 
@@ -75,4 +85,8 @@ ahmed
 kashkoush
 kashkoushdevahmed@gmail.com
 ah123532003
+123456
+
+kkk@gmail.com
+123456
  */

@@ -24,13 +24,10 @@ class DeleteAccountButton extends StatelessWidget {
                   Colors.red,
                 ),
               ),
-              child: BlocProvider<ParentCubit>(
-                create: (context) => ParentCubit.instance,
-                child: Text(
-                  ParentCubit.instance.local['delete_account'],
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
+              child: Text(
+                ParentCubit.instance.local['delete_account'],
+                style: const TextStyle(
+                  color: Colors.white,
                 ),
               ),
             ));

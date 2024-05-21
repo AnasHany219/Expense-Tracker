@@ -56,42 +56,39 @@ class _LogInFormState extends State<LogInForm> {
   Padding buildInputForm(String label, bool isPassword) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
-      child: BlocProvider<ParentCubit>(
-        create: (context) => ParentCubit.instance,
-        child: TextFormField(
-          style: Theme.of(context).textTheme.bodySmall,
-          controller: isPassword
-              ? _loginCubit.passwordController
-              : _loginCubit.emailController,
-          validator: isPassword
-              ? Validator().passwordValidator
-              : Validator().emailValidator,
-          obscureText: isPassword ? _isObscure : false,
-          decoration: InputDecoration(
-            labelText: ParentCubit.instance.local[label] ?? label,
-            prefixIcon: isPassword
-                ? const Icon(Icons.password_outlined)
-                : const Icon(Icons.email),
-            labelStyle: Theme.of(context).textTheme.titleSmall,
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                  color: Theme.of(context).buttonTheme.colorScheme!.background),
-            ),
-            suffixIcon: isPassword
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _isObscure = !_isObscure;
-                      });
-                    },
-                    icon: Icon(
-                      _isObscure ? Icons.visibility_off : Icons.visibility,
-                      color:
-                          Theme.of(context).buttonTheme.colorScheme!.background,
-                    ),
-                  )
-                : null,
+      child: TextFormField(
+        style: Theme.of(context).textTheme.bodySmall,
+        controller: isPassword
+            ? _loginCubit.passwordController
+            : _loginCubit.emailController,
+        validator: isPassword
+            ? Validator().passwordValidator
+            : Validator().emailValidator,
+        obscureText: isPassword ? _isObscure : false,
+        decoration: InputDecoration(
+          labelText: ParentCubit.instance.local[label] ?? label,
+          prefixIcon: isPassword
+              ? const Icon(Icons.password_outlined)
+              : const Icon(Icons.email),
+          labelStyle: Theme.of(context).textTheme.titleSmall,
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: Theme.of(context).buttonTheme.colorScheme!.background),
           ),
+          suffixIcon: isPassword
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _isObscure = !_isObscure;
+                    });
+                  },
+                  icon: Icon(
+                    _isObscure ? Icons.visibility_off : Icons.visibility,
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.background,
+                  ),
+                )
+              : null,
         ),
       ),
     );
