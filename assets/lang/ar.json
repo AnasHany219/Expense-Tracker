@@ -2,6 +2,7 @@
   "add_expense": "اضف عنصر",
   "Amount": "الكميه",
   "Category": "التصنيف",
+  "Date": "التاريخ",
   "change_name": "تغير الاسم",
   "change_password": "تغيير كلمه المرور",
   "confirm_password": "تأكيد كلمه المرور",
@@ -42,5 +43,13 @@
   "enter_otp": "ادخل الكود",
   "verification_code": "كود التحقق",
   "dont_receive_code": "لم تستلم الكود؟",
-  "resend_code": "ارسال الكود"
+  "resend_code": "ارسال الكود",
+  "loading_expenses": "تحميل المصروفات",
+  "empty_expenses": "لا يوجد مصروفات",
+  "spending_limit": "الحد المسموح",
+  "total_spending": "المصاريف الكليه",
+  "balance": "الرصيد",
+  "enter_new_budget": "ادخل الحد الجديد",
+  "enter_valid_number": "ادخل رقم صحيح",
+  "update_budget": "تحديث الحد"
 }

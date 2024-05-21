@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';
 
@@ -17,13 +18,14 @@ class ExpenseListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text('Amount: ${expense.amount.toStringAsFixed(2)} \$'),
+        title: Text(
+            '${ParentCubit.instance.local['Amount']}: ${expense.amount.toStringAsFixed(2)} \$'),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Category: ${expense.category}'),
-            Text('Date: ${expense.date}'),
-            Text('Notes: ${expense.notes}'),
+            Text('${ParentCubit.instance.local['Category']}: ${expense.category}'),
+            Text('${ParentCubit.instance.local['Date']}: ${expense.date}'),
+            Text('${ParentCubit.instance.local['Note']}: ${expense.notes}'),
           ],
         ),
         trailing: IconButton(

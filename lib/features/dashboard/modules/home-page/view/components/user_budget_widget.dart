@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/core/text_style.dart';
 
@@ -34,7 +35,7 @@ class UserBudgetWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Spending Limit: ${userBudget.toStringAsFixed(2)} \$ ',
+                '${ParentCubit.instance.local["spending_limit"] ?? "Spending Limit"}: ${userBudget.toStringAsFixed(2)} \$ ',
                 style: TextStyle(
                   color: Theme.of(context).buttonTheme.colorScheme!.background,
                   fontSize: 18,
@@ -50,7 +51,7 @@ class UserBudgetWidget extends StatelessWidget {
             ],
           ),
           Text(
-            'Total Spending: ${totalExpenses.toStringAsFixed(2)} \$ ',
+            '${ParentCubit.instance.local['total_spending'] ?? "Total Spending"}: ${totalExpenses.toStringAsFixed(2)} \$ ',
             style: TextStyle(
               fontSize: 18,
               color: Theme.of(context).buttonTheme.colorScheme!.background,
@@ -59,7 +60,7 @@ class UserBudgetWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Balance: ${difference.toStringAsFixed(2)} \$ ',
+            '${ParentCubit.instance.local['balance'] ?? "Balance"}: ${difference.toStringAsFixed(2)} \$ ',
             style: TextStyle(
               fontSize: 18,
               color: isBudgetExceeded ? Colors.red : Colors.green,
@@ -88,12 +89,13 @@ class UserBudgetWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodySmall,
                 controller: controller,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Enter new budget',
+                decoration: InputDecoration(
+                  labelText:
+                      '${ParentCubit.instance.local['enter_new_budget'] ?? 'Enter new budget'}',
                 ),
                 validator: (value) {
                   return double.tryParse(value!) == null
-                      ? 'Please enter a valid number'
+                      ? '${ParentCubit.instance.local['enter_valid_number'] ?? "Please enter a valid number"}'
                       : null;
                 },
               ),
@@ -105,7 +107,8 @@ class UserBudgetWidget extends StatelessWidget {
                   onUpdate(newBudget);
                   Navigator.pop(context);
                 },
-                child: const Text('Update Budget'),
+                child: Text(
+                    '${ParentCubit.instance.local['update_budget'] ?? "Update Budget"}'),
               ),
             ],
           ),

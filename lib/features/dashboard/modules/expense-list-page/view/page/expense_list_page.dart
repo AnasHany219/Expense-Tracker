@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expense_tracker/core/text_style.dart';
@@ -40,14 +41,15 @@ class ExpenseList extends StatelessWidget {
   }
 
   Widget _buildLoadingState(BuildContext context) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircularProgressIndicator(color: secondaryColor),
+          const CircularProgressIndicator(color: secondaryColor),
           Text(
-            'Loading expenses',
-            style: TextStyle(
+            ParentCubit.instance.local["loading_expenses"] ??
+                'Loading expenses',
+            style: const TextStyle(
               color: secondaryColor,
               fontSize: 20,
             ),
@@ -58,18 +60,18 @@ class ExpenseList extends StatelessWidget {
   }
 
   Widget _buildEmptyState(BuildContext context) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.delete,
             size: 100,
             color: secondaryColor,
           ),
           Text(
-            'No expenses found',
-            style: TextStyle(
+            ParentCubit.instance.local["empty_expenses"] ?? 'No expenses found',
+            style: const TextStyle(
               color: secondaryColor,
               fontSize: 20,
             ),
