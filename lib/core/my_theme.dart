@@ -28,11 +28,13 @@ class MyTheme {
     textTheme: const TextTheme(
       titleLarge: TextStyle(
           fontSize: 24, color: primaryColor, fontWeight: FontWeight.bold),
-      bodySmall: TextStyle(fontSize: 18, color: textFieldColor),
-      labelLarge: TextStyle(fontSize: 18, color: primaryColor),
+      bodySmall: TextStyle(
+          fontSize: 16, color: primaryColor, fontWeight: FontWeight.w500),
+      labelLarge: TextStyle(
+          fontSize: 18, color: primaryColor, fontWeight: FontWeight.bold),
       titleMedium: TextStyle(
           fontSize: 18, color: secondaryColor, fontWeight: FontWeight.w500),
-      titleSmall: TextStyle(fontSize: 18, color: textFieldColor),
+      titleSmall: TextStyle(fontSize: 16, color: textFieldColor),
       bodyMedium: TextStyle(
           fontSize: 14, color: primaryColor, fontWeight: FontWeight.w700),
     ),
@@ -49,9 +51,11 @@ class MyTheme {
           fontSize: 24, color: primaryColor2, fontWeight: FontWeight.bold),
       titleMedium: TextStyle(
           fontSize: 18, color: secondaryColor2, fontWeight: FontWeight.w500),
-      labelLarge: TextStyle(fontSize: 18, color: primaryColor2),
-      bodySmall: TextStyle(fontSize: 14, color: textFieldColor2),
-      titleSmall: TextStyle(fontSize: 18, color: textFieldColor2),
+      labelLarge: TextStyle(
+          fontSize: 18, color: primaryColor2, fontWeight: FontWeight.bold),
+      bodySmall: TextStyle(
+          fontSize: 16, color: primaryColor2, fontWeight: FontWeight.w500),
+      titleSmall: TextStyle(fontSize: 16, color: textFieldColor2),
       bodyMedium: TextStyle(
           fontSize: 14, color: primaryColor2, fontWeight: FontWeight.w700),
     ),
