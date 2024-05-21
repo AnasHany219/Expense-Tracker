@@ -2,10 +2,8 @@
 
 import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:expense_tracker/core/primary_button.dart';
-import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-add-page/controller/cubit/expense_add_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Form widget for adding a new expense.
 class ExpenseAddForm extends StatefulWidget {

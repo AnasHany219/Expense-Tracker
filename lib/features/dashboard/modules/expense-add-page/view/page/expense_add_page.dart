@@ -1,5 +1,4 @@
 import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
-import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-add-page/controller/cubit/expense_add_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-add-page/view/component/expense-add-form.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +25,7 @@ class ExpenseAddPage extends StatelessWidget {
             ),
           ),
         ),
-      backgroundColor: Theme.of(context).buttonTheme.colorScheme!.background,
+        backgroundColor: Theme.of(context).buttonTheme.colorScheme!.background,
       ),
       body: BlocProvider(
         create: (context) =>

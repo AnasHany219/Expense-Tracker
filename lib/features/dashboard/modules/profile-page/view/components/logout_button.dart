@@ -1,6 +1,5 @@
 import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LogoutButton extends StatelessWidget {
   final Function() onPressed;

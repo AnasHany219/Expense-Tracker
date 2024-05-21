@@ -1,6 +1,5 @@
 import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/core/text_style.dart';
 
 /// A widget representing the user budget information.
 class UserBudgetWidget extends StatelessWidget {

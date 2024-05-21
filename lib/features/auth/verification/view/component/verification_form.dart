@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:expense_tracker/features/auth/verification/controller/cubit/verification_cubit.dart';
 import 'package:expense_tracker/core/validation.dart';
-import 'package:expense_tracker/core/text_style.dart';
 
 class VerificationForm extends StatefulWidget {
   final String? email;

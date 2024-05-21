@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bloc/bloc.dart';
 import 'package:expense_tracker/core/snackbar.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/model/expense.dart';

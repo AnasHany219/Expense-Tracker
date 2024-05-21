@@ -2,7 +2,6 @@ import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/view/page/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/features/dashboard/controller/cubit/dashboard_cubit.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-add-page/view/page/expense_add_page.dart';
 import 'package:expense_tracker/features/dashboard/modules/expense-list-page/view/page/expense_list_page.dart';

@@ -1,5 +1,4 @@
 import 'package:expense_tracker/core/parent_cubit/parent_cubit.dart';
-import 'package:expense_tracker/core/text_style.dart';
 import 'package:expense_tracker/core/validation.dart';
 import 'package:expense_tracker/features/dashboard/modules/profile-page/controller/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
