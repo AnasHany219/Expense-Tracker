@@ -30,11 +30,11 @@ Future<void> main() async {
   bool onboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
 
   // Determine initial route based on onboarding completion
-  // Widget initialRoute =
-  //     onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
-
   Widget initialRoute =
-      const DashboardPage(email: "anashany219@gmail.com");
+      onboardingCompleted ? const SignUpScreen() : const OnBoardingScreen();
+
+  // Widget initialRoute =
+  // const DashboardPage(email: "anashany219@gmail.com");
 
   // Widget initialRoute = const VerificationScreen(email:"kashkoushdevahmed@gmail.com",password:"ah123532003");
 
