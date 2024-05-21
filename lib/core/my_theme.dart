@@ -13,10 +13,12 @@ class MyTheme {
     textTheme: const TextTheme(
       titleLarge: TextStyle(fontSize: 24, color: primaryColor),
       bodySmall: TextStyle(fontSize: 18, color: textFieldColor),
+      labelLarge: TextStyle(fontSize: 18, color: primaryColor),
       titleMedium: TextStyle(
           fontSize: 18, color: secondaryColor, fontWeight: FontWeight.w500),
-      labelLarge: TextStyle(fontSize: 18, color: primaryColor),
       titleSmall: TextStyle(fontSize: 18, color: textFieldColor),
+      bodyMedium: TextStyle(
+          fontSize: 14, color: primaryColor, fontWeight: FontWeight.w700),
     ),
   );
 
@@ -33,6 +35,8 @@ class MyTheme {
       labelLarge: TextStyle(fontSize: 18, color: primaryColor2),
       bodySmall: TextStyle(fontSize: 14, color: textFieldColor2),
       titleSmall: TextStyle(fontSize: 18, color: textFieldColor2),
+      bodyMedium: TextStyle(
+          fontSize: 14, color: primaryColor2, fontWeight: FontWeight.w700),
     ),
   );
 }

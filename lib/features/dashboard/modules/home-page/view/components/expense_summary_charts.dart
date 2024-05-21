@@ -18,16 +18,16 @@ class ExpenseSummaryCharts extends StatelessWidget {
     return Column(
       children: [
         /// Expense Summary Title
-        _title('Expense Summary'),
+        _title('Expense Summary', context),
         const SizedBox(height: 30),
 
         /// Pie Chart
-        _title('Pie Chart'),
-        _buildPieChart(),
+        _title('Pie Chart', context),
+        _buildPieChart(context),
         const SizedBox(height: 30),
 
         /// Line Chart
-        _title('Line Chart'),
+        _title('Line Chart', context),
         _buildLineChart(context),
         const SizedBox(height: 30),
       ],
@@ -35,23 +35,20 @@ class ExpenseSummaryCharts extends StatelessWidget {
   }
 
   /// Builds a title for the chart.
-  Widget _title(String title) {
+  Widget _title(String title, BuildContext context) {
     return Text(
       title,
-      style: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-      ),
+      style: Theme.of(context).textTheme.labelLarge,
     );
   }
 
   /// Builds the pie chart.
-  Widget _buildPieChart() {
+  Widget _buildPieChart(BuildContext context) {
     return SizedBox(
       height: 300,
       child: PieChart(
         PieChartData(
-          sections: _generatePieChartSections(),
+          sections: _generatePieChartSections(context),
           centerSpaceRadius: 30.0,
         ),
       ),
@@ -70,12 +67,10 @@ class ExpenseSummaryCharts extends StatelessWidget {
               show: true,
               border: Border(
                 left: BorderSide(
-                    color:
-                        Theme.of(context).buttonTheme.colorScheme!.primary,
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary,
                     width: 3),
                 bottom: BorderSide(
-                    color:
-                        Theme.of(context).buttonTheme.colorScheme!.primary,
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary,
                     width: 3),
               ),
             ),
@@ -84,7 +79,9 @@ class ExpenseSummaryCharts extends StatelessWidget {
                 spots: _generateLineChartSpots(),
                 isCurved: true,
                 color: Colors.blue,
-                belowBarData: BarAreaData(show: true),
+                belowBarData: BarAreaData(
+                  show: true,
+                ),
               ),
             ],
             titlesData: FlTitlesData(
@@ -97,7 +94,8 @@ class ExpenseSummaryCharts extends StatelessWidget {
                   showTitles: true,
                   reservedSize: 32,
                   interval: 1,
-                  getTitlesWidget: _bottomTitleWidgets,
+                  getTitlesWidget: (value, meta) =>
+                      _bottomTitleWidgets(value, meta, context),
                 ),
               ),
             ),
@@ -108,7 +106,7 @@ class ExpenseSummaryCharts extends StatelessWidget {
   }
 
   /// Generates pie chart sections from expense data.
-  List<PieChartSectionData> _generatePieChartSections() {
+  List<PieChartSectionData> _generatePieChartSections(BuildContext context) {
     final List<PieChartSectionData> sections = [];
     int index = 0;
     for (final entry in expenseData.entries) {
@@ -119,10 +117,7 @@ class ExpenseSummaryCharts extends StatelessWidget {
         value: amount,
         title: category,
         radius: 100,
-        titleStyle: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.bold,
-        ),
+        titleStyle: Theme.of(context).textTheme.bodyMedium,
       ));
       index++;
     }
@@ -142,11 +137,9 @@ class ExpenseSummaryCharts extends StatelessWidget {
   }
 
   /// Generates widgets for bottom titles on the line chart.
-  Widget _bottomTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
+  Widget _bottomTitleWidgets(
+      double value, TitleMeta meta, BuildContext context) {
+    final style = Theme.of(context).textTheme.bodyMedium;
 
     final int index = value.toInt();
     final String categoryName = (index >= 0 && index < expenseData.length)
